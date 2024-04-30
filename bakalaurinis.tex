@@ -1,4 +1,10 @@
-\documentclass{VUMIFInfBakalaurinis}
+\documentclass[
+    % english, % Klasei padavus parametrą 'english', darbas bus anglų kalba.
+    % signatureplaces % prideda parašų vietas tituliniame puslapyje
+]{VUMIFPSbakalaurinis}
+\usepackage{float}
+\usepackage{wrapfig2}
+\usepackage{hyperref}
 \usepackage{algorithmicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -7,87 +13,151 @@
 \usepackage{bm}
 \usepackage{caption}
 \usepackage{color}
-\usepackage{float}
 \usepackage{graphicx}
-% \usepackage{hyperref}  % Nuorodų aktyvavimas
 \usepackage{listings}
-\usepackage{subfig}
-\usepackage{url}
-\usepackage{wrapfig}
-
+\usepackage{subcaption}
+\usepackage{biblatex}
 
 % Titulinio aprašas
 \university{Vilniaus universitetas}
 \faculty{Matematikos ir informatikos fakultetas}
-\institute{Informatikos institutas}  % Užkomentavus šią eilutę - institutas neįtraukiamas į titulinį
-\department{Informatikos katedra}
-\papertype{Baigiamasis bakalauro darbas}
-\title{Rizikų valdymo proceso modeliavimas}
-\titleineng{Modeling of Risk Management Process}
-\status{X kurso Y grupės studentas}
+\department{Programų sistemų bakalauro studijų programa}
+\papertype{Bakalauro baigiamasis darbas}
+\title{Programų sistemų kūrimo metodų tyrimas}
+\titleineng{Investigation of Methods of Software Development}
 \author{Vardenis Pavardenis}
 % \secondauthor{Vardonis Pavardonis}   % Pridėti antrą autorių
 \supervisor{prof. habil. dr. Vardaitis Pavardaitis}
 \reviewer{doc. dr. Vardauskas Pavardauskas}
-\date{Vilnius \\ \the\year}
+\date{Vilnius – \the\year}
 
-% Nustatymai
-% \setmainfont{Palemonas}   % Pakeisti teksto šriftą į Palemonas (turi būti įdiegtas sistemoje)
-\bibliography{bibliografija} 
+\bibliography{bibliografija}
 
 \begin{document}
 \maketitle
 
+%% Padėkų skyrius
+% \sectionnonumnocontent{}
+% \vspace{7cm}
+% \begin{center}
+%     Padėkos asmenims ir/ar organizacijoms
+% \end{center}
+
+\begin{lithuanian}
+\sectionnonumnocontent{Santrauka}
+Glaustai aprašomas darbo turinys: pristatoma nagrinėta problema ir padarytos
+išvados. Santraukos apimtis ne didesnė nei 0,5 puslapio. Santraukų gale
+nurodomi darbo raktiniai žodžiai. Automatiškai naudojamos lietuviškos kabutės: \enquote{tekstas}.
+
+% Nurodomi iki 5 svarbiausių temos raktinių žodžių (terminų).
+% Vienas terminas gali susidėti iš kelių žodžių.
+\raktiniaizodziai{raktinis žodis 1, raktinis žodis 2, raktinis žodis 3, raktinis žodis 4, raktinis žodis 5}
+\end{lithuanian}
+
+\begin{english}
+\sectionnonumnocontent{Summary}
+Santrauka anglų kalba. Santraukos apimtis ne didesnė nei 0,5 puslapio. Automatiškai naudojamos angliškos kabutės: \enquote{tekstas}.
+
+\keywords{keyword 1, keyword 2, keyword 3, keyword 4, keyword 5}
+\end{english}
+
 \tableofcontents
 
-\sectionnonum{Sąvokų apibrėžimai}
-Sutartinių ženklų, simbolių, vienetų ir terminų sutrumpinimų sąrašas (jeigu
-ženklų, simbolių, vienetų ir terminų bendras skaičius didesnis nei 10 ir
-kiekvienas iš jų tekste kartojasi daugiau nei 3 kartus).
-
 \sectionnonum{Įvadas}
-Įvade apibūdinamas darbo tikslas, temos aktualumas ir siekiami rezultatai.
+Įvade nurodomas darbo tikslas ir uždaviniai, kuriais bus įgyvendinamas tikslas,
+aprašomas temos aktualumas, apibrėžiamas tiriamasis objektas akcentuojant
+neapibrėžtumą, kuris bus išspręstas darbe, aptariamos teorinės darbo prielaidos
+bei metodika, apibūdinami su tema susiję literatūros ar kitokie šaltiniai,
+temos analizės tvarka, darbo atlikimo aplinkybės, pateikiama žinių apie
+naudojamus instrumentus (programas ir kt., jei darbe yra eksperimentinė dalis).
+Darbo įvadas neturi būti dėstymo santrauka. Įvado apimtis 2--4 puslapiai.
 
-\section{Pagrindinė tiriamoji dalis}
-Pagrindinėje tiriamojoje dalyje aptariama ir pagrindžiama tyrimo metodika;
-pagal atitinkamas darbo dalis, nuosekliai, panaudojant lyginamosios analizės,
-klasifikacijos, sisteminimo metodus bei apibendrinimus, dėstoma sukaupta ir
-išanalizuota medžiaga. 
+\section{Medžiagos darbo tema dėstymo skyriai}
+Medžiagos darbo tema dėstymo skyriuose išsamiai pateikiamos nagrinėjamos temos
+detalės: pradiniai duomenys, jų analizės ir apdorojimo metodai, sprendimų
+įgyvendinimas, gautų rezultatų apibendrinimas.
+
+Medžiaga turi būti dėstoma aiškiai, pateikiant argumentus. Tekste dėstomas
+trečiuoju asmeniu, t.y. rašoma ne \enquote{aš manau}, bet „autorius mano“, „autoriaus
+nuomone“. Reikėtų vengti informacijos nesuteikiančių frazių, pvz., „...kaip jau
+buvo minėta...“, \enquote{...kaip visiems žinoma...} ir pan., vengti grožinės
+literatūros ar publicistinio stiliaus, gausių metaforų ar panašių meninės
+išraiškos priemonių.
+
+Skyriai gali turėti poskyrius ir smulkesnes sudėtines dalis, kaip punktus ir
+papunkčius.
 
 \subsection{Poskyris}
 Citavimo pavyzdžiai: cituojamas vienas šaltinis \cite{PvzStraipsnLt}; cituojami
-keli šaltiniai \cite{PvzStraipsnEn, PvzKonfLt, PvzKonfEn, PvzKnygLt, PvzKnygEn,
-PvzElPubLt, PvzElPubEn, PvzMagistrLt, PvzPhdEn}.
+keli šaltiniai \cite{PvzStraipsnEn, PvzStraipsnLta, PvzKonfLt, PvzKonfEn, PvzKnygLt, PvzKnygEn,
+PvzElPubLt, PvzElPubEn, PvzBakLt, PvzMagistrLt, PvzPhdEn}.
 
-\subsubsection{Skirsnis}
-\subsubsubsection{Straipsnis}
-\subsubsection{Skirsnis}
+Anglų kalbos terminų pateikimo pavyzdžiai: priklausomybių injekcija (\anglnb{dependency injection},
+dažnai trumpinama kaip \textit{DI}), saitų redaktorius \angl{linker}.
+
+Išnašų\footnote{Pirma išnaša.} pavyzdžiai\footnote{Antra išnaša.}.
+
+\subsection{Faktorialo algoritmas}
+
+\ref{alg:factorial} algoritmas parodo, kaip suskaičiuoti skaičiaus faktorialą.
+
+\begin{algorithm}
+\caption{Skaičiaus faktorialas}
+\begin{algorithmic}[1] % [1] padaro, kad eilutės būtų sunumeruotos
+\State $N\gets$ skaičius, kurio faktorialą skaičiuojame
+\State $F\gets 1$
+\For{$i := 2$ to $N$}
+    \State $F\gets F \cdot i$
+\EndFor
+\end{algorithmic}
+\label{alg:factorial}
+\end{algorithm}
+
+\subsubsection{Punktas}
+\subsubsubsection{Papunktis}
+\subsubsection{Punktas}
 \section{Skyrius}
 \subsection{Poskyris}
 \subsection{Poskyris}
 
+\sectionnonum{Rezultatai}
+Rezultatų skyriuje išdėstomi pagrindiniai darbo rezultatai: kažkas išanalizuota,
+kažkas sukurta, kažkas įdiegta. Tarpinių žingsnių išdavos skirtos užtikrinti galutinio
+rezultato kokybę neturi būti pateikiami šiame skyriuje. Kalbant informatikos termi-
+nais, šiame skyriuje pateikiama darbo išvestis, kuri gali būti įvestimi kituose panašios
+tematikos darbuose. Rezultatai pateikiami sunumeruotų (gali būti hierarchiniai) sąrašų
+pavidalu. Darbo rezultatai turi atitikti darbo tikslą.
+
 \sectionnonum{Išvados}
-Išvadose ir pasiūlymuose, nekartojant atskirų dalių apibendrinimų,
-suformuluojamos svarbiausios darbo išvados, rekomendacijos bei pasiūlymai.
+\begin{enumerate}[labelindent=0pt]
+    \item Išvadų skyriuje daromi nagrinėtų problemų sprendimo metodų palyginimai, siūlomos
+rekomendacijos, akcentuojamos naujovės.
+    \item Išvados pateikiamos sunumeruoto (gali būti hierarchinis) sąrašo pavidalu.
+    \item Darbo išvados turi atitikti darbo tikslą.
+\end{enumerate}
 
-\sectionnonum{Conclusions}
-Šiame skyriuje pateikiamos išvados (reziume) anglų kalba.
+\printbibliography[heading=bibintoc]  % Šaltinių sąraše nurodoma panaudota
+% literatūra, kitokie šaltiniai. Abėcėlės tvarka išdėstomi darbe panaudotų
+% (cituotų, perfrazuotų ar bent paminėtų) mokslo leidinių, kitokių publikacijų
+% bibliografiniai aprašai. Šaltinių sąrašas spausdinamas iš naujo puslapio.
+% Aprašai pateikiami netransliteruoti. Šaltinių sąraše negali būti tokių
+% šaltinių, kurie nebuvo paminėti tekste (LaTeX tai sutvarko automatiškai).
+% Šaltinių sąraše rekomenduojame necituoti savo kursinio darbo, nes tai nėra
+% oficialus literatūros šaltinis. Jei tokių nuorodų reikia, pateikti jas tekste.
 
+% \sectionnonum{Sąvokų apibrėžimai}
+\sectionnonum{Santrumpos}
+Sąvokų apibrėžimai ir santrumpų sąrašas sudaromas tada, kai darbo tekste
+vartojami specialūs paaiškinimo reikalaujantys terminai ir rečiau sutinkamos
+santrumpos.
 
-\printbibliography[heading=bibintoc] % Literatūros šaltiniai aprašomi
-% bibliografija.bib faile. Šaltinių sąraše nurodoma panaudota literatūra,
-% kitokie šaltiniai. Abėcėlės tvarka išdėstoma tik darbe panaudotų (cituotų,
-% perfrazuotų ar bent paminėtų) mokslo leidinių, kitokių publikacijų
-% bibliografiniai aprašai (šiuo punktu pasirūpina LaTeX). Aprašai pateikiami
-% netransliteruoti.
-
-\appendix  % Priedai
+% Priedai
 % Prieduose gali būti pateikiama pagalbinė, ypač darbo autoriaus savarankiškai
-% parengta, medžiaga. Savarankiški priedai gali būti pateikiami kompiuterio
-% diskelyje ar kompaktiniame diske. Priedai taip pat vadinami ir numeruojami.
-% Tekstas su priedais siejamas nuorodomis (pvz.: \ref{img:mlp}).
+% parengta, medžiaga. Savarankiški priedai gali būti pateikiami ir
+% kompaktiniame diske. Priedai taip pat numeruojami ir vadinami. Darbo tekstas
+% su priedais susiejamas nuorodomis.
+\appendix{Neuroninio tinklo struktūra}
 
-\section{Niauroninio tinklo struktūra}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{img/MLP}
@@ -96,7 +166,8 @@ suformuluojamos svarbiausios darbo išvados, rekomendacijos bei pasiūlymai.
 \end{figure}
 
 
-\section{Eksperimentinio palyginimo rezultatai}
+\appendix{Eksperimentinio palyginimo rezultatai}
+
 % tablesgenerator.com - converts calculators (e.g. excel) tables to LaTeX
 \begin{table}[H]\footnotesize
   \centering
