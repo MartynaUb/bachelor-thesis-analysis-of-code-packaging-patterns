@@ -1,0 +1,34 @@
+
+\cite{DesignMetrics}
+In addition, it was observed
+that considering only the package size as input to prediction
+models for package understandability is not enough.
+Improved prediction could be achieved b
+
+
+
+\cite{ModularStability}
+Software packaging (interchangeably referred to as modularization [1][2], clustering [3][4][5][6], and decomposition [7]
+is the process of grouping object-oriented (OO) classes into
+packages so that each package, desirably, offers a single service
+that is entirely offered by that package [8].
+
+
+\cite{ModularStability}
+ To this end, they designed
+a packaging metric to consider two aspects: (1) each UC
+should be covered by the least number of packages, and (2)
+classes in each package should be related in the sense that the
+intersection of the sets of UCs they contribute to is as large
+as possible. The first aspect (degree of UC coverage) reflects
+loose coupling; while the second (degree of class relevancy)
+reflects high cohesion. Consequently, to reflect both aspects,
+Ebad and Ahmed consider the weighted sum of two measures:
+UC coverage and class relevancy.
+
+
+\cite{LogicalStability}
+There are two aspects of design stability:
+logical stability and performance stability. Logical
+stability is concerned with design structure, whereas
+performance stability is concerned with design behavior.

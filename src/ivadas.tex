@@ -1,0 +1,88 @@
+\sectionnonum{Įvadas}
+\subsection{Problema ir jos aktualumas}
+Teisingai įgyvendintas kompiuterinės sistemos dizainas yra vienas iš kritinių sėkmingo verslo
+elementų.
+Tam, jog verslas išlaikytų stabilų augimą yra būtina sukurti sistemą, kuri sumažintų
+atotrūkį tarp organizacijos tikslų ir jų įgyvendinimo galimybių.
+Mąstant apie programinio kodo
+dizainą, kodo paketų kūrimas, klasių priskyrimas jiems ir paketų hierarchijos sudarymas paprastai
+nėra pagrindinis prioritetas, tačiau tai parodo praleistą galimybę padaryti sistemos dizainą labiau
+patikimu[Sho19], suprantamu [Eli10] ir lengviau palaikomu.
+Modernios sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
+kurie išskaidyti per skirtingo gylio direktorijas, todėl apgalvotai išskirstytas programinis
+kodas daro daug didesnę įtaką kodo kokybei, nei gali atrodyti iš pirmo žvilgsnio.
+Sistemos paketų studijavimas ir analizė norint įvertinti programinės įrangos kokybę
+tampa vis svarbesne tema, dėl pastoviai augančio failų ir paketų skaičiaus\cite{DesignMetrics}.
+Gerai įgyvendinta sistema turėtų gebėti keistis be didelių pakeitimų jos architektūroje,
+to yra siekiama todėl, nes įgyvendinti architektūrinius pakeitimus kainuoja didelius kaštus, kurie
+galėtų būti skirti produkto ir sistemos vystymuisi, o ne priežiūrai\cite{ModularStability}.
+Būtent teisinga sistemos struktūra gali sumažinti, pakeitimų nutekėjimą už paketo vidaus, ir įtaką bendrai
+sistemos architektūrai o ne vienam uždaram moduliui.
+
+
+Norint išsiaiškinti, kaip efektyviausiai gali būti skaidomas programinis
+kodas, tam jog jo struktūra darytų teigiama įtaką sistemos kokybei, reikalinga atlikti skirstymo į paketus šablonų analizę -
+išsiaiškinti galimus šablonus ir būdus, kaip skirstyti programinį kodą į paketus, turėti aiškius šablonų apibrėžimus su jų
+privalumai bei trūkumais.
+
+\subsection{Darbo tikslas}
+Šio darbo tikslas - identifikuoti šablonus kodo skirstymui į paketus.
+Remiantis moksliniais straipsniais apie sistemos kokybę bei palaikomumą aprašyti kriterijus,
+kurie būtų naudojami šablonus įvertinti, nustatant jų įtaką sistemos palaikomumui.
+
+\subsection{Keliami uždaviniai}
+\begin{itemize}
+    \item Išskirti gerai įgyvendinto kodo požymius
+    \item  Aprašyti skirstymo į paketus šablonus, remiantis pavyzdžiais teorinėje medžiagoje bei
+egzistuojančiose atviro kodo sistemose
+    \item  Įvertinti kiek realių sistemų struktūra nutolusi nuo teorinių šablonų apibrėžimų
+    \item  Pasiūlyti kriterijus, įvertinančius kodo suskirstymo šablono įtaką sistemos kokybei, remiantis
+rastai gerai įgyvenditos sistemos požymiais
+    \item  Pasirinkti kelias sistemas ir pertvarkyti jų failų struktūrą pagal aprašytus šablonus, įvertinant
+kiek sudėtinga pasiekti kiekvieno šablono strukūrą
+    \item  Naudojant pertvarkytas sistemas, įvertinti kiekvieną kodo skirstymo šabloną pagal pasiūlytus kriterijus
+    \item  Pateikti rekomendacijas, kokius šablonus kodo skirstymui tinkamiausia naudoti
+\end{itemize}
+todo: apubidinti šaltinius
+
+\subsection{Numatomas darbo atlikimo procesas}
+\begin{itemize}
+    \item Remiantis teorine medžiaga aprašomi gerai įgyvendinto kodo požymiai, užtikrinantys
+sistemos stabilumą ir palaikomumą.
+    \item Aprašomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos
+kodo kokybei, pavyzdžiui:
+    \begin{itemize}
+        \item Komponentų skaičius, priklausomas nuo pasirinkto komponento[Mah03]
+        \item Tiesioginės ir netiesioginės priklausomybės (matomumas)[Ala07]
+    \end{itemize}
+    \item Galimų kodo skirstymo šablonų išskyrimas pasitelkiant teorinę informaciją [Sho11] ir
+egzistuojančių sistemų architektūrą.
+    \item Atviro kodo projektų pasirinkimas. Pasirenkami skirtingo tipo projektai, užtikrinant
+objektyvesnę šablonų analizę skirtingose srityse. Galimi tipai:
+    \begin{itemize}
+        \item Taikomoji programinė įranga, teikianti paslaugas įrangos naudotojams. Pavyzdžiui,
+internetinė programėlė priminimams ir darbams užsirašyti
+        \item Techninė programinė įranga, naudojama taikomosios programinės įrangos duomenų
+saugojimui, siuntimui, paieškai. Pavyzdžiui, duomenų bazės, pranešimų eilės, talpyklos
+(angl. cache)
+        \item Programinės įrangos įrankiai, skirti naudoti kitose sistemose supaprastinant programinį
+kodą, naudojant jau įgyvendintas funkcijas. Pavyzdžiui, Java programavimo kalbos
+Spring karkasas internetinių programėlių kūrimui
+    \end{itemize}
+    \item Pasirinktų projektų paketų sturktūros pertvarkymas pagal pasirinktus skirstymo šablonus
+    \item Pertvarkytų projektų įvertinimas, naudojant išskirtus kriterijus, nustatant, kokią įtaką
+skirtingi skirstymo šablonai turi sistemos kokybei
+\end{itemize}
+
+
+\subsection{Laukiami rezultatai}
+\begin{itemize}
+    \item Įdentifikuoti kodo skirstymo šablonai, remiantis teorine informacija ir praktikoje sutinkamais pavyzdžiais
+    \item Sukurti kriterijai, įvertinantys sistemos paketų struktūros indėlį sistemos kokybei
+    \item Pasirinkti projektai pertvarkyti pagal kodo skirstymo šablonus
+    \item Įvertinus šablonus sukurtais kriterijais, pateiktos rekomendacijos kodo skirstymo šablonų naudojimui
+\end{itemize}
+
+
+\subsection{todo:}
+aprašyti sekančius chapterius.

@@ -1,0 +1,103 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{DesignMetrics}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9be8598fa13bf454b0edd5d866a5b604}{%
+           family={Elish},
+           familyi={E\bibinitperiod},
+           given={Mahmoud},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{9be8598fa13bf454b0edd5d866a5b604}
+      \strng{fullhash}{9be8598fa13bf454b0edd5d866a5b604}
+      \strng{bibnamehash}{9be8598fa13bf454b0edd5d866a5b604}
+      \strng{authorbibnamehash}{9be8598fa13bf454b0edd5d866a5b604}
+      \strng{authornamehash}{9be8598fa13bf454b0edd5d866a5b604}
+      \strng{authorfullhash}{9be8598fa13bf454b0edd5d866a5b604}
+      \field{labelalpha}{Eli10}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{Exploring the Relationships between Design Metrics and Package Understandability: A Case Study}
+      \field{urlday}{4}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{year}{2010}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/221219583_Exploring_the_Relationships_between_Design_Metrics_and_Package_Understandability_A_Case_Study
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/221219583_Exploring_the_Relationships_between_Design_Metrics_and_Package_Understandability_A_Case_Study
+      \endverb
+    \endentry
+    \entry{ModularStability}{article}{}
+      \name{author}{1}{}{%
+        {{hash=031c17d640ab9f0543f5d08628171fe4}{%
+           family={Shouki\bibnamedelimb A.\bibnamedelimi Ebad},
+           familyi={S\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim E\bibinitperiod},
+           given={Moataz\bibnamedelima Ahmed},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{031c17d640ab9f0543f5d08628171fe4}
+      \strng{fullhash}{031c17d640ab9f0543f5d08628171fe4}
+      \strng{bibnamehash}{031c17d640ab9f0543f5d08628171fe4}
+      \strng{authorbibnamehash}{031c17d640ab9f0543f5d08628171fe4}
+      \strng{authornamehash}{031c17d640ab9f0543f5d08628171fe4}
+      \strng{authorfullhash}{031c17d640ab9f0543f5d08628171fe4}
+      \field{labelalpha}{Sho19}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{Investigating The Effect of Software Packaging on Modular Structure Stability}
+      \field{urlday}{4}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://d1wqtxts1xzle7.cloudfront.net/75578419/pdf-libre.pdf?1638471828=&response-content-disposition=inline%3B+filename%3DInvestigating_the_Effect_of_Software_Pac.pdf&Expires=1709553794&Signature=BWU2DSSXDNujfvTllUWYspcqNlbW1Fgg~doSlc6JoeK7XXJ5bGLPB1B1yBD0tnojJ0yNuWZzQP9rvrU8ZXm2TbxXwJEhgCEzlU8CTK~crCtPI1NDWFqmQuafamaohj3MJocCfsuRTpXDcQtUaGfmZjdEzl4DHMewWQXHsfd~RLbnCW-fpTjd~yffOhlxnM4GyB2gNMuGZyXsDBXWQuD66kZpwWdluJ63GWjvs28T2ArRpaekqk9JAc-Icun18nyonYJ~W4pIViibjHA4k9yN5r1FZRSWFeUSHpRmflEpJ1opD2Nh889TquLxsA2DhPP3L5BwqcVo2UpIRqeOBnYPUA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+      \endverb
+      \verb{url}
+      \verb https://d1wqtxts1xzle7.cloudfront.net/75578419/pdf-libre.pdf?1638471828=&response-content-disposition=inline%3B+filename%3DInvestigating_the_Effect_of_Software_Pac.pdf&Expires=1709553794&Signature=BWU2DSSXDNujfvTllUWYspcqNlbW1Fgg~doSlc6JoeK7XXJ5bGLPB1B1yBD0tnojJ0yNuWZzQP9rvrU8ZXm2TbxXwJEhgCEzlU8CTK~crCtPI1NDWFqmQuafamaohj3MJocCfsuRTpXDcQtUaGfmZjdEzl4DHMewWQXHsfd~RLbnCW-fpTjd~yffOhlxnM4GyB2gNMuGZyXsDBXWQuD66kZpwWdluJ63GWjvs28T2ArRpaekqk9JAc-Icun18nyonYJ~W4pIViibjHA4k9yN5r1FZRSWFeUSHpRmflEpJ1opD2Nh889TquLxsA2DhPP3L5BwqcVo2UpIRqeOBnYPUA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{PvzBakLt}
+  \missing{PvzElPubEn}
+  \missing{PvzElPubLt}
+  \missing{PvzKnygEn}
+  \missing{PvzKnygLt}
+  \missing{PvzKonfEn}
+  \missing{PvzKonfLt}
+  \missing{PvzMagistrLt}
+  \missing{PvzPhdEn}
+  \missing{PvzStraipsnEn}
+  \missing{PvzStraipsnLt}
+  \missing{PvzStraipsnLta}
+\endrefsection
+\endinput
+
