@@ -30,3 +30,46 @@ To siekiama todėl, nes architektūriniai pakeitimai paveikią didelę sistemos 
 jų įgyvendinimo ir priežiūros kaštai yra ženkliai didesni\cite{ModularStability}.
 Paketų struktūra, kuri užtikrina atsieta (\angl{decoupled}) komunikavima tarp paketų, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
 išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, ženkliai nesikeičiant ir sutaupant programos priežiūros kaštus.
+
+\subsection{Kodo skirstymo paketais metodų vertinimas}
+Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka geram kompiuterinės sistemos dizainui,
+tačiau lieka neatsakytas klausimas - kaip įvertinti metodą kodui į paketus grupuoti, kaip objektyiviai užtikrinti
+jog šis sprendimas yra butent toks kokio reikia ir kokia būtent jo įtaka kompiuterinei sistemai?
+Tvarkingas, aiškiai suprantamas kodas yra subjektyvi tema, priklausanti nuo komandos,
+naudojamos programavimo kalbos ar programinių įrankių bei programinės sistemos dalykinės srities.
+Kodo grupavimo į paketus metodai, taip, kaip ir bendros tvarkingo kodo praktikos,
+gali būti labai subjektyvūs ir patogus tik metodą formavusiam asmeniui.
+Tam, kad pagrįstai įvertinti skirtingus kodo skirstymo šablonus, pasiekiant kuo objektyvesnį,
+plačiau priimtiną rezultatą, reikėtų aprašyti kriterijus, ko tikimasi iš paketų struktūros.
+
+Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices} aprašo
+šesis principus padedančius teisingai grupuoti klases į paketus.
+Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų, tam tikrame paketų skirstymo šablone, gali
+būti kriterijus, įvertinti to šablono kokybei ir įtakai bendram sistemos dizainui.
+
+Pirmi trys principai yra apie paketo elementų sąryšį, jie padeda paskirstyti klases paketams\cite{AgileSoftwareDevelopment}.
+Kiti trys principai reglamentuoja paketų sąjungą, jie padeda nustatyti, kaip paketai turėtų būti tarpusavyje susiję.
+
+Paketų stabilumo metrikos:
+\begin{itemize}
+    \item \textit{Klasių skaičius} - klasių skaičiaus metrika paketui nurodo, skaičių klasių (konkrečių ir abstrakčių) pakete.
+    Ši metrika matuoja paketo dydį.
+    \item \textit{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių metrika nurodo
+    skaičių kitų paketų, kurie priklauso nuo klasių esančių pasirinktame pakete.
+    Ši metrika matuoja ateinančias priklausomybes.
+    \item \textit{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių metrika nurodo skaičių kitų paketų,
+    nuo kuriu priklauso klasės pasirintame pakete.
+    Ši metrika matuoja išeinančias priklausomybės.
+    \item \textit{Nestabilums} - nestabilumo metrika nurodo santyki tarp eferentinių jungčių ir
+    visų jungčių (Aferentinės + Eferentinės) pakete.
+    Ši metrika matuoja paketo atsparumui pokyčiams.
+    Reikšmės rėžiai - nuo nulio iki vieno, kur vienas nurodo visiškai stabilų paketą, o vienetas visiškai nestabilų.
+    \item \textit{Atstumas} - Atstumo metrika apibrėžiamas kaip statmenas pakuotės atstumas nuo idealizuotos linijos (A + I = 1),
+    kur A yra abstrakčių klasių procentas nuo bendro paketo klasių skaičiaus.
+    Ši metrika yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
+    Paketas tiesiai pagrindinėje sekoje yra optimaliai subalansuotas, atsižvelgiant į jos abstraktumą ir stabilumą.
+    Šios metrikos diapazonas yra nuo nulio iki vieneto, o nulis nurodo paketą, kuris sutampa su pagrindine seka,
+    o vienas – paketą, kuris yra kuo toliau nuo pagrindinės sekos. todo: pataisyti
+    \item \textit{Žiedinės priklausomybės} - žiedinių priklausomybių metrika skaičių atveju, kur pasirinkto paketo išeinančios priklausomybes taip pat
+    yra paketo ateinančios priklausomybes (tiesiogiai arba netiesiogiai)
+\end{itemize}
