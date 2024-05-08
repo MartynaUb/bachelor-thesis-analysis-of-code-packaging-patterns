@@ -1,3 +1,8 @@
 .idea
 .DS_Store
 out
+bakalaurinis.aux
+bakalaurinis.log
+bakalaurinis.fls
+bakalaurinis.fdb_latexmk
+code/analyzer/.gitignore
