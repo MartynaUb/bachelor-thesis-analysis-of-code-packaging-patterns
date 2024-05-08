@@ -46,7 +46,7 @@ principus, padedančius teisingai grupuoti klases į paketus.
 Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų, tam tikrame paketų skirstymo šablone, gali
 būti kriterijus, įvertinti to šablono kokybei ir įtakai bendram sistemos dizainui.
 
-\subsubsubsection{Bendro sąryšio principas}
+\subsubsection{Bendro sąryšio principas}
 \textit{Klasės pakete turėtų būti susietos kartu, kad turėtų tą pačią priežastį pasikeisti. Pakeitimas,
 kuris paveikia paketą, paveikia visas to paketo klases ir jokių kitų paketų.}
 
@@ -90,41 +90,40 @@ Tai pat šis principas teigia, kad nestabilus paketas turi būti konkretus, nes 
 Taigi, jei paketas yra stabilus, jį taip pat turėtų sudaryti abstrakčios klasės, užtikrinant jo išplečiamumą.
 Stabilūs paketai, kurie yra lengvai išplečiami, yra lankstūs pakeitimams, nedarant didelės įtakos sitemos dizainui\cite{AgileSoftwareDevelopment}.
 
+\subsection{Paketų kokybės metrikos:}
 Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtas metrikas, kuriomis galima pamatuoti, kaip stipriai paketas laikosi šių principų.
-Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablonuose, kad suprasti šablonų kokybę.
-
-Paketų kokybės metrikos:
+Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablonuose, kad suprasti šablonų kokybę:
 \begin{itemize}
-    \item \textit{Klasių skaičius} - klasių skaičiaus metrika paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
+    \item \textbf{Klasių skaičius} - klasių skaičiaus metrika paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
     Ši metrika matuoja paketo dydį.
-    \item \textit{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių metrika nurodo
+    \item \textbf{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių metrika nurodo
     skaičių paketų, kurie priklauso nuo klasių, esančių pasirinktame pakete.
     Ši metrika matuoja ateinančias priklausomybes.
-    \item \textit{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių metrika nurodo skaičių kitų paketų,
+    \item \textbf{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių metrika nurodo skaičių kitų paketų,
     nuo kuriu priklauso klasės pasirintame pakete.
     Ši metrika matuoja išeinančias priklausomybes.
-    \item \textit{Nestabilumas} - nestabilumo metrika nurodo santykį tarp eferentinių jungčių ir
+    \item \textbf{Nestabilumas} - nestabilumo metrika nurodo santykį tarp eferentinių jungčių ir
     visų jungčių (Aferentinės + Eferentinės) pakete.
     Ši metrika matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojama stabilių priklausomybių principe:
     \begin{equation}
-        Nestabilumas=\frac{Jungtys_{eferentinės}}{Jungtys_{eferentinės} + Jungtys_{aferentinės}}
+        Nestabilumas=\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
     \end{equation}
     Reikšmės rėžiai - nuo nulio iki vieno, kur vienas nurodo visiškai stabilų paketą, o vienetas - visiškai nestabilų.
-    \item \textit{Abstrakcija} - paketo abstrakcijos metrika nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
+    \item \textbf{Abstrakcija} - paketo abstrakcijos metrika nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
     \begin{equation}
         Abstrakcija=\frac{N_{abstrakcios}}{N_{visos}}
     \end{equation}
     Ši metrika nurodo paketo abstraktumą.
     Abstrakcijos reikšmė gali būti tarp nulio ir vieno.
     Nulis reiškia, kad paketas neturi jokių abstrakčių klasiu, o vienetas nurodo, kad pakete yra tik abstrakčios klasės.
-    \item \textit{Atstumas nuo pagrindinės sekos} -
+    \item \textbf{Atstumas nuo pagrindinės sekos} -
     Pagrindinė seka tai sąryšis tarp nestabilumo ir abstrakcijos.
     Pagrindinė seka yra idealizuota linija (Abstrakcija + Nestabilumas = 1)  kurią galima atvaizduoti kaip kreivę, su abstrakcijos dydžiu \textit{y} ašyje ir nestabilumu \textit{x} ašyje.
     Paketas tiesiai ant pagrindinės sekos yra optimaliai subalansuotas atsižvelgiant į jo abstraktumą ir stabilumą.
     Idealus paketai yra arba visiškai abstraktūs ir stabilus (Nestabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir stabilūs (Nestabilumas=1, Abstrakcija=0).
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.2]{img/zones_of_exclusion}
+        \includegraphics[scale=0.4]{img/zones_of_exclusion}
         \caption{Pagrindinės sekos kreivė}
         \label{img:zones_of_exclusion}
     \end{figure}
@@ -134,7 +133,7 @@ Paketų kokybės metrikos:
     \end{equation}
     Ši metrika yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
     Šios metrikos diapazonas yra nuo nulio iki vieno, kur vienas reiškia paketą, sutampantį su pagrindinę seka, o vienas - paketą, maksimaliai nutolusi nuo pagrindinės sekos.
-    \item \textit{Žiedinės priklausomybės} - žiedinių priklausomybių metrika skaičiuoja atvejus,
+    \item \textbf{Žiedinės priklausomybės} - žiedinių priklausomybių metrika skaičiuoja atvejus,
     kur pasirinkto paketo išeinančios priklausomybes taip pat yra paketo ateinančios priklausomybes (tiesiogiai arba netiesiogiai).
     Ši metrika - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
 \end{itemize}
