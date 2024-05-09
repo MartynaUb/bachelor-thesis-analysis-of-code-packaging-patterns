@@ -17,7 +17,7 @@ Norint išsiaiškinti, kaip efektyviausiai gali būti skaidomas programinis
 kodas, tam jog jo struktūra darytų teigiama įtaką sistemos kokybei, reikalinga atlikti skirstymo į paketus šablonų analizę -
 išsiaiškinti galimus šablonus, kaip skirstyti programinį kodą į paketus, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
-Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omeny planą arba metodų rinkinys, nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių.
+Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį, nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių.
 
 Šio darbo tikslas - identifikuoti ir ivertinti šablonus kodo skirstymui į paketus.
 Remiantis moksliniais straipsniais apie sistemos kokybę bei palaikomumą aprašyti kriterijus,
@@ -39,7 +39,7 @@ kiek sudėtinga pasiekti kiekvieno šablono strukūrą
 Šiuo darbo metu nagrinėjami ir aprašomi gerai įgyvendinto kodo požymiai, užtikrinantys
 sistemos stabilumą ir palaikomumą, remiantis Martin Kleppmann \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems},
 ir Robert C. Martin \textit{Agile Software Development, Principles, Patterns, and Practices} knygomis.
-Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kodo kokybei, tokie kaip - komponentų skaičius, tiesioginės ir netiesioginės priklausomybės, paketų stabilumas\cite{AgileSoftwareDevelopment}.
+Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kodo kokybei, pavyzdžiui - komponentų skaičius, tiesioginės ir netiesioginės priklausomybės, paketų stabilumas\cite{AgileSoftwareDevelopment}.
 Tyrinėjami šablonai kodo skirstymui į paketus įvardinti Martin Sadin straipsnyje \textit{Four Strategies for Organizing Code}.
 Pasirintos ir išnagrinėtos atviro kodo sistemos.
 Pasirenkant skirtingo tipo projektus, siekiant
@@ -58,19 +58,10 @@ Spring karkasas internetinių programėlių kūrimui
 Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirstymo šablonus, pertvarkyti projektai įvertinti, naudojant išskirtus kriterijus, nustatant, kokią įtaką
 skirtingi skirstymo šablonai turi sistemos kokybei.
 
-Iš šio darbo yra laukiami šie rezultatai:
-\begin{itemize}
-    \item Įdentifikuoti kodo skirstymo šablonai, remiantis teorine informacija
-    \item Sukurti kriterijai, įvertinantys sistemos paketų struktūros indėlį sistemos kokybei
-    \item Pasirinkti projektai pertvarkyti pagal kodo skirstymo šablonus
-    \item Įvertinus šablonus sukurtais kriterijais, pateiktos rekomendacijos kodo skirstymo šablonų naudojimui
-\end{itemize}
-
-Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoka, kas ją sudaro, kaip galima įvertinti sistemos tvarkingumą, įgyvendinimo teisingumą.
-Aprašyti kriterijai kaip įvertinti paketų struktūros įtaka, sistemos kokybei.
+Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, kaip galima ją įvertinti, įgyvendinimo kokybę.
+Aprašyti kriterijai kaip įvertinti paketų struktūros įtaką sistemos kokybei.
 Antras skyrius tyrinėja skirtingus šablonųs klasėms į paketus skirstyti, jų privalumus bei trūkumus.
-Trečiame skyriuje aprašomi sukurti įrankiai, reikalingį sistemų analizei ir šablonų įvertinimui, minima kaip jie įgyvendinti ir kaip jie yra naudojami.
+Trečiame skyriuje aprašomi sukurti įrankiai, reikalingį sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
 Ketvirtame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
-Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama kiek sudėtingą pasiekti kiekvieno šablono struktūrą.
+Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.
 Nagrinėjama perdarytų sistemų kokybė pagal pirmame skyriuje aprašytus kriterijus, ieškomas geriausiai įvertintas šablonas.
-Straipsnis baigiamas šeštu skyriumi su išvadomis bei gautų rezultatų analize.

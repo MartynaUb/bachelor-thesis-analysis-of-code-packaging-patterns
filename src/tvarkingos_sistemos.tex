@@ -6,12 +6,12 @@ Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The
 \begin{itemize}
     \item Patikimumas, reiškiantis, kad net ir klaidų (įrangos, programinių ar žmogiškųjų) atveju,
     sistema veikia stabiliai ir patikimai, paslepiant tam tikras klaidas nuo vartotojo\cite{DataIntensiveApplications}.
-    \item Prižiūrimumas, reiškiantis jog skirtingų abstrakcijų pagalba sumažintas sistemos kompleksiškumas.
+    \item Prižiūrimumas, reiškiantis, jog skirtingų abstrakcijų pagalba sumažintas sistemos kompleksiškumas.
     Dėl to nesunku keisti esamą sistemos funkcionalumą bei pritaikyti naujiems verslo naudojimo atvejams.
     Tai supaprastina darbą inžinierių ir operacijų komandoms dirbančioms su šia sistema, taip pat leidžia prie sistemos prisidėti naujiems žmonėms, o ne
     tik jos ekspertams.
     Tai ypač aktualu atviro kodo sistemoms\cite{DataIntensiveApplications}.
-    \item Plečiamumas, reiškiantis jog sistema turi strategijas, kaip išlaikyti gerą našumą užklausų
+    \item Plečiamumas, reiškiantis, jog sistema turi strategijas, kaip išlaikyti gerą našumą užklausų
     srautui didėjant ir sistemai augant, tai atliekant su pagrįstais kompiuteriniais resursais ir
     priežiūros kaina\cite{DataIntensiveApplications}.
 \end{itemize}
@@ -19,7 +19,7 @@ Yra daug skirtingų elementų, sudarančių sistemą, kuri tenkintų aukščiau 
 pavyzdžiui, pasirinktos technologijos, aukšto lygio architektūra, dokumentacija, sistemos testavimo
 procesai, jų kiekis ir pan.
 Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos dizaino yra programinio kodo dizainas, jo skaitomumas, patikimumas.
-Konvencijos, kaip vadinti kodo paketus, kokias klasės jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo dizaino dalį.
+Konvencijos, kaip vadinti kodo paketus, kokias klases jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo dizaino dalį.
 Todėl, programinės įrangos kūrimo metu, laikas skirtas rasti sistemai tinkamą paketų skirstymo šabloną ir to šablono laikytis atsiperka, padarant
 programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos dizaino patikimumo ir lengvesnio palaikomumo.
 
@@ -39,12 +39,12 @@ naudojamos programavimo kalbos ar programinių įrankių bei programinės sistem
 Kodo grupavimo į paketus metodai, taip, kaip ir bendros tvarkingo kodo praktikos,
 gali būti labai subjektyvūs ir patogūs tik metodą formavusiam asmeniui.
 Tam, kad būtų galima pagrįstai įvertinti skirtingus kodo skirstymo šablonus, pasiekiant kuo objektyvesnį,
-plačiau priimtiną rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
+įtaką sistemos kokybei nusakantį rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
 
 Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices} aprašo
 principus, padedančius teisingai grupuoti klases į paketus.
 Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų, tam tikrame paketų skirstymo šablone, gali
-būti kriterijus, įvertinti to šablono kokybei ir įtakai bendram sistemos dizainui.
+būti kriterijus vertinant to šablono kokybę ir įtaką bendram sistemos dizainui.
 
 \subsubsection{Bendro sąryšio principas}
 \textit{Klasės pakete turėtų būti susietos kartu, kad turėtų tą pačią priežastį pasikeisti. Pakeitimas,
@@ -57,16 +57,16 @@ Jei dvi klasės yra taip stipriai susietos, kad jos visada keičiasi kartu, tada
 jos turėtų būti tame pačiame pakete.
 Kai reikia išleisti pakeitimus, geriau, kad visi pakeitimai būtų viename pakete.
 Tai sumažina darbo krūvį, susijusį su pakeitimu išleidimu, pakartotiniu patvirtinimu ir programinės įrangos perskirstymu,
-be reikalo nevaliduojant ir leidžiant kitų, nesusijusių modulių\cite{AgileSoftwareDevelopment}.
+be reikalo neatliekant validacijos ir neleidžiant kitų, nesusijusių modulių\cite{AgileSoftwareDevelopment}.
 
 \subsubsection{Aciklinių priklausomybių principas}
 \textit{Paketo priklausomybės diagramoje neturi būti žiedinių ciklų.}
 
 Priklausomybių ciklai sukuria neatidėliotinų problemų.
 Žiedinės priklausomybės gali sukelti domino efektą, kai nedidelis lokalus vieno modulio pokytis išplinta į kitus modulius,
-dėl to norit patestuoti vieną nedidelį modulį, reikia iš naujo sukompiliuoti didžiulę sistemos dalį.
+dėl to norit testuoti vieną nedidelį modulį, reikia iš naujo sukompiliuoti didžiulę sistemos dalį.
 Taip pat žiedinės priklausomybės lemia programos ir kompiliavimo klaidas, kadangi pasidaro labai sunku sudaryti tvarką, kaip kompiliuoti paketus.
-Iš tiesų, gali nebūti teisingos tvarkos, nes žiedinės priklausomybės gali sukelti begalinę rekursiją,
+Žiedinės priklausomybės taip pat gali sukelti begalinę rekursiją,
 kuri sukelia nemalonių problemų tokioms kalboms kaip Java, kurios skaito savo deklaracijas iš
 sukompiliuotų dvejetainių failų\cite{AgileSoftwareDevelopment}.
 
@@ -83,7 +83,7 @@ Programinės įrangos niuansas, kad modulis, sukurtas taip, kad jį būtų lengv
 
 
 \subsubsection{Stabilių abstrakcijų principas}
-\textit{Paketas turi būti tiek abstraktūs, tiek stabilūs}
+\textit{Paketas turi būti tiek abstraktūs, kiek ir stabilūs}
 Šis principas nustato ryšį tarp stabilumo ir abstraktumo.
 Stabilūs paketai turėtų būti abstraktūs, todėl ir lengvai praplečiami.
 Tai pat šis principas teigia, kad nestabilus paketas turi būti konkretus, nes jo nestabilumas leidžia lengvai pakeisti jo turinio kodą.
@@ -92,7 +92,7 @@ Stabilūs paketai, kurie yra lengvai išplečiami, yra lankstūs pakeitimams, ne
 
 \subsection{Paketų kokybės metrikos:}
 Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtas metrikas, kuriomis galima pamatuoti, kaip stipriai paketas laikosi šių principų.
-Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablonuose, kad suprasti šablonų kokybę:
+Būtent šios metrikos bus naudojamos įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų kokybę:
 \begin{itemize}
     \item \textbf{Klasių skaičius} - klasių skaičiaus metrika paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
     Ši metrika matuoja paketo dydį.
@@ -104,7 +104,7 @@ Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablo
     Ši metrika matuoja išeinančias priklausomybes.
     \item \textbf{Nestabilumas} - nestabilumo metrika nurodo santykį tarp eferentinių jungčių ir
     visų jungčių (Aferentinės + Eferentinės) pakete.
-    Ši metrika matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojama stabilių priklausomybių principe:
+    Ši metrika matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojamas stabilių priklausomybių principe:
     \begin{equation}
         Nestabilumas=\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
     \end{equation}
@@ -120,7 +120,7 @@ Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablo
     Pagrindinė seka tai sąryšis tarp nestabilumo ir abstrakcijos.
     Pagrindinė seka yra idealizuota linija (Abstrakcija + Nestabilumas = 1)  kurią galima atvaizduoti kaip kreivę, su abstrakcijos dydžiu \textit{y} ašyje ir nestabilumu \textit{x} ašyje.
     Paketas tiesiai ant pagrindinės sekos yra optimaliai subalansuotas atsižvelgiant į jo abstraktumą ir stabilumą.
-    Idealus paketai yra arba visiškai abstraktūs ir stabilus (Nestabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir stabilūs (Nestabilumas=1, Abstrakcija=0).
+    Idealūs paketai yra arba visiškai abstraktūs ir stabilūs (Nestabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir stabilūs (Nestabilumas=1, Abstrakcija=0).
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{img/zones_of_exclusion}
@@ -132,16 +132,16 @@ Būtent šios metrikos bus naudojamos įvertinti paketus, analizuojamuose šablo
         Atstumas = \left | Abstracija + Nestabilumas - 1 \right |
     \end{equation}
     Ši metrika yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
-    Šios metrikos diapazonas yra nuo nulio iki vieno, kur vienas reiškia paketą, sutampantį su pagrindinę seka, o vienas - paketą, maksimaliai nutolusi nuo pagrindinės sekos.
+    Šios metrikos diapazonas yra nuo nulio iki vieno, kur nulois reiškia paketą, sutampantį su pagrindine seka, o vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos.
     \item \textbf{Žiedinės priklausomybės} - žiedinių priklausomybių metrika skaičiuoja atvejus,
-    kur pasirinkto paketo išeinančios priklausomybes taip pat yra paketo ateinančios priklausomybes (tiesiogiai arba netiesiogiai).
+    kur pasirinkto paketo išeinančios priklausomybės taip pat yra paketo ateinančios priklausomybės (tiesiogiai arba netiesiogiai).
     Ši metrika - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
 \end{itemize}
 
-Šių metrikų patikimumas buvo ivertintas atvejo analyzėje \textit{Exploring the Relationships between Design Metrics and Package
-Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryši tarp minetų metrikų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
-Tyrimas atlikta naudojant aštuoniolika paketų, paimtų iš dviejų atvirodo kodo programinės įrangos sistemų.
-Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po trys panašią patirtį turinčius porgramuotojus.
+Šių metrikų patikimumas buvo ivertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
+Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryšį tarp minėtų metrikų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
+Tyrimas atliktas naudojant aštuoniolika paketų, paimtų iš dviejų atviro kodo programinės įrangos sistemų.
+Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris, panašią patirtį turinčius porgramuotojus.
 Jų buvo paprašta pilnai suprasti paketų funkcionaluma ir nuo vieno iki dešimt įvertinti pastangas, reikalingas suprastį kiekvieną paketą.
 Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliacija tarp daugumos metrikų ir
 paketų suprantamumo\cite{DesignMetrics}.
