@@ -1,22 +1,57 @@
 \section{Įrankiai šablonų analizei ir įvertinimui}
-Kompiuterinės sistemos kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai yra labai didelės.
+Kompiuterinės sistemos, kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai yra labai didelės.
 Pilnai perprasti tokias sistemas, nustatyti jų įgyvendinimo kokybę, naudojamus šablonus kodui skirstyti,
 apskaičiuoti paketų kokybes metrikas yra sudėtingas procesas.
-Daryti tai rankiniu budu yra labai sudėtinga, užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
-todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant,
+Daryti tai rankiniu budu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
+todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant
 aiškiai apibrėžtų ir programiškai efektyvių programinių įrankių pagalbą.
 
 \subsection{Reikalavimai įrankiams}
-Įrankių, leidžiančių paprasčiau atlikti sistemų analizę, atsakomybes galima suskirstyti į kelias grupes:
+Įrankių, leidžiančių paprasčiau atlikti sistemų analizę, atsakomybes galima suskirstyti į dvi grupes:
 \begin{itemize}
-    \item Bendrinė sistemos analizė - įrankis ar įrankiai turi atlikti bendrinę sistemos analize.
+    \item Bendrinė sistemos analizė - įrankis ar įrankiai padeda atlikti bendrinę sistemos analize.
     Šios atsakomybių grupės įrankių išvestis nėra objektyvūs, tiksliai apibrėžtų formulių rezultatai, o papildoma, aiškiai
     atvaizduota, meta informacija apie sistema - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardai.
-    Ši papildoma informacija padeda analizę atliekančiams asmeniui priimti ižvalgas apie sistemą, kaip pavyzdžiui,
-    kokiam paketų skirstymo šablonui yra atimiausia sistemos strukūra,
-    arba kaip lengvai sistema yra suprantama.
-    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi galėti paskaičiuoti aprašytas paketų kokybes metrikas.
-    Šių įrankių išvestis - formulėmis pagrįstų skaičiavimų rezultatai apie paketų kokybę, kurie suprantamu formatu išvedami įrankio naudotojui,
-    leidžiant juos palyginti su kitais rezultatais.
+    Ši papildoma informacija nėra aiškūs teiginiai, o tik pagalba analizę atliekančiams asmeniui, leidžianti priimti ižvalgas apie sistemą,
+    kaip pavyzdžiui, kokiam paketų skirstymo šablonui yra atimiausia sistemos strukūra, arba kaip lengvai sistema yra suprantama.
+    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padeda paskaičiuoti aprašytas paketų kokybes metrikas.
+    Šių įrankių išvestis - tikslūs, formulėmis pagrįstų skaičiavimų rezultatai apie paketų kokybę, kuriuos galima lyginti tarpusavyje.
 \end{itemize}
+
+todo: akcentuoti kad visas darbas vyksta su java sistemomis
+\subsection{Reikalavimai įrankiui bendrinės sistemos analizei}
+Įrankis bendrinei sistemos analizei atlikti, turėtų suteikti galimibė naudotojui nurodyti kelią iki \texit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
+atlikti jos turinio analizę bei naudotojui pateikti naudingas išvadas, sudarytas iš:
+\begin{itemize}
+    \item Klasių ir paketų skaičiaus
+    \item Vidutinį klasių pakete skaičiaus
+    \item Paketų ir klasių medį, identifikuojanti abstrakčias klases ar sąsajas
+    \item Paketų priklausomybių grafiką
+\end{itemize}
+Gautą rezultatą išvesti suprantamu formatu, leidžiant vartotojui priimti išvadas apie sistemos, arba tam tikros
+posistemės struktūrą, naudojamus įrankius bei kokybę.
+
+\subsection{Reikalavimai įrankiui paketo kokybėi skaičiuoti}
+Įrankis paketo kokybei skaičiuoti, turėtų suteikti galimibė naudotojui nurodyti kelią iki \texit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
+apskaičiuoti kiekvieno paketo kokybės metrikas:
+\begin{itemize}
+    \item Klasių skaičius
+    \item Aferentinių jungčių skaičius
+    \item Eferentinių jungčių skaičius
+    \item Nestabilumo santykis
+    \item Abstrakcijos santykis
+    \item Atstumo nuo pagrindinės sekos santykis
+    \item Žiedinių priklausomybių skaičius
+\end{itemize}
+Gautą rezultatą išvesti vartotojui suprantamu formatu, kuriame matytųsi individualių paketų metrikos, bei šių metrikų vidurkis sistemoje (arba posistemėje).
+Išvedimo formatas turėtų būti toks, jog skirtingų analizių rezultatai būtų lengvai palyginami su kitais.
+
+\textbf{Abiejose vienas iš palaikomų išvesties formatų turėtų būti \testit{latex}, taip suteikiant galimybę analizes rezultatus pateikti tolesniame šio dokūmento tūrinyje.}
+
 \subsection{Įrankių įgyvendinimas}
+Nors beveik visiems reikalavimuose minimiems funkcionalumas galima rasti jau sukurti įrankių, greit ir efektyviai pritaikyti visus juos skirtingom sistemoms
+(arba posistemėms) nėra patogų - kiekvieną įrankį reikėtų vykdyti atskirai, su skirtingais vykdymo procesas ir argumentais, taip išvestų rezultatų formatai yra skirtingi.
+Todėl, norint palengvinti ši procesą - suvienodinti procesų vykdymą, bei gautus rezultus, visi įrankiai reikalingi analizei, įgyvendinti kaip viena programinė sistema, kuri
+apdoroja failus nurodytoje sistemos direktorijoje, nuskaito \textit{java} failų tūrinį ir sukonstruoja informaciją apie sistemos paketųs bei klases.
+Surinkta informacija tada naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten kur galima naudojant jau parašytus įrankius, taip programiškai supaprastinant
+skirtingų įrankių vykdymą.
