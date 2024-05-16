@@ -66,3 +66,252 @@ parenkamos siekiant pabrėžti išorinę darną ir sugrupuoti klases, teikianči
 techninių bibliotekų vartotojams, kadangi galima lengvai surasti bibliotekos teikiamas funkcijas. Tokią kodo grupavimo tvarką sunku palaikyti,
 nes reikia gerai apgalvoti skirstymo strategiją, kad ji būtų prasminga ir patogi naudoti.
 
+
+
+\subsection{Problemos}
+Aprašant galimus šablonus paketams skirstyti, reikėtu identifikuoti klausimus arba problemas, kurias išspresti gali
+gerai sugrupuotas kodas, arba pristatyti / sustiprinti kodas sugrupuotas neteisingai.
+
+\subsubsection{Kur laikyti pagalbines klases, daugkartinio naudojimo klases?}
+Didžiausia problema susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
+inžinieriai dirbantys prie sistemos nežino apie jų egzistavimą, todėl jų nenaudoja,
+tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagalbinio funkcionalumo įgyvendinimo.
+
+\begin{figure}[H]
+\snugshade
+\dirtree{%
+    .1 {/} .
+    .2 {users} .
+    .3 {UserRolesGrouping} .
+    .3 {ArrayGroupingHelper} .
+    .2 {\ldots} .
+    .2 {payments} .
+    .3 {PaymentScheduler} .
+    .2 {\ldots} .
+    .2 {transactions} .
+    .3 {TransactionBatching} .
+    .3 {utils} .
+    .4 {ArrayGroupByUtil} .
+}
+\endsnugshade
+\caption{Sistemos pavizdys, kur labai panšia funkcija atliekančios klasė \textit{ArrayGroupByUtil} ir \textit{ArrayGroupingHelper}
+egzistuoja todėl, kad inžinierius nerado jau įgyvendintos klasės, dėl aiškios struktūros, daugartinio
+panaudojimo klasėms, trūkumo.}
+\end{figure}
+Vienas iš šablonų sprendžiančių šią problema, turėti viena paketą, skirtą visoms pagalbinėmis klasėmis, kuris yra paminėtas sistemos
+dokumentacijoje ir apie jo egzistavima teoriškai žino visi komandos nariai.
+Pakete turėtį atskiras klases, kiekvienam bendriniam domenui, iš kurios pavadinimo programuotojas galėtų nuspresti,
+kad jo ieškomas funkcionalumas, bus butent toje klasėje.
+
+\begin{figure}[H]
+\snugshade
+\dirtree{%
+    .1 {/} .
+    .2 {users} .
+    .3 {UserRolesGrouping} .
+    .2 {\ldots} .
+    .2 {payments} .
+    .3 {PaymentScheduler} .
+    .2 {\ldots} .
+    .2 {transactions} .
+    .3 {TransactionBatching} .
+    .2 {common} .
+    .3 {Arrays} .
+    .3 {Maps} .
+    .3 {SqlQueries} .
+    .3 {Users} .
+}
+\endsnugshade
+\caption{Sistemos pavizdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje, todėl
+pagalbinės klases yra lengvai randamos.}
+\end{figure}
+
+Jei pagalbinių klasių dydis labai išauga, galima jas sumažinti ir vietoj vienos atskiros klasės, vienai bendrinei sričiai, sukurti vieną paketą,
+ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
+Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku kokį srities subdomena padengia būtent ta klasė.
+
+
+\begin{figure}[H]
+\snugshade
+\dirtree{%
+    .1 {/common} .
+    .2 {arrays} .
+    .3 {ArrayFilters} .
+    .3 {ArrayComparators} .
+    .2 {\ldots} .
+    .2 {maps} .
+    .3 {MapTransformations} .
+    .3 {MapJoining} .
+    .2 {json} .
+    .3 {JsonParser} .
+    .2 {\ldots} .
+    .2 {database} .
+    .3 {DatabaseConnection} .
+    .3 {DatabaseQueries} .
+}
+\endsnugshade
+\caption{Sistemos pavizdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketai, taip sumažinant klasių dydį }
+\end{figure}
+
+Naudojant tokį šabloną, programuotojas, susiduriantis su bendrinė problema, kuri labai tikėtina jau yra išspresta sistemoje turėtų
+aiškų procesą, kaip elgtis šioje situacijoje:
+\begin{enumerate}
+    \item Atsidaryti vieną paketą, skirta bendrinio panaudojimo kodui
+    \item Pakete surasti klasę, kurios pavadinimas būtų susijes su jo problema
+    \item Klasės funkcijų sarašė surasti jam tinkamą funkciją.
+    \item Jei reikalingas funkcionalumas nerastas, įgyvendinti jį pasirinktoje klasėje, padengti jį testais,
+    bei aprašyti dokumentaciją, kaip funkcija turėtų būti naudojama
+    \item Iškviesti rastą arba sukurtą funkcija iš bendrinio panaudojimo kodo paketo savo funkcionalume
+\end{enumerate}
+
+\subsubsection{Ka daryti esant dideliam priklausomybių nuo paketo skaičiui?}
+Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms,
+jei tokia tendencija yra budinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
+daro įtaka reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendra sistemos architektūra.
+Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingis, kadangi yra paveikiama daugiau klasių.
+
+Robert C. Martin bendro sąryšio principas, kuris teigia kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete,
+akcentuoja siekiamybę turėti, gan mažus paketus turinčius, aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant
+glaudu tarpusavyje susijusiu klasių saryši.
+Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis racionalų aferentinės jungčių skaičių paketuose.
+Vadovaujantis šiuo šablonu kiekvieną paketą reikėtų realizuoti kaip komponentą, teikianti vieną funkcionalumą.
+Turinti minimalią sąsają \angl{interface}, kuri atskleidžia tik konceptus (metodus arba duomenų tipus),
+kurie yra glaudžiai susiję su komponento teikiama paslauga.
+
+Paketas turintis vieną funkciją yra naudojamas tik tų paketų, kuriems reikia būtent tos funkcijos,
+taip užtikrinant, tik maža sistemos dalies priklausomybę nuo to vieno paketo.
+
+Taip pat mažas paketo funkcionalumas reiškia, kad minėtas funkcionalumui įgyvendinti paketas naudos minimalų kitų sistemos esybių skaičiu,
+taip sumažinant ir eferentinės jungčių skaičių.
+
+Žemiau esančiuose paveikslėliuose galima matyti, kaip išskaidant paketus, turinčius kelis funckionalumus, yra sumažinamas paketų
+priklausomybių skaičius.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.15]{img/excesive_deps}
+    \caption{Sistemos pavizdys su kelias funkcijas atliekančiais paketais}
+    \label{img:excesive_deps}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.13]{img/good_deps}
+    \caption{Sistemos pavizdys su aiškią, vieną funkciją turinčiais paketais}
+    \label{img:good_deps}
+\end{figure}
+
+
+\subsubsection{Ka daryti su ciklinėmis priklausomybėmis?}
+
+\subsubsection{Ka daryti su daug skirtingų sąsajų implementacijų?}
+\subsubsection{Ka daryti su mikroservisų architektūra?}
+\subsubsection{Ka daryti su pasleptom priklausomybem?}
+\subsubsection{Kaip grpuoti kodą mono repozitorijoj?}
+\subsubsection{Ka daryti greitai besikeičiančių kodu?}
+\subsubsection{Ka valdyti esybių evoliuciją ir versijavimą}
+
+
+
+
+
+
+Packaging microservice classes involves structuring your codebase in a way that promotes modularity, scalability, and maintainability within the microservices architecture. Here's how you can package microservice classes effectively:
+
+
+2. *Separate Concerns*:
+- Follow the single responsibility principle (SRP) by separating concerns within each package.
+- For example, separate classes responsible for handling HTTP requests, business logic, data access, and external integrations into distinct packages or modules.
+
+
+5. *API Contract Packaging*:
+- Define clear API contracts for your microservices, specifying the expected inputs, outputs, and behavior of each service.
+- Group classes related to API endpoints, request/response models, and error handling into dedicated packages representing the API contract.
+
+6. *Infrastructure Concerns*:
+- Separate infrastructure-related concerns, such as database access, caching, logging, and messaging, into their own packages or modules.
+- This helps isolate infrastructure-specific code and configurations, making it easier to maintain and evolve over time.
+
+code duplication
+
+
+8. *Testing Concerns*:
+- Organize test classes alongside production code, following a similar package structure.
+- Group unit tests, integration tests, and end-to-end tests into separate packages or modules to maintain clarity and organization.
+
+3. *Difficulty in Understanding and Navigation*:
+- Unorganized code makes it hard for developers to understand the structure and relationships between different parts of the system.
+- Lack of clear packaging boundaries makes navigation and code exploration challenging, especially for new team members or maintainers.
+
+
+To solve the problem of multiple interface implementations, you can use several packaging techniques. Here are some approaches:
+
+1. *Interface Segregation Principle (ISP)*:
+- Follow the ISP, one of the SOLID principles, by segregating interfaces based on client requirements.
+- Instead of having a single interface with multiple methods, create smaller, more focused interfaces with a single responsibility.
+- Group related methods into separate interfaces, allowing classes to implement only the interfaces that are relevant to them.
+
+2. *Package by Feature*:
+- Organize classes implementing related interfaces into packages based on feature or functionality.
+- Each package contains classes that provide a specific feature and implement the necessary interfaces for that feature.
+- This approach keeps related classes together and reduces the likelihood of conflicts between different interface implementations.
+
+5. *Factory Pattern*:
+- Use the factory pattern to create instances of classes implementing specific interfaces.
+- Define factory methods or classes that encapsulate the logic for instantiating different implementations of an interface.
+- This centralizes the creation logic and allows for dynamic selection of implementations based on runtime conditions.
+
+6. *Composition over Inheritance*:
+- Prefer composition over inheritance when designing class relationships.
+- Instead of implementing multiple interfaces directly in a single class, consider composing the class of multiple smaller components, each implementing a specific interface.
+- This promotes flexibility, as you can mix and match components to achieve different behaviors without creating complex inheritance hierarchies.
+
+1. *Modularity*: Packaging allows breaking down a large system into smaller, more manageable modules. This enhances modularity, making it easier to understand, maintain, and extend the codebase.
+
+
+
+4. *Code Reusability*: Well-packaged code promotes code reuse by encapsulating reusable components or libraries into separate packages. This reduces duplication and improves overall productivity.
+
+6. *Collaboration*: Packaging encourages collaboration among team members by providing clear boundaries between different parts of the system. It enables parallel development and reduces the risk of conflicts when multiple developers work on the same project.
+
+
+
+
+
+Could you give patterns how to group code into packages:
+
+Certainly! Grouping code into packages is a common practice in many programming languages to organize and manage large codebases effectively. Here are some patterns for grouping code into packages:
+
+1. *Functional Grouping*:
+- Group code based on functionality or domain. For example, in a web application, you might have packages like authentication, user-management, payment, etc.
+- Each package contains related modules, classes, or functions that handle specific tasks within that domain.
+
+2. *Layered Architecture*:
+- Organize code into layers such as presentation, business logic, and data access layers.
+- Each layer represents a different aspect of the application, with well-defined responsibilities and dependencies.
+
+3. *Feature-Based Packaging*:
+- Group code based on features or components of the application.
+- Each feature or component has its own package containing all the necessary code, including UI, logic, and data handling.
+
+4. *Namespace Packaging*:
+- Use namespaces or packages to organize code based on hierarchical relationships.
+- For example, in Java, you might have packages like com.example.project.module1, com.example.project.module2, etc.
+
+5. *Modular Packaging*:
+- Divide the application into smaller, independent modules that can be developed, tested, and deployed separately.
+- Each module may contain its own set of packages, making it easier to manage dependencies and promote code reuse.
+
+6. *Aspect-Oriented Packaging*:
+- Separate cross-cutting concerns such as logging, security, and caching into their own packages.
+- These packages can then be applied to different parts of the application as needed, using techniques like aspect-oriented programming (AOP).
+
+7. *Dependency Injection Packaging*:
+- Organize code based on the dependency injection (DI) hierarchy.
+- Group classes and components that depend on each other closely within the same package to facilitate DI configuration and management.
+
+8. *Component-Based Packaging*:
+- Treat each component of the application as a standalone unit with its own package.
+- Components may include UI widgets, services, data models, etc., each residing in its own package for easier maintenance and reuse.
+
+By applying these packaging patterns, you can create a well-organized codebase that is easier to understand, maintain, and extend over time
