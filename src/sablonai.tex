@@ -5,13 +5,13 @@ grupuojant skirtingų dalykinių sričių esybes, arba pagal \textit{dalykinės 
 esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete.
 Tačiau šie du šablonai yra gan platūs ir galėtų būti išskaidyti į daugiau smulkesnių ir tiksliau aprašytų šablonų.
 Taip pat, minėtuose šablonuose, būdai kaip ir kodėl skaidyti programinį kodą parinkti akecentuojant tai, kaip programinį
-kodą supranta žmonės, dirbantys prie to kodo.
-Nuspresti, kaip žmones supranta programinį kodą yra gan sudėtingas ir subjektyvus procesas, todėl aprašant šablonus, kodo skirstymui
+kodą supranta prie jo dirbantys žmonės.
+Nuspręsti, kaip žmonės supranta programinį kodą yra gan sudėtingas ir subjektyvus procesas, todėl aprašant šablonus kodo skirstymui
 geriau akcentuoti, kaip sugrupuoti paketai bendrauja tarpusavyje ir skirstyti juos pagal klasių naudojimo atvejus ir priklausomybes.
 Taip kodo grupavimo metodai yra labiau artimi Martino aprašytiems principams.
 Šablonus kaip grupuoti kodą, akcentuojant klasių naudojimo atvejus ir priklausomybes nagrinėja Martin Sandin savo
 straipsnyje \textit{Four Strategies for Organizing Code}.
-Šis straipsnis idomus tuo, kad autorius nesiplečia į du dažniausiai sutinkamus šablonus - grupuoti pagal techninį sluoksni arba dalykinės srities esybes,
+Šis straipsnis idomus tuo, kad autorius nesiplečia į du dažniausiai sutinkamus šablonus - grupuoti pagal techninį sluoksnį arba dalykinės srities esybes,
 o aprašo keturis grupavimo būdus arba šablonus, kurie, nors ir įkvėpti minėtų dviejų budų, yra gan unikalūs ir labiau techniškai apibrėžti.
 
 
@@ -69,12 +69,12 @@ nes reikia gerai apgalvoti skirstymo strategiją, kad ji būtų prasminga ir pat
 
 
 \subsection{Problemos}
-Aprašant galimus šablonus paketams skirstyti, reikėtu identifikuoti klausimus arba problemas, kurias išspresti gali
-gerai sugrupuotas kodas, arba pristatyti / sustiprinti kodas sugrupuotas neteisingai.
+Aprašant galimus šablonus paketams skirstyti, reikėtų identifikuoti klausimus arba problemas, kurias išspresti gali
+gerai sugrupuotas kodas, arba pristatyti / sustiprinti kodas, sugrupuotas neteisingai.
 
 \subsubsection{Kur laikyti pagalbines klases, daugkartinio naudojimo klases?}
-Didžiausia problema susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
-inžinieriai dirbantys prie sistemos nežino apie jų egzistavimą, todėl jų nenaudoja,
+Didžiausia problema, susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
+inžinieriai, dirbantys prie sistemos nežino apie jų egzistavimą, todėl jų nenaudoja,
 tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagalbinio funkcionalumo įgyvendinimo.
 
 \begin{figure}[H]
@@ -94,14 +94,14 @@ tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagal
     .4 {ArrayGroupByUtil} .
 }
 \endsnugshade
-\caption{Sistemos pavizdys, kur labai panšia funkcija atliekančios klasė \textit{ArrayGroupByUtil} ir \textit{ArrayGroupingHelper}
-egzistuoja todėl, kad inžinierius nerado jau įgyvendintos klasės, dėl aiškios struktūros, daugartinio
-panaudojimo klasėms, trūkumo.}
+\caption{Sistemos pavyzdys, kur labai panašią funkciją atliekančios klasės \textit{ArrayGroupByUtil} ir \textit{ArrayGroupingHelper}
+egzistuoja todėl, kad inžinierius nerado jau įgyvendintos klasės, dėl aiškios struktūros daugartinio
+panaudojimo klasėms trūkumo.}
 \end{figure}
-Vienas iš šablonų sprendžiančių šią problema, turėti viena paketą, skirtą visoms pagalbinėmis klasėmis, kuris yra paminėtas sistemos
-dokumentacijoje ir apie jo egzistavima teoriškai žino visi komandos nariai.
-Pakete turėtį atskiras klases, kiekvienam bendriniam domenui, iš kurios pavadinimo programuotojas galėtų nuspresti,
-kad jo ieškomas funkcionalumas, bus butent toje klasėje.
+Vienas iš šablonų, sprendžiančių šią problemą, galėtų būti turėti vieną paketą, skirtą visoms pagalbinėmis klasėmis, kuris yra paminėtas sistemos
+dokumentacijoje ir apie jo egzistavimą teoriškai žino visi komandos nariai.
+Pakete reikėtų turėti atskiras klases kiekvienam bendriniam domenui, iš kurios pavadinimo programuotojas galėtų nuspresti,
+kad jo ieškomas funkcionalumas, bus būtent toje klasėje.
 
 \begin{figure}[H]
 \snugshade
@@ -122,14 +122,13 @@ kad jo ieškomas funkcionalumas, bus butent toje klasėje.
     .3 {Users} .
 }
 \endsnugshade
-\caption{Sistemos pavizdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje, todėl
-pagalbinės klases yra lengvai randamos.}
+\caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje, todėl
+pagalbinės klasės yra lengvai randamos.}
 \end{figure}
 
-Jei pagalbinių klasių dydis labai išauga, galima jas sumažinti ir vietoj vienos atskiros klasės, vienai bendrinei sričiai, sukurti vieną paketą,
+Jei pagalbinių klasių dydis labai išauga, jas galima sumažinti ir vietoj vienos atskiros klasės vienai bendrinei sričiai, sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
-Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku kokį srities subdomena padengia būtent ta klasė.
-
+Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį srities subdomeną padengia klasė.
 
 \begin{figure}[H]
 \snugshade
@@ -150,46 +149,46 @@ Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku kokį srities
     .3 {DatabaseQueries} .
 }
 \endsnugshade
-\caption{Sistemos pavizdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketai, taip sumažinant klasių dydį }
+\caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketais, taip sumažinant klasių dydį }
 \end{figure}
 
-Naudojant tokį šabloną, programuotojas, susiduriantis su bendrinė problema, kuri labai tikėtina jau yra išspresta sistemoje turėtų
+Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspresta sistemoje turėtų
 aiškų procesą, kaip elgtis šioje situacijoje:
 \begin{enumerate}
-    \item Atsidaryti vieną paketą, skirta bendrinio panaudojimo kodui
-    \item Pakete surasti klasę, kurios pavadinimas būtų susijes su jo problema
-    \item Klasės funkcijų sarašė surasti jam tinkamą funkciją.
+    \item Atsidaryti vieną paketą, skirtą bendrinio panaudojimo kodui
+    \item Pakete surasti klasę, kurios pavadinimas būtų susijęs su jo problema
+    \item Klasės funkcijų saraše surasti jam tinkamą funkciją.
     \item Jei reikalingas funkcionalumas nerastas, įgyvendinti jį pasirinktoje klasėje, padengti jį testais,
-    bei aprašyti dokumentaciją, kaip funkcija turėtų būti naudojama
-    \item Iškviesti rastą arba sukurtą funkcija iš bendrinio panaudojimo kodo paketo savo funkcionalume
+    bei aprašyti dokumentaciją, kaip funkcija turėtų būti naudojama.
+    \item Iškviesti rastą arba sukurtą funkciją iš bendrinio panaudojimo kodo paketo savo funkcionalume
 \end{enumerate}
 
 \subsubsection{Ka daryti esant dideliam priklausomybių nuo paketo skaičiui?}
-Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms,
-jei tokia tendencija yra budinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
-daro įtaka reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendra sistemos architektūra.
-Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingis, kadangi yra paveikiama daugiau klasių.
+Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms.
+Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
+daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
+Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingesnis, kadangi yra paveikiama daugiau klasių.
 
-Robert C. Martin bendro sąryšio principas, kuris teigia kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete,
-akcentuoja siekiamybę turėti, gan mažus paketus turinčius, aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant
-glaudu tarpusavyje susijusiu klasių saryši.
-Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis racionalų aferentinės jungčių skaičių paketuose.
-Vadovaujantis šiuo šablonu kiekvieną paketą reikėtų realizuoti kaip komponentą, teikianti vieną funkcionalumą.
-Turinti minimalią sąsają \angl{interface}, kuri atskleidžia tik konceptus (metodus arba duomenų tipus),
+Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete,
+akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant
+glaudų tarpusavyje susijusių klasių saryšį.
+Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis racionalų aferentinių jungčių skaičių paketuose.
+Vadovaujantis šiuo šablonu kiekvieną paketą reikėtų realizuoti kaip komponentą, teikiantį vieną funkcionalumą,
+turintį minimalią sąsają \angl{interface}, kuri atskleidžia tik konceptus (metodus arba duomenų tipus),
 kurie yra glaudžiai susiję su komponento teikiama paslauga.
 
 Paketas turintis vieną funkciją yra naudojamas tik tų paketų, kuriems reikia būtent tos funkcijos,
-taip užtikrinant, tik maža sistemos dalies priklausomybę nuo to vieno paketo.
+taip užtikrinant tik mažos sistemos dalies priklausomybę nuo vieno paketo.
 
-Taip pat mažas paketo funkcionalumas reiškia, kad minėtas funkcionalumui įgyvendinti paketas naudos minimalų kitų sistemos esybių skaičiu,
-taip sumažinant ir eferentinės jungčių skaičių.
+Taip pat mažas paketo funkcionalumas reiškia, kad minėtas paketas skirtas funkcionalumui įgyvendinti naudos minimalų kitų sistemos esybių skaičių,
+taip sumažinant ir eferentinių jungčių skaičių.
 
 Žemiau esančiuose paveikslėliuose galima matyti, kaip išskaidant paketus, turinčius kelis funckionalumus, yra sumažinamas paketų
 priklausomybių skaičius.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.15]{img/excesive_deps}
-    \caption{Sistemos pavizdys su kelias funkcijas atliekančiais paketais}
+    \caption{Sistemos pavyzdys su kelias funkcijas atliekančiais paketais}
     \label{img:excesive_deps}
 \end{figure}
 
@@ -197,7 +196,7 @@ priklausomybių skaičius.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.13]{img/good_deps}
-    \caption{Sistemos pavizdys su aiškią, vieną funkciją turinčiais paketais}
+    \caption{Sistemos pavyzdys su aiškią, vieną funkciją turinčiais paketais}
     \label{img:good_deps}
 \end{figure}
 

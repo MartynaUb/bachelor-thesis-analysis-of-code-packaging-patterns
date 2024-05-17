@@ -6,43 +6,44 @@ atotrūkį tarp organizacijos tikslų ir jų įgyvendinimo galimybių.
 Mąstant apie programinio kodo
 dizainą, kodo paketų kūrimas, klasių priskyrimas jiems ir paketų hierarchijos sudarymas paprastai
 nėra pagrindinis prioritetas, tačiau tai parodo praleistą galimybę padaryti sistemos dizainą labiau
-patikimu[Sho19], suprantamu[Eli10] ir lengviau palaikomu.
+patikimu [Sho19], suprantamu [Eli10] ir lengviau palaikomu.
 Modernios sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
 kurie išskaidyti per skirtingo gylio direktorijas, todėl apgalvotai išskirstytas programinis
 kodas daro daug didesnę įtaką kodo kokybei, nei gali atrodyti iš pirmo žvilgsnio.
-Sistemos paketų studijavimas ir analizė norint įvertinti programinės įrangos kokybę
-tampa vis svarbesne tema dėl augančio failų ir paketų skaičiaus\cite{DesignMetrics}.
+Sistemos paketų struktūros analizė norint įvertinti programinės įrangos kokybę
+tampa vis svarbesne tema dėl augančio failų ir paketų skaičiaus~\cite{DesignMetrics}.
 
-Norint išsiaiškinti, kaip efektyviausiai gali būti skaidomas programinis
-kodas, tam jog jo struktūra darytų teigiama įtaką sistemos kokybei, reikalinga atlikti skirstymo į paketus šablonų analizę -
+Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai,
+tam jog jo struktūra darytų teigiamą įtaką sistemos kokybei, reikalinga atlikti skirstymo į paketus šablonų analizę -
 išsiaiškinti galimus šablonus, kaip skirstyti programinį kodą į paketus, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
-Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį, nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių.
+Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį,
+nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių.
 
 Šio darbo tikslas - identifikuoti ir ivertinti šablonus kodo skirstymui į paketus.
 Remiantis moksliniais straipsniais apie sistemos kokybę bei palaikomumą aprašyti kriterijus,
-kurie būtų naudojami šablonus įvertinti, nustatant jų įtaką sistemos palaikomumui.
+kurie būtų naudojami šablonams įvertinti, nustatant jų įtaką sistemos palaikomumui.
 
 Tikslui pasiekti yra iškeliami šie uždaviniai:
 \begin{itemize}
-    \item Išskirti gerai įgyvendinto kodo požymius
+    \item  Išskirti gerai įgyvendinto kodo požymius
     \item  Aprašyti skirstymo į paketus šablonus, remiantis pavyzdžiais teorinėje medžiagoje
-    \item  Įvertinti kiek realių sistemų struktūra nutolusi nuo teorinių šablonų apibrėžimų
+    \item  Įvertinti, kiek realių sistemų struktūra nutolusi nuo teorinių šablonų apibrėžimų
     \item  Pasiūlyti kriterijus, įvertinančius kodo suskirstymo šablono įtaką sistemos kokybei, remiantis
-rastai gerai įgyvenditos sistemos požymiais
-    \item  Pasirinkti kelias sistemas ir pertvarkyti jų failų struktūrą pagal aprašytus šablonus, įvertinant
+rastais gerai įgyvendintos sistemos požymiais
+    \item  Pasirinkti kelias sistemas ir pertvarkyti jų failų struktūrą pagal aprašytus šablonus, įvertinant,
 kiek sudėtinga pasiekti kiekvieno šablono strukūrą
     \item  Naudojant pertvarkytas sistemas, įvertinti kiekvieną kodo skirstymo šabloną pagal pasiūlytus kriterijus
     \item  Pateikti rekomendacijas, kokius šablonus kodo skirstymui tinkamiausia naudoti
 \end{itemize}
 
-Šiuo darbo metu nagrinėjami ir aprašomi gerai įgyvendinto kodo požymiai, užtikrinantys
+Šio darbo metu nagrinėjami ir aprašomi gerai įgyvendinto kodo požymiai, užtikrinantys
 sistemos stabilumą ir palaikomumą, remiantis Martin Kleppmann \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems},
 ir Robert C. Martin \textit{Agile Software Development, Principles, Patterns, and Practices} knygomis.
-Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kodo kokybei, pavyzdžiui - komponentų skaičius, tiesioginės ir netiesioginės priklausomybės, paketų stabilumas\cite{AgileSoftwareDevelopment}.
+Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kodo kokybei, pavyzdžiui - komponentų skaičius,
+tiesioginės ir netiesioginės priklausomybės, paketų stabilumas~\cite{AgileSoftwareDevelopment}.
 Tyrinėjami šablonai kodo skirstymui į paketus įvardinti Martin Sadin straipsnyje \textit{Four Strategies for Organizing Code}.
-Pasirintos ir išnagrinėtos atviro kodo sistemos.
-Pasirenkant skirtingo tipo projektus, siekiant
+Nagrinėjamos atviro kodo sistemos, pasirenkant skirtingo tipo projektus, siekiant
 objektyvesnės šablonų analizės skirtingose srityse.
 Galimi tipai:
     \begin{itemize}
@@ -59,9 +60,9 @@ Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirst
 skirtingi skirstymo šablonai turi sistemos kokybei.
 
 Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, kaip galima ją įvertinti, įgyvendinimo kokybę.
-Aprašyti kriterijai kaip įvertinti paketų struktūros įtaką sistemos kokybei.
-Antras skyrius tyrinėja skirtingus šablonųs klasėms į paketus skirstyti, jų privalumus bei trūkumus.
-Trečiame skyriuje aprašomi sukurti įrankiai, reikalingį sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
+Aprašyti kriterijai, kaip įvertinti paketų struktūros įtaką sistemos kokybei.
+Antras skyrius tyrinėja skirtingus šablonus klasėms į paketus skirstyti, jų privalumus bei trūkumus.
+Trečiame skyriuje aprašomi sukurti įrankiai, reikalingi sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
 Ketvirtame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
 Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.
 Nagrinėjama perdarytų sistemų kokybė pagal pirmame skyriuje aprašytus kriterijus, ieškomas geriausiai įvertintas šablonas.

@@ -5,53 +5,53 @@ apskaičiuoti paketų kokybes metrikas yra sudėtingas procesas.
 Daryti tai rankiniu budu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
 todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant
 aiškiai apibrėžtų ir programiškai efektyvių programinių įrankių pagalbą.
+Šiame darbe nagrinėjamos Java programavimo kalba parašytos sistemos.
 
 \subsection{Reikalavimai įrankiams}
 Įrankių, leidžiančių paprasčiau atlikti sistemų analizę, atsakomybes galima suskirstyti į dvi grupes:
 \begin{itemize}
-    \item Bendrinė sistemos analizė - įrankis ar įrankiai padeda atlikti bendrinę sistemos analize.
+    \item Bendrinė sistemos analizė - įrankis ar įrankiai padeda atlikti bendrinę sistemos analizę.
     Šios atsakomybių grupės įrankių išvestis nėra objektyvūs, tiksliai apibrėžtų formulių rezultatai, o papildoma, aiškiai
-    atvaizduota, meta informacija apie sistema - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardai.
+    pavaizduota, meta informacija apie sistemą - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardus.
     Ši papildoma informacija nėra aiškūs teiginiai, o tik pagalba analizę atliekančiams asmeniui, leidžianti priimti ižvalgas apie sistemą,
     kaip pavyzdžiui, kokiam paketų skirstymo šablonui yra atimiausia sistemos strukūra, arba kaip lengvai sistema yra suprantama.
-    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padeda paskaičiuoti aprašytas paketų kokybes metrikas.
+    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padeda apskaičiuoti aprašytas paketų kokybės metrikas.
     Šių įrankių išvestis - tikslūs, formulėmis pagrįstų skaičiavimų rezultatai apie paketų kokybę, kuriuos galima lyginti tarpusavyje.
 \end{itemize}
 
-todo: akcentuoti kad visas darbas vyksta su java sistemomis
-\subsection{Reikalavimai įrankiui bendrinės sistemos analizei}
-Įrankis bendrinei sistemos analizei atlikti, turėtų suteikti galimibė naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
+\subsection{Reikalavimai bendrinės sistemos analizės įrankiui}
+Įrankis bendrinei sistemos analizei atlikti turėtų suteikti galimybę naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
 atlikti jos turinio analizę bei naudotojui pateikti naudingas išvadas, sudarytas iš:
 \begin{itemize}
     \item Klasių ir paketų skaičiaus
-    \item Vidutinį klasių pakete skaičiaus
-    \item Paketų ir klasių medį, identifikuojanti abstrakčias klases ar sąsajas
+    \item Vidutinio klasių pakete skaičiaus
+    \item Paketų ir klasių medį, identifikuojantį abstrakčias klases ar sąsajas
     \item Paketų priklausomybių grafiką
 \end{itemize}
-Gautą rezultatą išvesti suprantamu formatu, leidžiant vartotojui priimti išvadas apie sistemos, arba tam tikros
+Gautą rezultatą išvesti suprantamu formatu, leidžiant vartotojui susidaryti išvadas apie sistemos, arba tam tikros
 posistemės struktūrą, naudojamus įrankius bei kokybę.
 
 \subsection{Reikalavimai įrankiui paketo kokybėi skaičiuoti}
-Įrankis paketo kokybei skaičiuoti, turėtų suteikti galimibė naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
+Įrankis paketo kokybei skaičiuoti, turėtų suteikti galimybę naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
 apskaičiuoti kiekvieno paketo kokybės metrikas:
 \begin{itemize}
-    \item Klasių skaičius
-    \item Aferentinių jungčių skaičius
-    \item Eferentinių jungčių skaičius
-    \item Nestabilumo santykis
-    \item Abstrakcijos santykis
-    \item Atstumo nuo pagrindinės sekos santykis
-    \item Žiedinių priklausomybių skaičius
+    \item Klasių skaičių
+    \item Aferentinių jungčių skaičių
+    \item Eferentinių jungčių skaičių
+    \item Nestabilumo santykį
+    \item Abstrakcijos santykį
+    \item Atstumo nuo pagrindinės sekos santykį
+    \item Žiedinių priklausomybių skaičių
 \end{itemize}
 Gautą rezultatą išvesti vartotojui suprantamu formatu, kuriame matytųsi individualių paketų metrikos, bei šių metrikų vidurkis sistemoje (arba posistemėje).
 Išvedimo formatas turėtų būti toks, jog skirtingų analizių rezultatai būtų lengvai palyginami su kitais.
 
-\textbf{Abiejose vienas iš palaikomų išvesties formatų turėtų būti \textit{latex}, taip suteikiant galimybę analizes rezultatus pateikti tolesniame šio dokūmento tūrinyje.}
+\textbf{Abiejose vienas iš palaikomų išvesties formatų turėtų būti \textit{latex}, taip suteikiant galimybę analizės rezultatus pateikti tolesniame šio dokumento turinyje.}
 
 \subsection{Įrankių įgyvendinimas}
-Nors beveik visiems reikalavimuose minimiems funkcionalumas galima rasti jau sukurti įrankių, greit ir efektyviai pritaikyti visus juos skirtingom sistemoms
-(arba posistemėms) nėra patogų - kiekvieną įrankį reikėtų vykdyti atskirai, su skirtingais vykdymo procesas ir argumentais, taip išvestų rezultatų formatai yra skirtingi.
-Todėl, norint palengvinti ši procesą - suvienodinti procesų vykdymą, bei gautus rezultus, visi įrankiai reikalingi analizei, įgyvendinti kaip viena programinė sistema, kuri
-apdoroja failus nurodytoje sistemos direktorijoje, nuskaito \textit{java} failų tūrinį ir sukonstruoja informaciją apie sistemos paketųs bei klases.
-Surinkta informacija tada naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten kur galima naudojant jau parašytus įrankius, taip programiškai supaprastinant
+Nors beveik visiems reikalavimuose minimiems funkcionalumams galima rasti jau sukurti įrankių, greit ir efektyviai pritaikyti juos skirtingoms sistemoms
+(arba posistemėms) nėra patogu - kiekvieną įrankį reikėtų vykdyti atskirai, su skirtingais vykdymo procesais ir argumentais. Taip išvestų rezultatų formatai yra skirtingi.
+Todėl, norint palengvinti ši procesą - suvienodinti procesų vykdymą bei gautus rezultus, visi įrankiai reikalingi analizei įgyvendinti kaip viena programinė sistema, kuri
+apdoroja failus nurodytoje sistemos direktorijoje, nuskaito \textit{java} failų turinį ir sukonstruoja informaciją apie sistemos paketus bei klases.
+Surinkta informacija naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten, kur galima, naudojant jau parašytus įrankius, taip programiškai supaprastinant
 skirtingų įrankių vykdymą.
