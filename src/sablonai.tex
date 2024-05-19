@@ -1,19 +1,14 @@
 \section{Galimi kodo skirstymo į paketus šablonai}
-Diskusijose, kaip reikėtų skirstyti programini kodą, paprastai akcentuojami du šablonai - pagal \textit{techninį sluoksnį}, todo: šaltiniai, nurodantys skirstymo būdus
+Diskusijose, kaip reikėtų skirstyti programinį kodą, paprastai akcentuojami du metodai - pagal \textit{techninį sluoksnį},
 kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
 grupuojant skirtingų dalykinių sričių esybes, arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
-esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete.
-Tačiau šie du šablonai yra gan platūs ir galėtų būti išskaidyti į daugiau smulkesnių ir tiksliau aprašytų šablonų.
-Taip pat, minėtuose šablonuose, būdai kaip ir kodėl skaidyti programinį kodą parinkti akecentuojant tai, kaip programinį
-kodą supranta prie jo dirbantys žmonės.
+esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}
+Tačiau šie du metodai yra gan platūs ir, dažniausiai jų nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
+siekiant išspresti sistemos planavimo metu kylančias problemas. Norint išskirti šiuos šablonus, buvo nagrinėjamos atviro kodo sistemos,
+stebimi nukrypimai nuo numatytojo skirstymo metodo bei ieškoma paaiškinimų, kodėl šie sprendimai buvo priimti.
 Nuspręsti, kaip žmonės supranta programinį kodą yra gan sudėtingas ir subjektyvus procesas, todėl aprašant šablonus kodo skirstymui
 geriau akcentuoti, kaip sugrupuoti paketai bendrauja tarpusavyje ir skirstyti juos pagal klasių naudojimo atvejus ir priklausomybes.
 Taip kodo grupavimo metodai yra labiau artimi Martino aprašytiems principams.
-Šablonus kaip grupuoti kodą, akcentuojant klasių naudojimo atvejus ir priklausomybes nagrinėja Martin Sandin savo
-straipsnyje \textit{Four Strategies for Organizing Code}.
-Šis straipsnis idomus tuo, kad autorius nesiplečia į du dažniausiai sutinkamus šablonus - grupuoti pagal techninį sluoksnį arba dalykinės srities esybes,
-o aprašo keturis grupavimo būdus arba šablonus, kurie, nors ir įkvėpti minėtų dviejų budų, yra gan unikalūs ir labiau techniškai apibrėžti.
-
 
 \subsection{Pagal komponentą}
 Organizavimas pagal komponentus sumažina sistemos sudėtingumą, pabrėždamas išorinę ir vidinę kodo vienetų darną.
@@ -34,45 +29,16 @@ ir, dėl aiškiai aprašytų sąsajų, lengviau pernaudojamas.
     \label{img:component_packaging}
 \end{figure}
 
-
-\subsection{Pagal techninį sluoksnį}
-Laikantis skirstymo pagal techninį sluoksnį, kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
-kuris savyje grupuoja skirtingas dalykinės srities esybes. Pavyzdžiui, visos sąsajos darbui su duomenų baze guli viename pakete, sąsajos
-su verslo logikos transformacijomis kitame, o duomenų vaizdavimo klientui logika trečiame pakete.
-Šis paketų skirstymo metodas yra labai paplitęs, ypač tarp senesnių kompiuterinių sistemų. Jį paprasta įgyvendinti,
-metode paprasta pavadinti paketus, aišku, į kuriuos paketus priskirti klases. Nors tokią kodo struktūrą lengva įgyvendinti ir palaikyti sistemoje,
-ji turi nemažai trūkumų. Šis metodas nepalengvina sistemos plėtros valdymo - augant sistemai paprastai daugėja dalykinės srities esybių,
-o ne funkcinių sluoksnių, todėl esamų paketų skaičius beveik nesikeičia, bet klasių kiekis pakete vis auga, tai daro neigiamą įtaką navigacijai
-paketo viduje. Skirstant paketus pagal funkciją taip pat nėra gerinamas informacijos slėpimas (inkapsuliacija) - kiekvienas paketas savyje
-talpina skirtingų dalykinės srities esybių kodą, tai sudaro salygas per klaidą užmegzti komunikaciją tarp komponentų, kurie neturėtų būti susiję.
-Taip pat, skirstant tokiu būdu, sąsajos yra stipresnės tarp loginių komponentų, pasiskirsčiusių per sluoksnius, nei tarp vieno sluoksnio esybių.
-Tokiu atveju pokyčių pristatymas pasidaro sudėtingas, nes reikalinga keisti ne vieną sluoksnį.
-Tačiau šis metodas turi ne tik trūkumus - vienas iš jo privalumų - ganėtinai aiškiai nusakoma bendra sistemos architektūra, programiniai sluoksniai.
-Deja, netvarkinga sistemos būsena eliminuoja ši privalumą.
-
-\subsection{Pagal tipą}
-Kodo organizavimas pagal tipą įprastai nėra griežtai apibrėžtas - klasės grupuojamos pagal vartotojo sumanytą tipą, neteikiant svarbos
-klasių sąryšiams ar loginėms esybėms. Taip skirstant klases, į paketus galėtų būti grupuojamos esybių, išimčių ar serviso klasės. Šis skirstymo būdas
-neteikia prioriteto nei skirstymui pagal techninius sluoksnius, nei pagal dalykinės srities esybes. Jį ganėtinai nesudėtinga įgyvendinti,
-tačiau šis metodas yra netvarkingas bei turi trūkumų. Taip suskirstytas kodas sunkiai skaitomas, nes nėra aišku, pagal kokią tvarką
-ieškoti konkrečios klasės ar kaip priskirti esamiems paketams netinkamas klases. Taip pat toks skirstymo būdas visiškai nepadeda spręsti
-klasių sąsajų problemų, kadangi neapgalvotai išskirstyti sluoksniai gali būti glaudžiai susiję.
-
-\subsection{Pagal funkciją}
-Šis skirstymo būdas dalinai panašus į skirstymą pagal komponentą, tačiau yra mažiau griežtas ir
-prioritetas teikiamas ne vidinei darnai ir glaudžiai grupuojamų
-komponentų sąsajai, o išorinei darnai. Tokio skirstymo būdo paketuose dažniausiai grupuojamos tos pačios sąsajos implementacijos,
-parenkamos siekiant pabrėžti išorinę darną ir sugrupuoti klases, teikiančias panašias funkcijas. Toks skirstymas patogus, pavyzdžiui,
-techninių bibliotekų vartotojams, kadangi galima lengvai surasti bibliotekos teikiamas funkcijas. Tokią kodo grupavimo tvarką sunku palaikyti,
-nes reikia gerai apgalvoti skirstymo strategiją, kad ji būtų prasminga ir patogi naudoti.
-
-
-
 \subsection{Problemos}
-Aprašant galimus šablonus paketams skirstyti, reikėtų identifikuoti klausimus arba problemas, kurias išspresti gali
-gerai sugrupuotas kodas, arba pristatyti / sustiprinti kodas, sugrupuotas neteisingai.
+Norint išskirti galimus šablonus paketams skirstyti, reikėtų
+analizuoti jų panaudojimą atviro kodo sistemose, siekant pastebėti, kur buvo nukrypta nuo bendresnio kodo skirstymo
+būdo ir identifikuoti klausimus arba problemas, kurias buvo bandoma išspresti.
 
-\subsubsection{Kur laikyti pagalbines klases, daugkartinio naudojimo klases?}
+
+\subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
+Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal domeno esybes - pagalbines klases gali
+naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti. Skirstant pagal techninį sluoksnį, bazines pagalbines klases gali naudoti keli
+sluoksniai.
 Didžiausia problema, susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
 inžinieriai, dirbantys prie sistemos nežino apie jų egzistavimą, todėl jų nenaudoja,
 tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagalbinio funkcionalumo įgyvendinimo.
@@ -129,6 +95,8 @@ pagalbinės klasės yra lengvai randamos.}
 Jei pagalbinių klasių dydis labai išauga, jas galima sumažinti ir vietoj vienos atskiros klasės vienai bendrinei sričiai, sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
 Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį srities subdomeną padengia klasė.
+Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos  \footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
+\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
 
 \begin{figure}[H]
 \snugshade
@@ -183,6 +151,8 @@ taip užtikrinant tik mažos sistemos dalies priklausomybę nuo vieno paketo.
 Taip pat mažas paketo funkcionalumas reiškia, kad minėtas paketas skirtas funkcionalumui įgyvendinti naudos minimalų kitų sistemos esybių skaičių,
 taip sumažinant ir eferentinių jungčių skaičių.
 
+Toks skirstymo būdas
+
 Žemiau esančiuose paveikslėliuose galima matyti, kaip išskaidant paketus, turinčius kelis funckionalumus, yra sumažinamas paketų
 priklausomybių skaičius.
 \begin{figure}[H]
@@ -200,15 +170,41 @@ priklausomybių skaičius.
     \label{img:good_deps}
 \end{figure}
 
-
-\subsubsection{Ka daryti su ciklinėmis priklausomybėmis?}
-
 \subsubsection{Ka daryti su daug skirtingų sąsajų implementacijų?}
+Sistemai plečiantis, galima susidurti su problema, kad išauga sąsajos implementacijų skaičius. Ši problema gali iškilti
+tiek bandant skirstyti kodą pagal domeno esybes, tiek pagal techninį sluoksnį. Skirstant pagal domeną, gali būti neaišku, kur turėtų
+būti sukuriamas naujas esybės paketa. Skirstant kodą pagal techninį sluoksnį, gali susidaryti klasių perteklius, pavyzdžiui,
+model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas implementuoja. Šią problemą būtų galima spręsti sukuriant
+sub paketus kiekvienos sąsajos implementacijoms. Taip pat, jei vienos sąsajos implementacijai reikalingos kelios klasės, jas galima
+išskirti į atskirą paketą.
+
 \subsubsection{Ka daryti su mikroservisų architektūra?}
-\subsubsection{Ka daryti su pasleptom priklausomybem?}
-\subsubsection{Kaip grpuoti kodą mono repozitorijoj?}
-\subsubsection{Ka daryti greitai besikeičiančių kodu?}
-\subsubsection{Ka valdyti esybių evoliuciją ir versijavimą}
+\subsubsection{Ka daryti su paslėptom priklausomybėm?}
+\subsubsection{Kaip grupuoti kodą mono repozitorijoj?}
+\subsubsection{Ka daryti su greitai besikeičiančiu kodu?}
+\subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
+Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami. Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
+didesniems pokyčiams kartais reikia sukurti naujas klasių ar funkcionalumų versijas. Jei reikia palaikyti atgalinį
+suderinamumą (angl. backward compatibility), sistemoje gali atsirasti kelios tų pačių esybių versijos.
+Tokiu atveju kelios tų pačių esybių versijos sistemoje gali pridėti painumo. Ši problema dažnai sprendžiama sukuriant atskirus paketus skirtingoms
+versijoms bei iškeliant bendras priklausomybes taip, kad jas galėtų pasiekti abi versijos. Taip galima išvengti kodo duplikacijos bei perteklinio
+klasių skaičiaus paketuose.
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/regex} .
+        .2 {common} .
+        .2 {pending} .
+        .2 {v3} .
+        .2 {v4} .
+    }
+    \endsnugshade
+    \caption{Sistemos pavyzdys, kurioje skirtingos versijos patalpintos atskiruose sub paketuose, paliekant tik bendro naudojimo klases}
+\end{figure}
+Toks skirstymo būdas matomas keliose repozitorijose - Mongo duomenų bazėje\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}},
+API skirtame kelionių valdymui\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
+ bei duomenų saugojimo įrankyje \footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
+Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
 
 
 
