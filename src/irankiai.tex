@@ -1,21 +1,20 @@
 \section{Įrankiai šablonų analizei ir įvertinimui}
 Kompiuterinės sistemos, kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai yra labai didelės.
 Pilnai perprasti tokias sistemas, nustatyti jų įgyvendinimo kokybę, naudojamus šablonus kodui skirstyti,
-apskaičiuoti paketų kokybes metrikas yra sudėtingas procesas.
-Daryti tai rankiniu budu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
+apskaičiuoti paketų kokybės metrikas yra sudėtingas procesas.
+Daryti tai rankiniu būdu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
 todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant
 aiškiai apibrėžtų ir programiškai efektyvių programinių įrankių pagalbą.
-Šiame darbe nagrinėjamos Java programavimo kalba parašytos sistemos.
 
 \subsection{Reikalavimai įrankiams}
 Įrankių, leidžiančių paprasčiau atlikti sistemų analizę, atsakomybes galima suskirstyti į dvi grupes:
 \begin{itemize}
     \item Bendrinė sistemos analizė - įrankis ar įrankiai padeda atlikti bendrinę sistemos analizę.
     Šios atsakomybių grupės įrankių išvestis nėra objektyvūs, tiksliai apibrėžtų formulių rezultatai, o papildoma, aiškiai
-    pavaizduota, meta informacija apie sistemą - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardus.
+    pavaizduota meta informacija apie sistemą - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardus.
     Ši papildoma informacija nėra aiškūs teiginiai, o tik pagalba analizę atliekančiams asmeniui, leidžianti priimti ižvalgas apie sistemą,
     kaip pavyzdžiui, kokiam paketų skirstymo šablonui yra atimiausia sistemos strukūra, arba kaip lengvai sistema yra suprantama.
-    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padeda apskaičiuoti aprašytas paketų kokybės metrikas.
+    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padėti apskaičiuoti aprašytas paketų kokybės metrikas.
     Šių įrankių išvestis - tikslūs, formulėmis pagrįstų skaičiavimų rezultatai apie paketų kokybę, kuriuos galima lyginti tarpusavyje.
 \end{itemize}
 
@@ -31,8 +30,8 @@ atlikti jos turinio analizę bei naudotojui pateikti naudingas išvadas, sudaryt
 Gautą rezultatą išvesti suprantamu formatu, leidžiant vartotojui susidaryti išvadas apie sistemos, arba tam tikros
 posistemės struktūrą, naudojamus įrankius bei kokybę.
 
-\subsection{Reikalavimai įrankiui paketo kokybėi skaičiuoti}
-Įrankis paketo kokybei skaičiuoti, turėtų suteikti galimybę naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
+\subsection{Reikalavimai įrankiui paketo kokybei skaičiuoti}
+Įrankis paketo kokybei skaičiuoti turėtų suteikti galimybę naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
 apskaičiuoti kiekvieno paketo kokybės metrikas:
 \begin{itemize}
     \item Klasių skaičių

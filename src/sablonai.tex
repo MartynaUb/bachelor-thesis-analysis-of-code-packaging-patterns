@@ -10,25 +10,6 @@ Nuspręsti, kaip žmonės supranta programinį kodą yra gan sudėtingas ir subj
 geriau akcentuoti, kaip sugrupuoti paketai bendrauja tarpusavyje ir skirstyti juos pagal klasių naudojimo atvejus ir priklausomybes.
 Taip kodo grupavimo metodai yra labiau artimi Martino aprašytiems principams.
 
-\subsection{Pagal komponentą}
-Organizavimas pagal komponentus sumažina sistemos sudėtingumą, pabrėždamas išorinę ir vidinę kodo vienetų darną.
-Išorinė darna reiškia, kad paketas turi minimalią sąsają \angl{interface}, kuri atskleidžia tik konceptus (metodus arba duomenų tipus),
-kurie yra glaudžiai susiję su komponento teikiama paslauga.
-Vidinė darna reiškia, kad pakuotėje esantis kodas yra stipriai susijęs tarpusavyje ir susijęs su teikiama paslauga.
-
-Kodas yra grupuojamas į mažus paketus, turinčius vieną, aiškiai apibrėžtą funkcionalumą ar tikslą, aprašant abstrakciją, kokie paketo elementai
-yra pasiekiami iš išorės ir kaip jie naudojami.
-Taip sukuriamas kodas, kuris yra lengviau suprantamas.
-Tokią kodo grupavimo tvarką sunku palaikyti, tačiau jos rezultatas - kodas, kuris yra lengviau suprantamas, lengviau pagerinamas, lengviau testuojamas
-ir, dėl aiškiai aprašytų sąsajų, lengviau pernaudojamas.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.2]{img/component_packaging}
-    \caption{Sistemos sugrupuotos pagal komponentą pavyzdys}
-    \label{img:component_packaging}
-\end{figure}
-
 \subsection{Problemos}
 Norint išskirti galimus šablonus paketams skirstyti, reikėtų
 analizuoti jų panaudojimą atviro kodo sistemose, siekant pastebėti, kur buvo nukrypta nuo bendresnio kodo skirstymo
@@ -95,7 +76,7 @@ pagalbinės klasės yra lengvai randamos.}
 Jei pagalbinių klasių dydis labai išauga, jas galima sumažinti ir vietoj vienos atskiros klasės vienai bendrinei sričiai, sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
 Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį srities subdomeną padengia klasė.
-Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos  \footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
+Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
 \footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
 
 \begin{figure}[H]
@@ -120,7 +101,7 @@ Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavy
 \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketais, taip sumažinant klasių dydį }
 \end{figure}
 
-Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspresta sistemoje turėtų
+Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspręsta sistemoje turėtų
 aiškų procesą, kaip elgtis šioje situacijoje:
 \begin{enumerate}
     \item Atsidaryti vieną paketą, skirtą bendrinio panaudojimo kodui
@@ -151,7 +132,12 @@ taip užtikrinant tik mažos sistemos dalies priklausomybę nuo vieno paketo.
 Taip pat mažas paketo funkcionalumas reiškia, kad minėtas paketas skirtas funkcionalumui įgyvendinti naudos minimalų kitų sistemos esybių skaičių,
 taip sumažinant ir eferentinių jungčių skaičių.
 
-Toks skirstymo būdas
+Toks skirstymo būdas taip pat sprendžia ciklinių priklausomybių problemą - pavyzdžiui, įrankio, skirto spręsti ciklinių priklausomybių problemą,
+ kūrimo aprašas~\cite{CircularDependencies} teigia, kad ciklinių priklausomybių problemą galima spręsti laikantis trijų principų -
+bendro panaudojimo, bendro keitimosi bei paleidimo ir pernaudojimo ekvivalentumo.
+Šie principai yra išvesti iš bendro saryšio principu ir akcentuoja, kad kartu besikeičiančios klasės turėtų būti viename pakete.
+Norint užtikrinti šiuos reikalavimus, reikėtų turėti mažą,
+tiksliai apibrėžto funkcionalumo paketą, kurio visi komponentai - tarpusavyje susiję. Tokiu atveju ciklinių priklausomybių tikimybė sumažėja.
 
 Žemiau esančiuose paveikslėliuose galima matyti, kaip išskaidant paketus, turinčius kelis funckionalumus, yra sumažinamas paketų
 priklausomybių skaičius.
@@ -178,10 +164,6 @@ model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas 
 sub paketus kiekvienos sąsajos implementacijoms. Taip pat, jei vienos sąsajos implementacijai reikalingos kelios klasės, jas galima
 išskirti į atskirą paketą.
 
-\subsubsection{Ka daryti su mikroservisų architektūra?}
-\subsubsection{Ka daryti su paslėptom priklausomybėm?}
-\subsubsection{Kaip grupuoti kodą mono repozitorijoj?}
-\subsubsection{Ka daryti su greitai besikeičiančiu kodu?}
 \subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
 Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami. Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
 didesniems pokyčiams kartais reikia sukurti naujas klasių ar funkcionalumų versijas. Jei reikia palaikyti atgalinį
@@ -205,108 +187,3 @@ Toks skirstymo būdas matomas keliose repozitorijose - Mongo duomenų bazėje\fo
 API skirtame kelionių valdymui\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
-
-
-
-
-
-
-Packaging microservice classes involves structuring your codebase in a way that promotes modularity, scalability, and maintainability within the microservices architecture. Here's how you can package microservice classes effectively:
-
-
-2. *Separate Concerns*:
-- Follow the single responsibility principle (SRP) by separating concerns within each package.
-- For example, separate classes responsible for handling HTTP requests, business logic, data access, and external integrations into distinct packages or modules.
-
-
-5. *API Contract Packaging*:
-- Define clear API contracts for your microservices, specifying the expected inputs, outputs, and behavior of each service.
-- Group classes related to API endpoints, request/response models, and error handling into dedicated packages representing the API contract.
-
-6. *Infrastructure Concerns*:
-- Separate infrastructure-related concerns, such as database access, caching, logging, and messaging, into their own packages or modules.
-- This helps isolate infrastructure-specific code and configurations, making it easier to maintain and evolve over time.
-
-code duplication
-
-
-8. *Testing Concerns*:
-- Organize test classes alongside production code, following a similar package structure.
-- Group unit tests, integration tests, and end-to-end tests into separate packages or modules to maintain clarity and organization.
-
-3. *Difficulty in Understanding and Navigation*:
-- Unorganized code makes it hard for developers to understand the structure and relationships between different parts of the system.
-- Lack of clear packaging boundaries makes navigation and code exploration challenging, especially for new team members or maintainers.
-
-
-To solve the problem of multiple interface implementations, you can use several packaging techniques. Here are some approaches:
-
-1. *Interface Segregation Principle (ISP)*:
-- Follow the ISP, one of the SOLID principles, by segregating interfaces based on client requirements.
-- Instead of having a single interface with multiple methods, create smaller, more focused interfaces with a single responsibility.
-- Group related methods into separate interfaces, allowing classes to implement only the interfaces that are relevant to them.
-
-2. *Package by Feature*:
-- Organize classes implementing related interfaces into packages based on feature or functionality.
-- Each package contains classes that provide a specific feature and implement the necessary interfaces for that feature.
-- This approach keeps related classes together and reduces the likelihood of conflicts between different interface implementations.
-
-5. *Factory Pattern*:
-- Use the factory pattern to create instances of classes implementing specific interfaces.
-- Define factory methods or classes that encapsulate the logic for instantiating different implementations of an interface.
-- This centralizes the creation logic and allows for dynamic selection of implementations based on runtime conditions.
-
-6. *Composition over Inheritance*:
-- Prefer composition over inheritance when designing class relationships.
-- Instead of implementing multiple interfaces directly in a single class, consider composing the class of multiple smaller components, each implementing a specific interface.
-- This promotes flexibility, as you can mix and match components to achieve different behaviors without creating complex inheritance hierarchies.
-
-1. *Modularity*: Packaging allows breaking down a large system into smaller, more manageable modules. This enhances modularity, making it easier to understand, maintain, and extend the codebase.
-
-
-
-4. *Code Reusability*: Well-packaged code promotes code reuse by encapsulating reusable components or libraries into separate packages. This reduces duplication and improves overall productivity.
-
-6. *Collaboration*: Packaging encourages collaboration among team members by providing clear boundaries between different parts of the system. It enables parallel development and reduces the risk of conflicts when multiple developers work on the same project.
-
-
-
-
-
-Could you give patterns how to group code into packages:
-
-Certainly! Grouping code into packages is a common practice in many programming languages to organize and manage large codebases effectively. Here are some patterns for grouping code into packages:
-
-1. *Functional Grouping*:
-- Group code based on functionality or domain. For example, in a web application, you might have packages like authentication, user-management, payment, etc.
-- Each package contains related modules, classes, or functions that handle specific tasks within that domain.
-
-2. *Layered Architecture*:
-- Organize code into layers such as presentation, business logic, and data access layers.
-- Each layer represents a different aspect of the application, with well-defined responsibilities and dependencies.
-
-3. *Feature-Based Packaging*:
-- Group code based on features or components of the application.
-- Each feature or component has its own package containing all the necessary code, including UI, logic, and data handling.
-
-4. *Namespace Packaging*:
-- Use namespaces or packages to organize code based on hierarchical relationships.
-- For example, in Java, you might have packages like com.example.project.module1, com.example.project.module2, etc.
-
-5. *Modular Packaging*:
-- Divide the application into smaller, independent modules that can be developed, tested, and deployed separately.
-- Each module may contain its own set of packages, making it easier to manage dependencies and promote code reuse.
-
-6. *Aspect-Oriented Packaging*:
-- Separate cross-cutting concerns such as logging, security, and caching into their own packages.
-- These packages can then be applied to different parts of the application as needed, using techniques like aspect-oriented programming (AOP).
-
-7. *Dependency Injection Packaging*:
-- Organize code based on the dependency injection (DI) hierarchy.
-- Group classes and components that depend on each other closely within the same package to facilitate DI configuration and management.
-
-8. *Component-Based Packaging*:
-- Treat each component of the application as a standalone unit with its own package.
-- Components may include UI widgets, services, data models, etc., each residing in its own package for easier maintenance and reuse.
-
-By applying these packaging patterns, you can create a well-organized codebase that is easier to understand, maintain, and extend over time
