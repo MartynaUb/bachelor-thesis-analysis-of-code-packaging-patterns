@@ -3,6 +3,7 @@ package lt.mif.classes
 import com.github.javaparser.StaticJavaParser
 import java.nio.file.Path
 import kotlin.io.path.name
+import kotlin.jvm.optionals.getOrElse
 import kotlin.jvm.optionals.toSet
 
 data class JavaFile(
@@ -25,7 +26,7 @@ data class JavaFile(
                     i.name.qualifier.map { it.asString() }.toSet()
                 }
             }.toSet()
-            val packageName = parsedFile.packageDeclaration.get().nameAsString
+            val packageName = parsedFile.packageDeclaration.map { it.nameAsString}.getOrElse { "/" }
             return JavaFile(
                 packageName,
                 path.name,

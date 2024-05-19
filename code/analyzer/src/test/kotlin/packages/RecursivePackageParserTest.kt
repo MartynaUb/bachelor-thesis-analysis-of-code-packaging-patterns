@@ -5,6 +5,7 @@ import lt.mif.packages.RecursivePackageParser
 import kotlin.io.path.Path
 import kotlin.test.Test
 
+
 class RecursivePackageParserTest {
     @Test
     fun test_parse() {

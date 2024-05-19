@@ -16,7 +16,7 @@ class RecursivePackageParser : PackageParser {
         val packages = result.first.map { readPackages(it) }.fold(emptyMap<String, JavaPackage>()) { acc, t -> acc + t }
 
 
-        val files = result.second.filter { it.fileName.toString().endsWith(".java") }.map { JavaFile.fromPath(it) }
+       val files = result.second.filter { it.fileName.toString().endsWith(".java") }.map { JavaFile.fromPath(it) }
         val packageName = files.firstOrNull()?.packageName ?: return packages
         val absractCount = files.filter { it.abstract }.size
         val concreteCount = files.size - absractCount
