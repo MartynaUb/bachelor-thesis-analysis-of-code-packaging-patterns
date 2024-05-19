@@ -4,17 +4,16 @@ kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuri
 grupuojant skirtingų dalykinių sričių esybes, arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
 esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}
 Tačiau šie du metodai yra gan platūs ir, dažniausiai jų nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
-siekiant išspresti sistemos planavimo metu kylančias problemas. Norint išskirti šiuos šablonus, buvo nagrinėjamos atviro kodo sistemos,
-stebimi nukrypimai nuo numatytojo skirstymo metodo bei ieškoma paaiškinimų, kodėl šie sprendimai buvo priimti.
-Nuspręsti, kaip žmonės supranta programinį kodą yra gan sudėtingas ir subjektyvus procesas, todėl aprašant šablonus kodo skirstymui
-geriau akcentuoti, kaip sugrupuoti paketai bendrauja tarpusavyje ir skirstyti juos pagal klasių naudojimo atvejus ir priklausomybes.
-Taip kodo grupavimo metodai yra labiau artimi Martino aprašytiems principams.
+siekiant išspresti sistemos planavimo metu kylančias problemas.
+Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
+stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias buvo bandoma išspresti.
+\subsection{Sistemų analizės procesas}
+todo: išsiplėsti apie sistemų analizės procesą
+
 
 \subsection{Problemos}
-Norint išskirti galimus šablonus paketams skirstyti, reikėtų
-analizuoti jų panaudojimą atviro kodo sistemose, siekant pastebėti, kur buvo nukrypta nuo bendresnio kodo skirstymo
-būdo ir identifikuoti klausimus arba problemas, kurias buvo bandoma išspresti.
-
+Iš analizuotų sistemų buvo rastos šios problemos, būdingos sistemų dizainui, kartu su jas sprendžiančiais šablonais ir pavyzdžiais,
+kokiose sistemose jie yra:
 
 \subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
 Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal domeno esybes - pagalbines klases gali
@@ -76,9 +75,6 @@ pagalbinės klasės yra lengvai randamos.}
 Jei pagalbinių klasių dydis labai išauga, jas galima sumažinti ir vietoj vienos atskiros klasės vienai bendrinei sričiai, sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
 Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį srities subdomeną padengia klasė.
-Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
-\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
-
 \begin{figure}[H]
 \snugshade
 \dirtree{%
@@ -101,6 +97,9 @@ Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavy
 \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketais, taip sumažinant klasių dydį }
 \end{figure}
 
+Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos \texti{Omni-Notes}\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
+\textit{Fire Sticker}\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
+
 Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspręsta sistemoje turėtų
 aiškų procesą, kaip elgtis šioje situacijoje:
 \begin{enumerate}
@@ -122,22 +121,26 @@ Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje
 akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant
 glaudų tarpusavyje susijusių klasių saryšį.
 Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis racionalų aferentinių jungčių skaičių paketuose.
-Vadovaujantis šiuo šablonu kiekvieną paketą reikėtų realizuoti kaip komponentą, teikiantį vieną funkcionalumą,
-turintį minimalią sąsają \angl{interface}, kuri atskleidžia tik konceptus (metodus arba duomenų tipus),
-kurie yra glaudžiai susiję su komponento teikiama paslauga.
+
+Vadovaujantis šiuo šablonu kiekvieną paketą reikėtų realizuoti kaip komponentą, teikiantį vieną funkcionalumą.
+Funkcionalumas kitiems paketams yra pasiekiamas per vieną minimalią sąsają \angl{interface},
+kuri atskleidžia tik konceptus (metodus arba duomenų tipus), kurie yra glaudžiai susiję su komponento teikiama paslauga, bei
+klase, gražinančią minėtos sąsajos įgyvendinimą.
+Tai gali būti paprasta klasė, su statine funkcija, kurios rezultatas yra ši sąsaja, arba, esant keliomis sąsajos implementacijomis,
+\textit{Static factory} dizaino šablonas, kuris nusprendžia kuri įgyvendinimą reiketų grąžinti pagal paduotus argumentus.
+
+Visos kitos klasės naudoja \textit{package} pasiekiamumo modifikatorių, taip kompiliatoriaus pagalba užtikrinant,
+kad jos nebus pasiektos iš išorės.
 
 Paketas turintis vieną funkciją yra naudojamas tik tų paketų, kuriems reikia būtent tos funkcijos,
 taip užtikrinant tik mažos sistemos dalies priklausomybę nuo vieno paketo.
 
+Toks konceptas yra sutinkamas \textit{Typescript} programavimo kalboje, kur kiekvienas modulis (šios kalbos paketo atitikmuo) turi
+\texit{index.ts} faila, veikiantį kaip sąsaja, apibrėžiančia, kokios modulio klasės bei funkcijos gali būti pasiekiamos už paketo ribų.
+Tai užtikrina glaustą kontraktą ir aiškų modulio funkcionalumą, kurį gali pasiekti kiti moduliai, bei paslepia modulio įgyvendinimo detales.
+
 Taip pat mažas paketo funkcionalumas reiškia, kad minėtas paketas skirtas funkcionalumui įgyvendinti naudos minimalų kitų sistemos esybių skaičių,
 taip sumažinant ir eferentinių jungčių skaičių.
-
-Toks skirstymo būdas taip pat sprendžia ciklinių priklausomybių problemą - pavyzdžiui, įrankio, skirto spręsti ciklinių priklausomybių problemą,
- kūrimo aprašas~\cite{CircularDependencies} teigia, kad ciklinių priklausomybių problemą galima spręsti laikantis trijų principų -
-bendro panaudojimo, bendro keitimosi bei paleidimo ir pernaudojimo ekvivalentumo.
-Šie principai yra išvesti iš bendro saryšio principu ir akcentuoja, kad kartu besikeičiančios klasės turėtų būti viename pakete.
-Norint užtikrinti šiuos reikalavimus, reikėtų turėti mažą,
-tiksliai apibrėžto funkcionalumo paketą, kurio visi komponentai - tarpusavyje susiję. Tokiu atveju ciklinių priklausomybių tikimybė sumažėja.
 
 Žemiau esančiuose paveikslėliuose galima matyti, kaip išskaidant paketus, turinčius kelis funckionalumus, yra sumažinamas paketų
 priklausomybių skaičius.
@@ -155,6 +158,14 @@ priklausomybių skaičius.
     \caption{Sistemos pavyzdys su aiškią, vieną funkciją turinčiais paketais}
     \label{img:good_deps}
 \end{figure}
+
+Toks skirstymo būdas taip pat sprendžia ciklinių priklausomybių problemą - pavyzdžiui, įrankio, skirto spręsti ciklinių priklausomybių problemą,
+kūrimo aprašas~\cite{CircularDependencies} teigia, kad ciklinių priklausomybių problemą galima spręsti laikantis trijų principų -
+bendro panaudojimo, bendro keitimosi bei paleidimo ir pernaudojimo ekvivalentumo.
+Šie principai yra išvesti iš bendro saryšio principo ir akcentuoja, kad kartu besikeičiančios klasės turėtų būti viename pakete.
+Norint užtikrinti šiuos reikalavimus, reikėtų turėti mažą,
+tiksliai apibrėžto funkcionalumo paketą, kurio visi komponentai - tarpusavyje susiję.
+Tokiu atveju ciklinių priklausomybių tikimybė sumažėja.
 
 \subsubsection{Ka daryti su daug skirtingų sąsajų implementacijų?}
 Sistemai plečiantis, galima susidurti su problema, kad išauga sąsajos implementacijų skaičius. Ši problema gali iškilti
@@ -204,14 +215,16 @@ specifinės sąsajos implementacijoms.
     \caption{\textit{Java} standartinės bibliotekos pavyzdys, jei kiekvienai sąsajai būtų sukurtas subpaketas, jos įgyvendinamams laikyti}
 \end{figure}
 
-
 \subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
-Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami. Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
+Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami.
+Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
 didesniems pokyčiams kartais reikia sukurti naujas klasių ar funkcionalumų versijas. Jei reikia palaikyti atgalinį
 suderinamumą (angl. backward compatibility), sistemoje gali atsirasti kelios tų pačių esybių versijos.
-Tokiu atveju kelios tų pačių esybių versijos sistemoje gali pridėti painumo. Ši problema dažnai sprendžiama sukuriant atskirus paketus skirtingoms
-versijoms bei iškeliant bendras priklausomybes taip, kad jas galėtų pasiekti abi versijos. Taip galima išvengti kodo duplikacijos bei perteklinio
-klasių skaičiaus paketuose.
+Tokiu atveju kelios tų pačių esybių versijos sistemoje gali pridėti painumo.
+Ši problema dažnai sprendžiama sukuriant atskirus paketus skirtingoms
+versijoms (v1, v2, v3, \ldots) bei iškeliant bendrą, abiejų esybių naudojama kodą į subpaketus taip, kad jas galėtų pasiekti abi versijos.
+Taip galima išvengti kodo duplikacijos bei perteklinio klasių skaičiaus paketuose, bei užtikrinant aiškia skirtingų versijų
+atskirti.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -223,9 +236,9 @@ klasių skaičiaus paketuose.
         .2 {...} .
     }
     \endsnugshade
-    \caption{Sistemos pavyzdys, kurioje skirtingos versijos patalpintos atskiruose sub paketuose, paliekant tik bendro naudojimo klases}
+    \caption{\textit{Mongo} duombazės Sistemos pavyzdys, kurioje skirtingos versijos patalpintos atskiruose paketuose}
 \end{figure}
-Toks skirstymo būdas matomas keliose repozitorijose - Mongo duomenų bazėje\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}},
-API skirtame kelionių valdymui\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
- bei duomenų saugojimo įrankyje \footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
+Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo} duomenų bazėje\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}},
+API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
+ bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
