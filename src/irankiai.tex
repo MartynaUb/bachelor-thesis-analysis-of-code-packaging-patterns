@@ -1,7 +1,7 @@
 \section{Įrankiai šablonų analizei ir įvertinimui}
 Kompiuterinės sistemos, kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai yra labai didelės.
 Pilnai perprasti tokias sistemas, nustatyti jų įgyvendinimo kokybę, naudojamus šablonus kodui skirstyti,
-apskaičiuoti paketų kokybės metrikas yra sudėtingas procesas.
+apskaičiuoti paketų kokybės matus yra sudėtingas procesas.
 Daryti tai rankiniu būdu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
 todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant
 aiškiai apibrėžtų ir programiškai efektyvių programinių įrankių pagalbą.
@@ -14,7 +14,7 @@ aiškiai apibrėžtų ir programiškai efektyvių programinių įrankių pagalb�
     pavaizduota meta informacija apie sistemą - paketų struktūrą, jų priklausomybes, figuruojančių paketų bei klasių vardus.
     Ši papildoma informacija nėra aiškūs teiginiai, o tik pagalba analizę atliekančiams asmeniui, leidžianti priimti ižvalgas apie sistemą,
     kaip pavyzdžiui, kokiam paketų skirstymo šablonui yra atimiausia sistemos strukūra, arba kaip lengvai sistema yra suprantama.
-    \item Paketų kokybės metrikų skaičiavimas - įrankis ar įrankiai turi padėti apskaičiuoti aprašytas paketų kokybės metrikas.
+    \item Paketų kokybės matų skaičiavimas - įrankis ar įrankiai turi padėti apskaičiuoti aprašytus paketų kokybės matus.
     Šių įrankių išvestis - tikslūs, formulėmis pagrįstų skaičiavimų rezultatai apie paketų kokybę, kuriuos galima lyginti tarpusavyje.
 \end{itemize}
 
@@ -32,7 +32,7 @@ posistemės struktūrą, naudojamus įrankius bei kokybę.
 
 \subsection{Reikalavimai įrankiui paketo kokybei skaičiuoti}
 Įrankis paketo kokybei skaičiuoti turėtų suteikti galimybę naudotojui nurodyti kelią iki \textit{Java} programavimo kalba parašytos sistemos arba posistemės ir joje
-apskaičiuoti kiekvieno paketo kokybės metrikas:
+apskaičiuoti kiekvieno paketo kokybės matus:
 \begin{itemize}
     \item Klasių skaičių
     \item Aferentinių jungčių skaičių
@@ -42,7 +42,7 @@ apskaičiuoti kiekvieno paketo kokybės metrikas:
     \item Atstumo nuo pagrindinės sekos santykį
     \item Žiedinių priklausomybių skaičių
 \end{itemize}
-Gautą rezultatą išvesti vartotojui suprantamu formatu, kuriame matytųsi individualių paketų metrikos, bei šių metrikų vidurkis sistemoje (arba posistemėje).
+Gautą rezultatą išvesti vartotojui suprantamu formatu, kuriame matytųsi individualių paketų matai, bei šių matų vidurkis sistemoje (arba posistemėje).
 Išvedimo formatas turėtų būti toks, jog skirtingų analizių rezultatai būtų lengvai palyginami su kitais.
 
 \textbf{Abiejose vienas iš palaikomų išvesties formatų turėtų būti \textit{latex}, taip suteikiant galimybę analizės rezultatus pateikti tolesniame šio dokumento turinyje.}

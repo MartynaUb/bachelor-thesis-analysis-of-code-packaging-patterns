@@ -160,9 +160,50 @@ priklausomybių skaičius.
 Sistemai plečiantis, galima susidurti su problema, kad išauga sąsajos implementacijų skaičius. Ši problema gali iškilti
 tiek bandant skirstyti kodą pagal domeno esybes, tiek pagal techninį sluoksnį. Skirstant pagal domeną, gali būti neaišku, kur turėtų
 būti sukuriamas naujas esybės paketa. Skirstant kodą pagal techninį sluoksnį, gali susidaryti klasių perteklius, pavyzdžiui,
-model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas implementuoja. Šią problemą būtų galima spręsti sukuriant
-sub paketus kiekvienos sąsajos implementacijoms. Taip pat, jei vienos sąsajos implementacijai reikalingos kelios klasės, jas galima
-išskirti į atskirą paketą.
+model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas implementuoja.
+Šią problemą būtų galima spręsti sukuriant sąsajos implementacijas tame pačiame pakete kaip ir pati sąsają.
+Toks skirstymo į paketus šablonas yra sutinkamas \textit{Java} standartinėje bibliotekoje\footnote{\url{https://github.com/AdoptOpenJDK/openjdk-jdk11/tree/master/src/java.base/share/classes/java/util}},
+kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame pakete.
+Dėl tokios paketų struktūros, inžinieriai, naudojantys standartinę \textit{Java} biblioteką, gali lengvai rasti jiems reikiamus sąsajos įgyvendinimus:
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/util} .
+        .2 {Map} .
+        .2 {HashMap} .
+        .2 {LinkedHashMap} .
+        .2 {WeakHashMap} .
+        .2 {TreeMap} .
+        .2 {...} .
+        .2 {List} .
+        .2 {LinkedList} .
+        .2 {ArrayList} .
+    }
+    \endsnugshade
+    \caption{\textit{Java} standartinės bibliotekos pavyzdys, kuriame sąsajų įgyvendinimai guli tame pačiame pakete, kaip ir sąsajos}
+\end{figure}
+Taip pat, jei viena sąsaja turi labai daug implementacijų, norint padaryti paketo turinį aiškesnį, galima sukurti po subpaketą
+specifinės sąsajos implementacijoms.
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/util} .
+        .2 {Map} .
+        .2 {map} .
+        .3 {HashMap} .
+        .3 {LinkedHashMap} .
+        .3 {WeakHashMap} .
+        .3 {TreeMap} .
+        .2 {...} .
+        .2 {List} .
+        .2 {list} .
+        .3 {LinkedList} .
+        .3 {ArrayList} .
+    }
+    \endsnugshade
+    \caption{\textit{Java} standartinės bibliotekos pavyzdys, jei kiekvienai sąsajai būtų sukurtas subpaketas, jos įgyvendinamams laikyti}
+\end{figure}
+
 
 \subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
 Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami. Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
@@ -179,6 +220,7 @@ klasių skaičiaus paketuose.
         .2 {pending} .
         .2 {v3} .
         .2 {v4} .
+        .2 {...} .
     }
     \endsnugshade
     \caption{Sistemos pavyzdys, kurioje skirtingos versijos patalpintos atskiruose sub paketuose, paliekant tik bendro naudojimo klases}

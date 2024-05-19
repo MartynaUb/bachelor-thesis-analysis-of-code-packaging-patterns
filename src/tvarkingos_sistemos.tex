@@ -1,8 +1,8 @@
 \section{Kompiuterinės sistemos vertinimas}
-\subsection{Kompiuterinė sistemos kokybė}
+\subsection{Kompiuterinės sistemos kokybė}
 Norint išsiaiškinti, kokią įtaką sistemos kokybei daro skirtingi paketų skirstymo metodai ir kaip objektyviai pamatuoti jų įtaką, pirmiausia
 reikėtų apsibrėžti, kokiais požymiais pasižymi gerai įgyvendinta kompiuterinė sistema.
-Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems} išskiria šiuos pagrindinius kriterijus:
+Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems}~\cite{DataIntensiveApplications} išskiria šiuos pagrindinius kriterijus:
 \begin{itemize}
     \item Patikimumas, reiškiantis, kad net ir klaidų (įrangos, programinių ar žmogiškųjų) atveju,
     sistema veikia stabiliai ir patikimai, paslepiant tam tikras klaidas nuo vartotojo~\cite{DataIntensiveApplications}.
@@ -20,17 +20,17 @@ pavyzdžiui, pasirinktos technologijos, aukšto lygio architektūra, dokumentaci
 procesai, jų kiekis ir pan.
 Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos dizaino yra programinio kodo dizainas, jo skaitomumas, patikimumas.
 Konvencijos, kaip vadinti kodo paketus, kokias klases jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo dizaino dalį.
-Todėl programinės įrangos kūrimo metu, laikas, skirtas rasti sistemai tinkamą paketų skirstymo šabloną ir to šablono laikytis atsiperka, padarant
+Todėl kuriant programinę įrangą, laikas, skirtas rasti sistemai tinkamą paketų skirstymo šabloną ir to šablono laikytis, atsiperka padarant
 programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos dizaino patikimumo ir lengvesnio palaikomumo.
 
-Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}, autoriai akcentuoja, kad
-gerai įgyvendintos, objektiškai orientuotos sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
-To siekiama todėl, nes architektūriniai pakeitimai paveikia didelę sistemos dalį ir
-jų įgyvendinimo ir priežiūros kaštai yra žymiai didesni\cite{ModularStability}.
-Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
+Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}~\cite{ModularStability}, autoriai akcentuoja, kad
+gerai įgyvendintos, objektinio stiliaus sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
+To siekiama, nes architektūriniai pakeitimai paveikia didelę sistemos dalį ir
+jų įgyvendinimo ir sistemos priežiūros kaštai yra žymiai didesni\cite{ModularStability}.
+Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų TODO performuluoti, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
 išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, ženkliai nesikeičiant ir sutaupant programos priežiūros kaštus.
 
-\subsection{Kodo skirstymo paketais metodų vertinimas}
+\subsection{Kodo skirstymo į paketus metodų vertinimas}
 Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka geram kompiuterinės sistemos dizainui,
 tačiau lieka neatsakytas klausimas - kaip įvertinti metodą kodui į paketus grupuoti, kaip objektyviai užtikrinti,
 jog pasirinktas sprendimas yra būtent toks, kokio reikia, ir kokia jo įtaka kompiuterinei sistemai?
@@ -41,7 +41,7 @@ gali būti labai subjektyvūs ir patogūs tik metodą formavusiam asmeniui.
 Tam, kad būtų galima pagrįstai įvertinti skirtingus kodo skirstymo šablonus, pasiekiant kuo objektyvesnį,
 įtaką sistemos kokybei nusakantį rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
 
-Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices} aprašo
+Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices}~\cite{AgileSoftwareDevelopment} aprašo
 principus, padedančius teisingai grupuoti klases į paketus.
 Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų, tam tikrame paketų skirstymo šablone, gali
 būti kriterijus vertinant to šablono kokybę ir įtaką bendram sistemos dizainui.
@@ -50,7 +50,7 @@ būti kriterijus vertinant to šablono kokybę ir įtaką bendram sistemos dizai
 \textit{Klasės pakete turėtų būti susietos kartu, kad turėtų tą pačią priežastį pasikeisti. Pakeitimas,
 kuris paveikia paketą, paveikia visas to paketo klases ir jokių kitų paketų.}
 
-Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle }, klasė turėtų neturėti skirtingų priežasčių keistis,
+Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle}, klasė turėtų neturėti skirtingų priežasčių keistis,
 šis principas taip pat teigia, kad paketas taip pat neturėtų turėti skirtingų priežasčių pasikeisti.
 Principas ragina suburti visas klases, kurios gali keistis dėl tų pačių priežasčių, į vieną vietą.
 Jei dvi klasės yra taip stipriai susietos, kad jos visada keičiasi kartu, tada
@@ -72,7 +72,7 @@ sukompiliuotų dvejetainių failų~\cite{AgileSoftwareDevelopment}.
 
 
 \subsubsection{Stabilių priklausomybių principas}
-\textit{Paketų priklausomybės turetų laikytis stabilumo krypties}
+\textit{Paketų priklausomybės turetų laikytis stabilumo krypties}.
 Sistema negali būti visiškai statiška.
 Norint jai plėstis būtinas tam tikras nepastovumas.
 Kai kurie paketai yra sukurti taip, kad būtų nepastovūs, iš jų tikimasi pokyčių.
@@ -83,37 +83,37 @@ Gali susiklostyti situacija, kad modulis, sukurtas taip, kad jį būtų lengva p
 
 
 \subsubsection{Stabilių abstrakcijų principas}
-\textit{Paketai turi būti tiek abstraktūs, kiek ir stabilūs}
+\textit{Paketai turi būti tiek abstraktūs, kiek ir stabilūs}.
 Šis principas nustato ryšį tarp stabilumo ir abstraktumo.
 Stabilūs paketai turėtų būti abstraktūs, todėl ir lengvai praplečiami.
 Tai pat šis principas teigia, kad nestabilus paketas turi būti konkretus, nes jo nestabilumas leidžia lengvai pakeisti jo turinio kodą.
 Taigi, jei paketas yra stabilus, jį taip pat turėtų sudaryti abstrakčios klasės, užtikrinant jo išplečiamumą.
 Stabilūs paketai, kurie yra lengvai išplečiami, yra lankstūs pakeitimams, nedarant didelės įtakos sitemos struktūrai~\cite{AgileSoftwareDevelopment}.
 
-\subsection{Paketų kokybės metrikos}
-Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtas metrikas, kuriomis galima pamatuoti, kaip stipriai paketas laikosi šių principų.
-Būtent šios metrikos bus naudojamos įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų kokybę:
+\subsection{Paketų kokybės matai}
+Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtus matus, kuriais galima pamatuoti, kaip stipriai paketas laikosi šių principų.
+Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų kokybę:
 \begin{itemize}
-    \item \textbf{Klasių skaičius} - klasių skaičiaus metrika paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
-    Ši metrika matuoja paketo dydį.
-    \item \textbf{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių metrika nurodo
+    \item \textbf{Klasių skaičius} - klasių skaičiaus matas paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
+    Šis matas matuoja paketo dydį.
+    \item \textbf{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių matas nurodo
     skaičių paketų, kurie priklauso nuo klasių, esančių pasirinktame pakete.
-    Ši metrika matuoja ateinančias priklausomybes.
-    \item \textbf{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių metrika nurodo skaičių kitų paketų,
+    Šis matas matuoja ateinančias priklausomybes.
+    \item \textbf{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių matas nurodo skaičių kitų paketų,
     nuo kurių priklauso klasės pasirintame pakete.
-    Ši metrika matuoja išeinančias priklausomybes.
-    \item \textbf{Nestabilumas} - nestabilumo metrika nurodo santykį tarp eferentinių jungčių ir
+    Šis matas matuoja išeinančias priklausomybes.
+    \item \textbf{Nestabilumas} - nestabilumo matas nurodo santykį tarp eferentinių jungčių ir
     visų jungčių (aferentinės + eferentinės) pakete.
-    Ši metrika matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojamas stabilių priklausomybių principe:
+    Šis matas matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojamas stabilių priklausomybių principe:
     \begin{equation}
         Nestabilumas=\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
     \end{equation}
     Reikšmės rėžiai - nuo nulio iki vieno, kur vienas nurodo visiškai stabilų paketą, o vienetas - visiškai nestabilų.
-    \item \textbf{Abstrakcija} - paketo abstrakcijos metrika nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
+    \item \textbf{Abstrakcija} - paketo abstrakcijos matas nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
     \begin{equation}
         Abstrakcija=\frac{N_{abstrakcios}}{N_{visos}}
     \end{equation}
-    Ši metrika nurodo paketo abstraktumą.
+    Šis matas nurodo paketo abstraktumą.
     Abstrakcijos reikšmė gali būti tarp nulio ir vieno.
     Nulis reiškia, kad paketas neturi jokių abstrakčių klasių, o vienetas nurodo, kad pakete yra tik abstrakčios klasės.
     \item \textbf{Atstumas nuo pagrindinės sekos} -
@@ -131,17 +131,17 @@ Būtent šios metrikos bus naudojamos įvertinti paketus analizuojamuose šablon
     \begin{equation}
         Atstumas = \left | Abstracija + Nestabilumas - 1 \right |
     \end{equation}
-    Ši metrika yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
-    Šios metrikos diapazonas yra nuo nulio iki vieno, kur nulis reiškia paketą, sutampantį su pagrindine seka, o vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos.
-    \item \textbf{Žiedinės priklausomybės} - žiedinių priklausomybių metrika skaičiuoja atvejus,
+    Šis matas yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
+    Šio mato diapazonas yra nuo nulio iki vieno, kur nulis reiškia paketą, sutampantį su pagrindine seka, o vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos.
+    \item \textbf{Žiedinės priklausomybės} - žiedinių priklausomybių matas skaičiuoja atvejus,
     kur pasirinkto paketo išeinančios priklausomybės taip pat yra paketo ateinančios priklausomybės (tiesiogiai arba netiesiogiai).
-    Ši metrika - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
+    Šis matas - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
 \end{itemize}
 
-Šių metrikų patikimumas buvo ivertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
-Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryšį tarp minėtų metrikų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
+Šių matų patikimumas buvo ivertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
+Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryšį tarp minėtų matų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
 Tyrimas atliktas naudojant aštuoniolika paketų, paimtų iš dviejų atviro kodo programinės įrangos sistemų.
 Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris, panašią patirtį turinčius porgramuotojus.
 Jų buvo paprašyta pilnai suprasti paketų funkcionalumą ir nuo vieno iki dešimt įvertinti pastangas, reikalingas suprasti kiekvieną paketą.
-Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliaciją tarp daugumos metrikų ir
+Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliaciją tarp daugumos matų ir
 paketų suprantamumo~\cite{DesignMetrics}.
