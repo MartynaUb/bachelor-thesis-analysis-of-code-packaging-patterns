@@ -35,7 +35,7 @@ class LatexAnalyzer(
             } else {
                 acc
             }
-        }.toString()
+        }.appendLine("}").toString()
             .let { File("$resultDir/tree").writeText(it) }
     }
 

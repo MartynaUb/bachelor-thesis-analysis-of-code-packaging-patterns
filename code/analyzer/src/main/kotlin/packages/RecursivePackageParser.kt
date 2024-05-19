@@ -8,7 +8,7 @@ import kotlin.io.path.listDirectoryEntries
 class RecursivePackageParser : PackageParser {
 
     override fun parse(systemPath: Path): Set<JavaPackage> {
-        return resolveDependencies(HashMap(readPackages(systemPath))).values.toSet()
+        return filterOutExternalDependencies(resolveDependencies(HashMap(readPackages(systemPath))))
     }
 
     private fun readPackages(systemPath: Path): Map<String, JavaPackage> {
@@ -16,7 +16,7 @@ class RecursivePackageParser : PackageParser {
         val packages = result.first.map { readPackages(it) }.fold(emptyMap<String, JavaPackage>()) { acc, t -> acc + t }
 
 
-       val files = result.second.filter { it.fileName.toString().endsWith(".java") }.map { JavaFile.fromPath(it) }
+        val files = result.second.filter { it.fileName.toString().endsWith(".java") }.map { JavaFile.fromPath(it) }
         val packageName = files.firstOrNull()?.packageName ?: return packages
         val absractCount = files.filter { it.abstract }.size
         val concreteCount = files.size - absractCount
@@ -27,7 +27,7 @@ class RecursivePackageParser : PackageParser {
         )
     }
 
-    private fun resolveDependencies(javaPackages: MutableMap<String, JavaPackage>): Map<String, JavaPackage> {
+    private fun resolveDependencies(javaPackages: MutableMap<String, JavaPackage>): MutableMap<String, JavaPackage> {
         javaPackages.forEach {
             it.value.dependencies.forEach { dependency ->
                 val javaPackage = javaPackages[dependency]
@@ -38,4 +38,13 @@ class RecursivePackageParser : PackageParser {
         }
         return javaPackages
     }
+
+    private fun filterOutExternalDependencies(javaPackages: MutableMap<String, JavaPackage>): Set<JavaPackage> =
+        javaPackages.map {
+            val dependencies = it.value.dependencies.filter { dependency ->
+                javaPackages.contains(dependency)
+            }.toSet()
+            it.value.copy(dependencies = dependencies)
+        }.toSet()
+
 }
