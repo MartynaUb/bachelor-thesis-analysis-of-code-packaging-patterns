@@ -215,26 +215,33 @@ Dėl tokios paketų struktūros, inžinieriai, naudojantys standartinę \textit{
     \endsnugshade
     \caption{\textit{Java} standartinės bibliotekos pavyzdys, kuriame sąsajų įgyvendinimai guli tame pačiame pakete, kaip ir sąsajos}
 \end{figure}
-Taip pat, jei viena sąsaja turi labai daug implementacijų, norint padaryti paketo turinį aiškesnį, galima sukurti po subpaketą
-specifinės sąsajos implementacijoms.
+Šis šablonas turi vieną trūkumą - pakete su didelių klasių kiekių, bei keliom skirtingom sąsajom, sunku suprasti, kuri klasė, kurią sąsaja įgyvendina.
+Tai pastebima ir \textit{Java} bibliotekos pavyzdyje - \textit{utils} paketas išviso turi viršs 50 klasių, iš kurių bent 10 yra sąsajos, o visa kita jų implementacijos,
+todėl greitai rasti norima sąsajos įgyvendinima vistiek užtrunka.
+
+Šio šablono trūkumas gali būti išspręstas, ji šiek tiek pakeitus - sąsaja, kuri turi daug skirtingų įgyvendinimų turėtų turėti specifiškai jai sukurtą paketą, o kiekvienam paketo
+įgyvendinimui sukuriamas po subpaketas, kuriame yra tiek klasė įgyvendinanti minėta sąsają, tiek kitos įgyvendinimui reikalingos klasės.
+Naudojant tokia kodo struktūra galima labai greitai rasti sąsasas, bei galimus jos įgyvendinimus, beveik netyrinėjant sistemos struktūros, bei klasių kodo.
+Šis šablonas taip pat užtikrina, kad paketas turį vieną aiškų funkcionalumą todėl laikosi bendro sąryšio principo.
+Šablone aprašyta paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
+skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, bei
+\textit{Leaf}\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master/leaf-core/src/main/java/com/sankuai/inf/leaf}}, naudojamoj unikalaus identifikatoriaus generavimui.
+
 \begin{figure}[H]
     \snugshade
     \dirtree{%
-        .1 {/util} .
-        .2 {Map} .
-        .2 {map} .
-        .3 {HashMap} .
-        .3 {LinkedHashMap} .
-        .3 {WeakHashMap} .
-        .3 {TreeMap} .
-        .2 {...} .
-        .2 {List} .
-        .2 {list} .
-        .3 {LinkedList} .
-        .3 {ArrayList} .
+        .1 {/} .
+        .2 {segment} .
+        .3 {dao} .
+        .3 {model} .
+        .3 {SegmentIdGenImpl} .
+        .2 {snowflake} .
+        .3 {SnowflakeIdGenImpl} .
+        .3 {SnowflakeZookeeperHolder} .
+        .2 {IdGen} .
     }
     \endsnugshade
-    \caption{\textit{Java} standartinės bibliotekos pavyzdys, jei kiekvienai sąsajai būtų sukurtas subpaketas, jos įgyvendinamams laikyti}
+    \caption{\textit{Leaf} sistema, kur kiekvienas sąsajos įgyvendinimas yra aprašytas subpakete}
 \end{figure}
 
 \subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
@@ -264,3 +271,8 @@ Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
+
+
+Todo: parašyti, kad galima išrinkti dar daugiau problemu bei šablonu tesiant analize
+Todo: paaiškinti, kad naudojant matus šablonams įvertinti, atmetam dali šablonų, kurie negali būti jais pamatuoti
+Todo; pridėti šabloną sprendžianti distance
