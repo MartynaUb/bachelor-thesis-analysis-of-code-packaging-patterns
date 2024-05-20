@@ -79,7 +79,7 @@ Kai kurie paketai yra sukurti taip, kad būtų nepastovūs, iš jų tikimasi pok
 Nuo paketo, kuris, manoma, yra nepastovus, neturėtų priklausyti sunkiai pakeičiami paketai,
 nes priešingu atveju nepastovų paketą taip pat bus sunku pakeisti.
 Gali susiklostyti situacija, kad modulis, sukurtas taip, kad jį būtų lengva pakeisti, kartais tampa sunkiai keičiamu,
- pridėjus priklausomybę nuo jo~\cite{AgileSoftwareDevelopment}.
+pridėjus priklausomybę nuo jo~\cite{AgileSoftwareDevelopment}.
 
 
 \subsubsection{Stabilių abstrakcijų principas}
@@ -94,33 +94,33 @@ Stabilūs paketai, kurie yra lengvai išplečiami, yra lankstūs pakeitimams, ne
 Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtus matus, kuriais galima pamatuoti, kaip stipriai paketas laikosi šių principų.
 Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų kokybę:
 \begin{itemize}
-    \item \textbf{Klasių skaičius} - klasių skaičiaus matas paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
+    \item \textbf{Klasių skaičius} (\textit{N}) - klasių skaičiaus matas paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
     Šis matas matuoja paketo dydį.
-    \item \textbf{Aferentinės jungtys \angl{Afferent Couplings}} - aferentinių jungčių matas nurodo
+    \item \textbf{Aferentinės jungtys \angl{Afferent Couplings}} (\textit{Af}) - aferentinių jungčių matas nurodo
     skaičių paketų, kurie priklauso nuo klasių, esančių pasirinktame pakete.
     Šis matas matuoja ateinančias priklausomybes.
-    \item \textbf{Eferentinės jungtys \angl{Efferent Couplings}} - eferentinių jungčių matas nurodo skaičių kitų paketų,
+    \item \textbf{Eferentinės jungtys \angl{Efferent Couplings}} (\textit{Ef}) - eferentinių jungčių matas nurodo skaičių kitų paketų,
     nuo kurių priklauso klasės pasirintame pakete.
     Šis matas matuoja išeinančias priklausomybes.
-    \item \textbf{Nestabilumas} - nestabilumo matas nurodo santykį tarp eferentinių jungčių ir
+    \item \textbf{Stabilumas} (\textit{S} - stabilumo matas nurodo santykį tarp eferentinių jungčių ir
     visų jungčių (aferentinės + eferentinės) pakete.
     Šis matas matuoja paketo atsparumą pokyčiams, kuris buvo akcentuojamas stabilių priklausomybių principe:
     \begin{equation}
-        Nestabilumas=\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
+        Stabilumas (S) =\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
     \end{equation}
     Reikšmės rėžiai - nuo nulio iki vieno, kur vienas nurodo visiškai stabilų paketą, o vienetas - visiškai nestabilų.
-    \item \textbf{Abstrakcija} - paketo abstrakcijos matas nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
+    \item \textbf{Abstrakcija} (\textit{A}) - paketo abstrakcijos matas nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
     \begin{equation}
         Abstrakcija=\frac{N_{abstrakcios}}{N_{visos}}
     \end{equation}
     Šis matas nurodo paketo abstraktumą.
     Abstrakcijos reikšmė gali būti tarp nulio ir vieno.
     Nulis reiškia, kad paketas neturi jokių abstrakčių klasių, o vienetas nurodo, kad pakete yra tik abstrakčios klasės.
-    \item \textbf{Atstumas nuo pagrindinės sekos} -
+    \item \textbf{Atstumas nuo pagrindinės sekos} (\textit{D}) -
     Pagrindinė seka yra sąryšis tarp nestabilumo ir abstrakcijos.
     Pagrindinė seka - idealizuota linija (Abstrakcija + Nestabilumas = 1)  kurią galima vaizduoti kaip kreivę, su abstrakcijos dydžiu \textit{y} ašyje ir nestabilumu \textit{x} ašyje.
     Paketas tiesiai ant pagrindinės sekos yra optimaliai subalansuotas atsižvelgiant į jo abstraktumą ir stabilumą.
-    Idealūs paketai yra arba visiškai abstraktūs ir stabilūs (Nestabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir stabilūs (Nestabilumas=1, Abstrakcija=0).
+    Idealūs paketai yra arba visiškai abstraktūs ir stabilūs (Stabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir nestabilūs (Nestabilumas=1, Abstrakcija=0).
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{img/zones_of_exclusion}
@@ -133,7 +133,7 @@ Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norin
     \end{equation}
     Šis matas yra paketo abstraktumo ir stabilumo pusiausvyros rodiklis.
     Šio mato diapazonas yra nuo nulio iki vieno, kur nulis reiškia paketą, sutampantį su pagrindine seka, o vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos.
-    \item \textbf{Žiedinės priklausomybės} - žiedinių priklausomybių matas skaičiuoja atvejus,
+    \item \textbf{Žiedinės priklausomybės} (\textit{C}) - žiedinių priklausomybių matas skaičiuoja atvejus,
     kur pasirinkto paketo išeinančios priklausomybės taip pat yra paketo ateinančios priklausomybės (tiesiogiai arba netiesiogiai).
     Šis matas - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
 \end{itemize}
