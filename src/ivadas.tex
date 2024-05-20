@@ -1,28 +1,28 @@
 \sectionnonum{Įvadas}
-Teisingai įgyvendintas kompiuterinės sistemos dizainas yra vienas iš kritinių sėkmingo verslo
+Gerai suprojektuota kompiuterinė sistema yra vienas iš kritinių sėkmingo verslo
 elementų.
 Tam, jog informacines sistemas naudojantis verslas išlaikytų stabilų augimą, yra būtina sukurti sistemą, kuri sumažintų
 atotrūkį tarp organizacijos tikslų ir jų įgyvendinimo galimybių.
 Mąstant apie programinio kodo
-dizainą, kodo paketų kūrimas, klasių priskyrimas jiems ir paketų hierarchijos sudarymas paprastai
-nėra pagrindinis prioritetas, tačiau tai parodo praleistą galimybę padaryti sistemos dizainą labiau
-patikimu [Sho19], suprantamu [Eli10] ir lengviau palaikomu.
-Modernios sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
+projektavimą, kodo paketų kūrimas, klasių priskyrimas jiems ir paketų hierarchijos sudarymas paprastai
+nėra pagrindinis prioritetas, tačiau tai parodo praleistą galimybę padaryti sistemos struktūrą labiau
+patikima [Sho19], suprantama [Eli10] ir lengviau palaikoma.
+Modernios informacinės sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
 kurie išskaidyti per skirtingo gylio direktorijas, todėl apgalvotai išskirstytas programinis
-kodas daro daug didesnę įtaką kodo kokybei, nei gali atrodyti iš pirmo žvilgsnio.
+kodas daro daug didesnę įtaką bendram sistemos našumui, suprantamumui bei palaikomumui, nei gali atrodyti iš pirmo žvilgsnio.
 Sistemos paketų struktūros analizė norint įvertinti programinės įrangos kokybę
 tampa vis svarbesne tema dėl augančio failų ir paketų skaičiaus~\cite{DesignMetrics}.
 
 Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai,
-tam jog jo struktūra darytų teigiamą įtaką sistemos kokybei, reikalinga atlikti skirstymo į paketus šablonų analizę -
+tam jog jo struktūra darytų teigiamą įtaką sistemai, reikalinga atlikti skirstymo į paketus šablonų analizę -
 išsiaiškinti galimus šablonus, kaip skirstyti programinį kodą į paketus, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
 Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį,
-nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių.
+nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių bei sprendžiant iškilusią problemą.
 
-Šio darbo tikslas - identifikuoti ir ivertinti praktikoje naudojamus šablonus kodo skirstymui į paketus.
-Tai atliekama remiantis moksliniais straipsniais apie sistemos kokybę bei palaikomumą aprašant kriterijus,
-kurie būtų naudojami šablonams įvertinti, nustatant jų įtaką sistemos palaikomumui.
+Šio darbo tikslas - identifikuoti ir įvertinti praktikoje naudojamus šablonus kodo skirstymui į paketus.
+Tai atliekama remiantis moksliniais straipsniais apie sistemos kokybę bei palaikomumą, aprašant kriterijus,
+kurie būtų naudojami šablonams įvertinti, nustatant jų įtaką sistemos palaikomumui, patikimumui bei plečiamumui.
 
 Tikslui pasiekti yra iškeliami šie uždaviniai:
 \begin{itemize}
@@ -33,13 +33,13 @@ rastais gerai įgyvendintos sistemos požymiais
     \item  Pasirinkti kelias sistemas ir pertvarkyti jų failų struktūrą pagal aprašytus šablonus, įvertinant,
 kiek sudėtinga pasiekti kiekvieno šablono strukūrą
     \item  Naudojant pertvarkytas sistemas, įvertinti kiekvieną kodo skirstymo šabloną pagal pasiūlytus kriterijus
-    \item  Pateikti rekomendacijas, kokius šablonus kodo skirstymui tinkamiausia naudoti
+    \item  Pateikti rekomendacijas, ar aprašyti šablonai kodo skirstymui tinkami naudoti
 \end{itemize}
 
 Šio darbo metu nagrinėjami ir aprašomi gerai įgyvendinto kodo požymiai, užtikrinantys
 sistemos stabilumą ir palaikomumą, remiantis Martin Kleppmann \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems},
 ir Robert C. Martin \textit{Agile Software Development, Principles, Patterns, and Practices} knygomis.
-Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kodo kokybei, pavyzdžiui - komponentų skaičius,
+Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kokybei, pavyzdžiui - komponentų skaičius,
 tiesioginės ir netiesioginės priklausomybės, paketų stabilumas~\cite{AgileSoftwareDevelopment}.
 Tyrinėjami šablonai kodo skirstymui į paketus įvardinti Martin Sadin straipsnyje \textit{Four Strategies for Organizing Code}.
 Nagrinėjamos atviro kodo sistemos, pasirenkant skirtingo tipo projektus, siekiant
@@ -58,10 +58,10 @@ Spring karkasas internetinių programėlių kūrimui
 Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirstymo šablonus, pertvarkyti projektai įvertinti, naudojant išskirtus kriterijus, nustatant, kokią įtaką
 skirtingi skirstymo šablonai turi sistemos kokybei.
 
-Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, kaip galima ją įvertinti, įgyvendinimo kokybę.
+Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, įgyvendinimo kokybę ir kaip galima ją įvertinti.
 Aprašyti kriterijai, kaip įvertinti paketų struktūros įtaką sistemos kokybei.
 Antras skyrius tyrinėja skirtingus šablonus klasėms į paketus skirstyti, jų privalumus bei trūkumus.
 Trečiame skyriuje aprašomi sukurti įrankiai, reikalingi sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
 Ketvirtame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
 Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.
-Nagrinėjama perdarytų sistemų kokybė pagal pirmame skyriuje aprašytus kriterijus, ieškomas geriausiai įvertintas šablonas.
+Nagrinėjama perdarytų sistemų kokybė pagal pirmame skyriuje aprašytus kriterijus, ieškomi šablonų privalumai bei trūkumai.
