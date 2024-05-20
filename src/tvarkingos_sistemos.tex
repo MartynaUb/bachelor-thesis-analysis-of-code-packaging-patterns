@@ -1,6 +1,6 @@
 \section{Kompiuterinės sistemos vertinimas}
 \subsection{Kompiuterinės sistemos kokybė}
-Norint išsiaiškinti, kokią įtaką sistemos kokybei daro skirtingi paketų skirstymo metodai ir kaip objektyviai pamatuoti jų įtaką, pirmiausia
+Norint išsiaiškinti, kokią įtaką sistemos kokybei daro skirtingi paketų skirstymo šablonai ir kaip objektyviai pamatuoti jų įtaką, pirmiausia
 reikėtų apsibrėžti, kokiais požymiais pasižymi gerai įgyvendinta kompiuterinė sistema.
 Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems}~\cite{DataIntensiveApplications} išskiria šiuos pagrindinius kriterijus:
 \begin{itemize}
@@ -18,21 +18,21 @@ Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The
 Yra daug skirtingų elementų, sudarančių sistemą, kuri tenkintų aukščiau paminėtus kriterijus,
 pavyzdžiui, pasirinktos technologijos, aukšto lygio architektūra, dokumentacija, sistemos testavimo
 procesai, jų kiekis ir pan.
-Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos dizaino yra programinio kodo dizainas, jo skaitomumas, patikimumas.
-Konvencijos, kaip vadinti kodo paketus, kokias klases jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo dizaino dalį.
-Todėl kuriant programinę įrangą, laikas, skirtas rasti sistemai tinkamą paketų skirstymo šabloną ir to šablono laikytis, atsiperka padarant
-programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos dizaino patikimumo ir lengvesnio palaikomumo.
+Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos yra programinio kodo struktūra, jo skaitomumas, patikimumas.
+Konvencijos, kaip vadinti kodo paketus, kokias klases jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo struktūros dalį.
+Todėl, kuriant programinę įrangą, laikas, skirtas rasti sistemai tinkamus paketų skirstymo šablonus ir tų šablonų laikytis, atsiperka padarant
+programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos patikimumo, plečiamumo ir lengvesnio palaikomumo.
 
 Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}~\cite{ModularStability}, autoriai akcentuoja, kad
-gerai įgyvendintos, objektinio stiliaus sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
+gerai įgyvendintos objektinio stiliaus sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
 To siekiama, nes architektūriniai pakeitimai paveikia didelę sistemos dalį ir
 jų įgyvendinimo ir sistemos priežiūros kaštai yra žymiai didesni\cite{ModularStability}.
 Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų TODO performuluoti, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
-išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, ženkliai nesikeičiant ir sutaupant programos priežiūros kaštus.
+išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, nepristatant nebūtinų pokyčių ir sutaupant programos priežiūros kaštus.
 
-\subsection{Kodo skirstymo į paketus metodų vertinimas}
-Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka geram kompiuterinės sistemos dizainui,
-tačiau lieka neatsakytas klausimas - kaip įvertinti metodą kodui į paketus grupuoti, kaip objektyviai užtikrinti,
+\subsection{Kodo skirstymo į paketus šablonų vertinimas}
+Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka gerai kompiuterinės sistemos struktūrai,
+tačiau lieka neatsakytas klausimas - kaip įvertinti šabloną kodui į paketus grupuoti, kaip objektyviai užtikrinti,
 jog pasirinktas sprendimas yra būtent toks, kokio reikia, ir kokia jo įtaka kompiuterinei sistemai?
 Tvarkingas, aiškiai suprantamas kodas yra subjektyvi tema, priklausanti nuo komandos,
 naudojamos programavimo kalbos ar programinių įrankių bei programinės sistemos dalykinės srities.
@@ -43,15 +43,15 @@ Tam, kad būtų galima pagrįstai įvertinti skirtingus kodo skirstymo šablonus
 
 Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices}~\cite{AgileSoftwareDevelopment} aprašo
 principus, padedančius teisingai grupuoti klases į paketus.
-Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų, tam tikrame paketų skirstymo šablone, gali
-būti kriterijus vertinant to šablono kokybę ir įtaką bendram sistemos dizainui.
+Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų naudojant tam tikrą paketų skirstymo šabloną, gali
+būti kriterijus vertinant to šablono kokybę ir įtaką bendrai sistemos struktūrai.
 
 \subsubsection{Bendro sąryšio principas}
 \textit{Klasės pakete turėtų būti susietos kartu, kad turėtų tą pačią priežastį pasikeisti. Pakeitimas,
 kuris paveikia paketą, paveikia visas to paketo klases ir jokių kitų paketų.}
 
-Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle}, klasė turėtų neturėti skirtingų priežasčių keistis,
-šis principas taip pat teigia, kad paketas taip pat neturėtų turėti skirtingų priežasčių pasikeisti.
+Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle}, klasė turėtų neturėti skirtingų priežasčių keistis.
+Šis principas taip pat teigia, kad paketas taip pat neturėtų turėti skirtingų priežasčių pasikeisti.
 Principas ragina suburti visas klases, kurios gali keistis dėl tų pačių priežasčių, į vieną vietą.
 Jei dvi klasės yra taip stipriai susietos, kad jos visada keičiasi kartu, tada
 jos turėtų būti tame pačiame pakete.
@@ -75,11 +75,11 @@ sukompiliuotų dvejetainių failų~\cite{AgileSoftwareDevelopment}.
 \textit{Paketų priklausomybės turetų laikytis stabilumo krypties}.
 Sistema negali būti visiškai statiška.
 Norint jai plėstis būtinas tam tikras nepastovumas.
-Kai kurie paketai yra sukurti taip, kad būtų nepastovūs, iš jų tikimasi pokyčių.
+Kai kurie paketai yra sukurti taip, kad būtų nepastovūs, tikimasi, kad sistemai plečiantis, jie keisis.
 Nuo paketo, kuris, manoma, yra nepastovus, neturėtų priklausyti sunkiai pakeičiami paketai,
-nes priešingu atveju nepastovų paketą taip pat bus sunku pakeisti.
+ priešingu atveju nepastovų paketą taip pat bus sunku pakeisti.
 Gali susiklostyti situacija, kad modulis, sukurtas taip, kad jį būtų lengva pakeisti, kartais tampa sunkiai keičiamu,
-pridėjus priklausomybę nuo jo~\cite{AgileSoftwareDevelopment}.
+pridėjus netinkamą priklausomybę nuo jo~\cite{AgileSoftwareDevelopment}.
 
 
 \subsubsection{Stabilių abstrakcijų principas}
@@ -91,8 +91,8 @@ Taigi, jei paketas yra stabilus, jį taip pat turėtų sudaryti abstrakčios kla
 Stabilūs paketai, kurie yra lengvai išplečiami, yra lankstūs pakeitimams, nedarant didelės įtakos sitemos struktūrai~\cite{AgileSoftwareDevelopment}.
 
 \subsection{Paketų kokybės matai}
-Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtus matus, kuriais galima pamatuoti, kaip stipriai paketas laikosi šių principų.
-Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų kokybę:
+Beveik visi autoriaus aprašyti principai turi aiškiai apibrėžtus matus, kuriais galima patikrinti, kiek paketas laikosi šių principų.
+Būtent šie matai bus naudojami įvertinti paketus analizuojamuose šablonuose norint patikrinti šablonų poveikį sistemai:
 \begin{itemize}
     \item \textbf{Klasių skaičius} (\textit{N}) - klasių skaičiaus matas paketui nurodo, kiek klasių (konkrečių ir abstrakčių) yra pakete.
     Šis matas matuoja paketo dydį.
@@ -108,7 +108,7 @@ Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norin
     \begin{equation}
         Stabilumas (S) =\frac{Jungtys_{eferentines}}{Jungtys_{eferentines} + Jungtys_{aferentines}}
     \end{equation}
-    Reikšmės rėžiai - nuo nulio iki vieno, kur vienas nurodo visiškai stabilų paketą, o vienetas - visiškai nestabilų.
+    Reikšmės rėžiai - nuo nulio iki vieno, kur nulis nurodo visiškai stabilų paketą, o vienetas - visiškai nestabilų.
     \item \textbf{Abstrakcija} (\textit{A}) - paketo abstrakcijos matas nurodo santykį tarp abstrakčių klasių (arba sąsajų \angl{interface}) pakete ir bendro klasių skaičiaus:
     \begin{equation}
         Abstrakcija=\frac{N_{abstrakcios}}{N_{visos}}
@@ -141,7 +141,7 @@ Būtent šie bus naudojamos įvertinti paketus analizuojamuose šablonuose norin
 Šių matų patikimumas buvo ivertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
 Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryšį tarp minėtų matų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
 Tyrimas atliktas naudojant aštuoniolika paketų, paimtų iš dviejų atviro kodo programinės įrangos sistemų.
-Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris, panašią patirtį turinčius porgramuotojus.
+Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris, panašią patirtį turinčius programuotojus.
 Jų buvo paprašyta pilnai suprasti paketų funkcionalumą ir nuo vieno iki dešimt įvertinti pastangas, reikalingas suprasti kiekvieną paketą.
 Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliaciją tarp daugumos matų ir
 paketų suprantamumo~\cite{DesignMetrics}.
