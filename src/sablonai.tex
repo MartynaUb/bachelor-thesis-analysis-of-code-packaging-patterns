@@ -97,7 +97,7 @@ Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį sritie
 \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketais, taip sumažinant klasių dydį }
 \end{figure}
 
-Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos \texti{Omni-Notes}\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
+Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos \textit{Omni-Notes}\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
 \textit{Fire Sticker}\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
 
 Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspręsta sistemoje turėtų
@@ -136,8 +136,30 @@ Paketas turintis vieną funkciją yra naudojamas tik tų paketų, kuriems reikia
 taip užtikrinant tik mažos sistemos dalies priklausomybę nuo vieno paketo.
 
 Toks konceptas yra sutinkamas \textit{Typescript} programavimo kalboje, kur kiekvienas modulis (šios kalbos paketo atitikmuo) turi
-\texit{index.ts} faila, veikiantį kaip sąsaja, apibrėžiančia, kokios modulio klasės bei funkcijos gali būti pasiekiamos už paketo ribų.
+\textit{index.ts} faila, veikiantį kaip sąsaja, apibrėžiančia, kokios modulio klasės bei funkcijos gali būti pasiekiamos už paketo ribų.
 Tai užtikrina glaustą kontraktą ir aiškų modulio funkcionalumą, kurį gali pasiekti kiti moduliai, bei paslepia modulio įgyvendinimo detales.
+Toki šabloną naudoja turinio valdymo sistema \textit{Keystone}\footnote{\url{https://github.com/keystonejs/keystone/tree/main/packages/core/src/fields/types}},
+kur kiekvieną esybė turi savo modulį, atliekantį vieną funkcija, kurio kontraktas aprašytas \textit{index.ts} faile.
+
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/types} .
+        .2 {image} .
+        .3 {views} .
+        .3 {utils} .
+        .3 {index} .
+        .2 {text} .
+        .3 {views} .
+        .3 {index} .
+        .2 {...} .
+        .2 {checkbox} .
+        .3 {views} .
+        .3 {index} .
+    }
+    \endsnugshade
+    \caption{\textit{Keystone} sistemos dalis, kurioje matomi smulkūs moduliai su \textit{index.ts} failuose aprašytais kontraktais}
+\end{figure}
 
 Taip pat mažas paketo funkcionalumas reiškia, kad minėtas paketas skirtas funkcionalumui įgyvendinti naudos minimalų kitų sistemos esybių skaičių,
 taip sumažinant ir eferentinių jungčių skaičių.
@@ -238,7 +260,7 @@ atskirti.
     \endsnugshade
     \caption{\textit{Mongo} duombazės Sistemos pavyzdys, kurioje skirtingos versijos patalpintos atskiruose paketuose}
 \end{figure}
-Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo} duomenų bazėje\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}},
+Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}} duomenų bazėje,
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
