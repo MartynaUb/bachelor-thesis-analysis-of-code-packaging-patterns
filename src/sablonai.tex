@@ -2,21 +2,26 @@
 Diskusijose, kaip reikėtų skirstyti programinį kodą, paprastai akcentuojami du metodai - pagal \textit{techninį sluoksnį},
 kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
 arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
-esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}
-Tačiau šie du metodai yra gan platūs ir, dažniausiai, jų nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
+esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
+Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo bei
+palaikomumo~\cite{DivideByDomain}.
+Tačiau šis metodas nėra pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
 Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
 stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias buvo bandoma išspresti.
-\subsection{Sistemų analizės procesas}
-todo: išsiplėsti apie sistemų analizės procesą
 
+\subsection{Sistemų analizės procesas}
+Praktikoje naudojamų šablonų paieška buvo atliekama stebint atviro kodo sistemų struktūrą ir bandant nustatyti, kodėl pasirenkama nukrypti
+nuo pagrindinio skirstymo būdo. Nagrinėtos įvairių tipų sistemos - tiek taikomoji, tiek techninė programinė įranga.
+Pastebėta, kad nukrypimai nuo pagrindinio skirstymo būdo dažnai pasikartodavo bandant išspręsti tas pačias problemas,
+tačiau jų sprendimo šablonai gali būti skirtingi.
 
 \subsection{Problemos}
-Iš analizuotų sistemų buvo rastos šios problemos, būdingos sistemų dizainui, kartu su jas sprendžiančiais šablonais ir pavyzdžiais,
-kokiose sistemose jie yra:
+Analizuotose sistemose buvo rastos šios problemos, būdingos sistemų dizainui, kartu su jas sprendžiančiais šablonais ir pavyzdžiais,
+kokiose sistemose jie yra.
 
 \subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
-Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal domeno esybes - pagalbines klases gali
+Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal dalykinės srities esybes - pagalbines klases gali
 naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti. Skirstant pagal techninį sluoksnį, bazines pagalbines klases gali naudoti keli
 sluoksniai.
 Didžiausia problema, susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
@@ -45,7 +50,7 @@ panaudojimo klasėms trūkumo.}
 \end{figure}
 Vienas iš šablonų, sprendžiančių šią problemą, galėtų būti turėti vieną paketą, skirtą visoms pagalbinėmis klasėmis, kuris yra paminėtas sistemos
 dokumentacijoje ir apie jo egzistavimą teoriškai žino visi komandos nariai.
-Pakete reikėtų turėti atskiras klases kiekvienam bendriniam domenui, iš kurios pavadinimo programuotojas galėtų nuspresti,
+Pakete reikėtų turėti atskiras klases kiekvienai bendrinei dalykinei sričiai, iš kurios pavadinimo programuotojas galėtų nuspresti,
 kad jo ieškomas funkcionalumas bus būtent toje klasėje.
 \begin{figure}[H]
 \snugshade
@@ -69,9 +74,11 @@ kad jo ieškomas funkcionalumas bus būtent toje klasėje.
 \caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje, todėl
 pagalbinės klasės yra lengvai randamos.}
 \end{figure}
-Jei pagalbinių klasių dydis labai išauga, galima vietoje vienos atskiros klasės vienai bendrinei sričiai, sukurti vieną paketą,
-ir jame turėti kelias pagalbines klases, susijusias su tuo domenu.
-Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį srities subdomeną padengia klasė.
+Toks skirstymo būdas savo idėja artimas skirstymui
+pagal dalykinę sritį - jei bendro naudojimo klases laikytume papildoma dalykinės srities esybe, toks skirstymas atitinka bendresnį.
+Jei pagalbinių klasių dydis labai išauga, galima vietoje vienos atskiros klasės vienai bendrinei sričiai sukurti vieną paketą,
+ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi.
+Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokią smulkesnę dalykinės srities sritį padengia klasė.
 \begin{figure}[H]
 \snugshade
 \dirtree{%
@@ -91,10 +98,11 @@ Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokį sritie
     .3 {DatabaseQueries} .
 }
 \endsnugshade
-\caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po domeno subpaketais, taip sumažinant klasių dydį }
+\caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po dalykinės srities subpaketais, taip sumažinant klasių dydį }
 \end{figure}
 Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos \textit{Omni-Notes}\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
-\textit{Fire Sticker}\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}
+\textit{Fire Sticker}\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}.
+\textit{Omni-Notes} atveju, \textit{utils} pakete esančios klasės papildomai skirstomos pagal atitinkamą dalykinę sritį.
 Naudojant tokį šabloną, programuotojas, susiduriantis su bendrine problema, kuri, labai tikėtina, jau yra išspręsta sistemoje, turėtų
 aiškų procesą, kaip elgtis šioje situacijoje:
 \begin{enumerate}
@@ -106,7 +114,26 @@ aiškų procesą, kaip elgtis šioje situacijoje:
     \item Iškviesti rastą arba sukurtą funkciją iš bendrinio panaudojimo kodo paketo savo funkcionalume
 \end{enumerate}
 
-\subsubsection{Didelias priklausomybių nuo paketo skaičius}
+Šiai problemai spręsti galimas ir kitoks būdas - turėti keletą pagalbinių klasių paketų, patalpintų po bendresniu dalykinės srities
+ar techninio sluoksnio paketu.
+Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė įranga \textit{Seata}\footnote{\url{https://github.com/apache/incubator-seata/tree/2.x/saga/seata-saga-engine/src/main/java/org/apache/seata/saga/engine/utils}}.
+Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje, pavyzdžiui, po \textit{engine} paketu.
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/engine} .
+        .2 {strategy} .
+        .2 {sequence} .
+        .2 {\ldots} .
+        .2 {utils} .
+        .3 {ExceptionUtils} .
+        .3 {\ldots} .
+    }
+    \endsnugshade
+    \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{utils} pakete esančiame po dalykinės srities subpaketais}
+\end{figure}
+
+\subsubsection{Didelis priklausomybių nuo paketo skaičius}
 Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms.
 Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
 daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
@@ -182,10 +209,10 @@ Tokiu atveju ciklinių priklausomybių tikimybė sumažėja.
 
 \subsubsection{Ka daryti su daug skirtingų sąsajų implementacijų?}
 Sistemai plečiantis galima susidurti su problema, kad išauga sąsajos implementacijų skaičius. Ši problema gali iškilti
-tiek bandant skirstyti kodą pagal domeno esybes, tiek pagal techninį sluoksnį. Skirstant pagal domeną, gali būti neaišku, kur turėtų
+tiek bandant skirstyti kodą pagal dalykinės srities esybes, tiek pagal techninį sluoksnį. Skirstant pagal dalykinės srities esybes, gali būti neaišku, kur turėtų
 būti sukuriamas naujas esybės paketas. Skirstant kodą pagal techninį sluoksnį, gali susidaryti klasių perteklius, pavyzdžiui,
 model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas jas implementuoja.
-Šią problemą būtų galima spręsti sukuriant sąsajos implementacijas tame pačiame pakete kaip ir pati sąsaja.
+Šią problemą galima spręsti sukuriant sąsajos implementacijas tame pačiame pakete kaip ir pati sąsaja.
 Toks skirstymo į paketus šablonas yra sutinkamas \textit{Java} standartinėje bibliotekoje\footnote{\url{https://github.com/AdoptOpenJDK/openjdk-jdk11/tree/master/src/java.base/share/classes/java/util}},
 kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame pakete.
 Dėl tokios paketų struktūros, inžinieriai, naudojantys standartinę \textit{Java} biblioteką, gali lengvai rasti jiems reikiamus sąsajos įgyvendinimus:
@@ -262,8 +289,3 @@ Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
-
-
-Todo: parašyti, kad galima išrinkti dar daugiau problemų bei šablonų tęsiant analizę
-Todo: paaiškinti, kad naudojant matus šablonams įvertinti, atmetame dalį šablonų, kurie negali būti jais pamatuoti
-Todo; pridėti šabloną sprendžiantį distance
