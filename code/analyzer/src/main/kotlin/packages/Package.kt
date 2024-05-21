@@ -19,10 +19,11 @@ data class JavaPackage(
 
     fun getAfferentCouplings(): Int = this.dependants.size
 
-    fun getStability(): Double =
+    fun getStability(): Double = if (getEfferentCouplings() + getAfferentCouplings() == 0) 0.0 else
         (getEfferentCouplings().toDouble() / (getEfferentCouplings() + getAfferentCouplings())).roundTo(3)
 
-    fun getAbstraction(): Double = (absractCount.toDouble() / this.classCount()).roundTo(3)
+    fun getAbstraction(): Double =
+        if (this.classCount() == 0) 0.0 else (absractCount.toDouble() / this.classCount()).roundTo(3)
 
     fun getDistance(): Double = abs(this.getAbstraction() + this.getStability() - 1).roundTo(3)
 }
