@@ -5,10 +5,10 @@ arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykin
 esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
 Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo bei
 palaikomumo~\cite{DivideByDomain}.
-Tačiau šis metodas nėra pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
+Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
 Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
-stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias buvo bandoma išspresti.
+stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias jais buvo bandoma išspresti.
 
 \subsection{Sistemų analizės procesas}
 Praktikoje naudojamų šablonų paieška buvo atliekama stebint atviro kodo sistemų struktūrą ir bandant nustatyti, kodėl pasirenkama nukrypti
@@ -22,8 +22,7 @@ kokiose sistemose jie yra.
 
 \subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
 Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal dalykinės srities esybes - pagalbines klases gali
-naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti. Skirstant pagal techninį sluoksnį, bazines pagalbines klases gali naudoti keli
-sluoksniai.
+naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti.
 Didžiausia problema, susijusi su pagalbinėmis klasėmis, kurios turėtų išspręsti dažnai sistemoje sutinkamas problemas -
 inžinieriai, dirbantys prie sistemos nežino apie jų egzistavimą, todėl jų nenaudoja,
 tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagalbinio funkcionalumo įgyvendinimų.
@@ -74,10 +73,10 @@ kad jo ieškomas funkcionalumas bus būtent toje klasėje.
 \caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje, todėl
 pagalbinės klasės yra lengvai randamos.}
 \end{figure}
-Toks skirstymo būdas savo idėja artimas skirstymui
-pagal dalykinę sritį - jei bendro naudojimo klases laikytume papildoma dalykinės srities esybe, toks skirstymas atitinka bendresnį.
 Jei pagalbinių klasių dydis labai išauga, galima vietoje vienos atskiros klasės vienai bendrinei sričiai sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi.
+Toks papildomas skirstymo šablonas gali praplėsti skirstymą
+pagal dalykinę sritį - jei bendro naudojimo klasės grupuojamos pagal dengiamą sritį, toks skirstymas atitinka bendresnį.
 Tokiu atveju reikia užtikrinti, kad iš klasių pavadinimo aišku, kokią smulkesnę dalykinės srities sritį padengia klasė.
 \begin{figure}[H]
 \snugshade
@@ -114,8 +113,8 @@ aiškų procesą, kaip elgtis šioje situacijoje:
     \item Iškviesti rastą arba sukurtą funkciją iš bendrinio panaudojimo kodo paketo savo funkcionalume
 \end{enumerate}
 
-Šiai problemai spręsti galimas ir kitoks būdas - turėti keletą pagalbinių klasių paketų, patalpintų po bendresniu dalykinės srities
-ar techninio sluoksnio paketu.
+Šiai problemai spręsti galimas ir kitoks būdas - turėti keletą pagalbinių klasių paketų, patalpintų po atitinkamu bendresniu dalykinės srities
+ paketu.
 Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė įranga \textit{Seata}\footnote{\url{https://github.com/apache/incubator-seata/tree/2.x/saga/seata-saga-engine/src/main/java/org/apache/seata/saga/engine/utils}}.
 Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje, pavyzdžiui, po \textit{engine} paketu.
 \begin{figure}[H]
@@ -133,20 +132,23 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
     \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{utils} pakete esančiame po dalykinės srities subpaketais}
 \end{figure}
 
-\subsubsection{Didelis priklausomybių nuo paketo skaičius}
+\subsubsection{Didelis klasių skaičius pakete}
 Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus tinkamą skirstymo klasių skirstymo į paketus metodą
 ir palaikant šią tvarką, klasių skaičius pakete gali išaugti. Tokį pavyzdį galima matyti paieškos įrankio \textit{Elasticsearch}\footnote{\url{https://github.com/elastic/elasticsearch/tree/main/server/src/main/java/org/elasticsearch/transport}}
 \textit{transport} pakete. Nors klasės yra sugrupuotos pagal dalykinės srities esybę, bendras jų skaičius pakete siekia beveik devyniasdešimt.
 Tokiame pakete naviguoti sunku, jis taip pat gali turėti daug priklausomybių.
-Sprendimo būdas galėtų būti tokius paketus skirstyti papildomai.
 Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
 daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
 Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingesnis, kadangi yra paveikiama daugiau klasių.
+Dažnai matoma, kad susidarius šiai situacijai, nukrypstama nuo skirstymo pagal dalykinės srities esybes, pradedamos grupuoti
+techninio sluoksnio klasės. Tokį skirstymą galima matyti \textit{DBeaver} duomenų bazės įrankyje \footnote{\url{https://github.com/dbeaver/dbeaver/tree/devel/plugins/org.jkiss.dbeaver.ext.mssql/src/org/jkiss/dbeaver/ext/mssql}} -
+Aukštesniame lygmenyje grupuojant pagal dalykinės srities esybes, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
+pagal techninį sluoksnį pakete \textit{model}.
 Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete,
 akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant ir
 glaudų tarpusavyje susijusių klasių saryšį.
 Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis mažesnį klasių bei aferentinių jungčių skaičių paketuose.
-Vadovaujantis šiuo šablonu, kiekvieną paketą reikėtų realizuoti kaip komponentą, teikiantį vieną funkcionalumą.
+Vadovaujantis šiuo šablonu, klases reikėtų skirstyti pagal smulkesnį jų teikiamą funkcionalumą.
 Tokį skirstymo tipą galima stebėti \textit{IntelliJ} įskiepyje \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
 Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos domeno sistemos esybes.
 Šį šabloną dar būtų galima patobulinti sprendžiant aferentinių jungčių skaičiaus problemą.
@@ -215,11 +217,11 @@ Norint užtikrinti šiuos reikalavimus, reikėtų turėti mažą,
 tiksliai apibrėžto funkcionalumo paketą, kurio visi komponentai - tarpusavyje susiję.
 Tokiu atveju ciklinių priklausomybių tikimybė sumažėja.
 
-\subsubsection{Ka daryti su daug skirtingų sąsajų implementacijų?}
+\subsubsection{Daug skirtingų sąsajų implementacijų}
 Sistemai plečiantis galima susidurti su problema, kad išauga sąsajos implementacijų skaičius. Ši problema gali iškilti
-tiek bandant skirstyti kodą pagal dalykinės srities esybes, tiek pagal techninį sluoksnį. Skirstant pagal dalykinės srities esybes, gali būti neaišku, kur turėtų
-būti sukuriamas naujas esybės paketas. Skirstant kodą pagal techninį sluoksnį, gali susidaryti klasių perteklius, pavyzdžiui,
-model pakete. Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas jas implementuoja.
+ skirstant klases pagal dalykinės srities esybes, gali būti neaišku, kur turėtų
+būti sukuriamas naujas esybės paketas.
+Tokiu atveju navigacija pakete pasidaro sudėtinga, neaišku, kas kurią klasę implementuoja.
 Šią problemą galima spręsti sukuriant sąsajos implementacijas tame pačiame pakete kaip ir pati sąsaja.
 Toks skirstymo į paketus šablonas yra sutinkamas \textit{Java} standartinėje bibliotekoje\footnote{\url{https://github.com/AdoptOpenJDK/openjdk-jdk11/tree/master/src/java.base/share/classes/java/util}},
 kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame pakete.
@@ -246,7 +248,7 @@ Tai pastebima ir \textit{Java} bibliotekos pavyzdyje - \textit{utils} paketas i�
 todėl greitai rasti norimą sąsajos įgyvendinimą vis tiek užtrunka.
 
 Šio šablono trūkumas gali būti išspręstas, jį šiek tiek pakeitus - sąsaja, kuri turi daug skirtingų įgyvendinimų, turėtų turėti specifiškai jai sukurtą paketą, o kiekvienam paketo
-įgyvendinimui sukuriamas po subpaketas, kuriame yra tiek klasę įgyvendinanti minėta sąsają, tiek kitos, įgyvendinimui reikalingos klasės.
+įgyvendinimui sukuriamas po subpaketas, kuriame yra tiek klasę įgyvendinanti minėtą sąsają, tiek kitos, įgyvendinimui reikalingos klasės.
 Naudojant tokią kodo struktūrą galima labai greitai rasti sąsasas bei galimus jos įgyvendinimus, beveik netyrinėjant sistemos struktūros, bei klasių kodo.
 Šis šablonas taip pat užtikrina, kad paketas turi vieną aiškų funkcionalumą, todėl laikosi bendro sąryšio principo.
 Šablone aprašyta paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
@@ -270,16 +272,17 @@ skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, 
     \caption{\textit{Leaf} sistema, kur kiekvienas sąsajos įgyvendinimas yra aprašytas subpakete}
 \end{figure}
 
-\subsubsection{Kaip valdyti esybių pokyčius ir versijavimą}
+\subsubsection{Esybių pokyčių ir versijavimo valdymas}
 Sistemai egzistuojant ilgesnį laiką, jos pokyčiai pasidaro neišvengiami.
 Smulkūs pokyčiai nebūtinai paveikia bendrą sistemos struktūrą, tačiau
 didesniems pokyčiams kartais reikia sukurti naujas klasių ar funkcionalumų versijas. Jei reikia palaikyti atgalinį
 suderinamumą (angl. backward compatibility), sistemoje gali atsirasti kelios tų pačių esybių versijos.
 Tokiu atveju sistemoje egzistuojančios kelios tų pačių esybių versijos gali pridėti painumo.
 Ši problema dažnai sprendžiama sukuriant atskirus paketus skirtingoms
-versijoms (v1, v2, v3, \ldots) bei iškeliant bendrą, abiejų esybių naudojamą kodą į subpaketus taip, kad jas galėtų pasiekti abi versijos.
+versijoms (v1, v2, v3, \ldots) bei iškeliant bendrą, abiejų esybių naudojamą kodą į paketus taip, kad jas galėtų pasiekti abi versijos.
 Taip galima išvengti kodo duplikacijos bei perteklinio klasių skaičiaus paketuose, bei užtikrinant aiškią skirtingų versijų
-atskirtį.
+atskirtį. Toks skirstymas gali praplėsti skirstymą pagal dalykinės srities esybes - skirstomos versijos gali atspindėti reikalingus
+palaikyti besikeičiančius verslo reikalavimus.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -297,3 +300,53 @@ Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
+
+Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Šablonas &  Pavadinimas \\ [0.5ex]
+        \hline\hline
+        Sprendžiama problema & Pagalbinių klasių skirstymas\\
+        \hline
+        Siūlomas sprendimas & Sukurti atskirą pagalbinių klasių paketą dalykinės srities esybių lygmenyje \\
+        \hline
+        Galimos variacijos & Gali būti papildomai sukuriami subpaketai pagal pagalbinių klasių dengiamą funkcionalumą \\
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        Šablonas &  Pavadinimas \\ [0.5ex]
+        \hline\hline
+        Sprendžiama problema & Pagalbinių klasių skirstymas\\
+        \hline
+        Siūlomas sprendimas & klases laikyti \textit{util} paketuose, žemesniame lygmenyje nei dalykinės srities esybės \\
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        Šablonas &  Pavadinimas \\ [0.5ex]
+        \hline\hline
+        Sprendžiama problema & Didelis klasių skaičius pakete\\
+        \hline
+        Siūlomas sprendimas & klases suskirstyti pagal smulkesnį jų teikiamą funkcionalumą \\
+        \hline
+        Galimos variacijos & Smulkūs moduliai su atskirose klasėse aprašytais kontraktais \\
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        Šablonas &  Pavadinimas \\ [0.5ex]
+        \hline\hline
+        Sprendžiama problema & Daug skirtingų sąsajų implementacijų\\
+        \hline
+        Siūlomas sprendimas & Kiekvienam paketo įgyvendinimui sukurti subpaketą, kuriame yra tiek klasę įgyvendinanti sąsaja, tiek kitos, įgyvendinimui reikalingos klasės \\
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        Šablonas &  Pavadinimas \\ [0.5ex]
+        \hline\hline
+        Sprendžiama problema & Esybių pokyčių ir versijavimo valdymas\\
+        \hline
+        Siūlomas sprendimas & Sukurti atskirus paketus skirtingoms versijoms bei iškelti bendrą, abiejų esybių naudojamą kodą į paketus \\
+    \end{tabular}
+
+\end{center}
+
