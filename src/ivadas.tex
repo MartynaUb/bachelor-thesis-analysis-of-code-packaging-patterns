@@ -13,9 +13,18 @@ kodas daro daug didesnę įtaką bendram sistemos našumui, suprantamumui bei pa
 Sistemos paketų struktūros analizė norint įvertinti programinės įrangos kokybę
 tampa vis svarbesne tema dėl augančio failų ir paketų skaičiaus~\cite{DesignMetrics}.
 
+Diskusijose, kaip reikėtų skirstyti programinį kodą, paprastai akcentuojami du metodai - pagal \textit{techninį sluoksnį},
+kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
+arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
+esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
+Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo bei
+palaikomumo~\cite{DivideByDomain}.
+Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi -
+klasės būna išskaidytos remiantis papildomomis taisyklėmis,
+siekiant išspręsti sistemos planavimo metu kylančias problemas.
 Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai,
 tam jog jo struktūra darytų teigiamą įtaką sistemai, reikalinga atlikti skirstymo į paketus šablonų analizę -
-išsiaiškinti galimus šablonus, kaip skirstyti programinį kodą į paketus, turėti aiškius šablonų apibrėžimus su jų
+išsiaiškinti galimus šablonus, naudojamus kylančių projektavimo problemų sprendimui, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
 Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį,
 nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių bei sprendžiant iškilusią problemą.

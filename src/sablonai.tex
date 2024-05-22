@@ -1,11 +1,6 @@
 \section{Galimi kodo skirstymo į paketus šablonai}
-Diskusijose, kaip reikėtų skirstyti programinį kodą, paprastai akcentuojami du metodai - pagal \textit{techninį sluoksnį},
-kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
-arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
-esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
-Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo bei
-palaikomumo~\cite{DivideByDomain}.
-Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
+Skirstymo pagal dalykinės srities esybes metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje.
+Tai lemia, kad praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
 Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
 stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias jais buvo bandoma išspresti.
@@ -305,7 +300,7 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pavadinimas \\ [0.5ex]
+        Šablonas &  Atskiras pagalbinių klasių paketas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
@@ -316,7 +311,7 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
     \end{tabular}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pavadinimas \\ [0.5ex]
+        Šablonas &  Pagalbinių klasių priskyrimas dalykinės srities paketui \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
@@ -325,7 +320,7 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
     \end{tabular}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pavadinimas \\ [0.5ex]
+        Šablonas &  Skirstymas pagal teikiamą funkcionalumą \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Didelis klasių skaičius pakete\\
         \hline
@@ -336,7 +331,7 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
     \end{tabular}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pavadinimas \\ [0.5ex]
+        Šablonas &  Sąsajų atskyrimas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Daug skirtingų sąsajų implementacijų\\
         \hline
@@ -345,7 +340,7 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
     \end{tabular}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pavadinimas \\ [0.5ex]
+        Šablonas &  Atskirų versijų skirstymas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Esybių pokyčių ir versijavimo valdymas\\
         \hline
