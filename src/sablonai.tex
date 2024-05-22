@@ -134,16 +134,24 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
 \end{figure}
 
 \subsubsection{Didelis priklausomybių nuo paketo skaičius}
-Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms.
+Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus tinkamą skirstymo klasių skirstymo į paketus metodą
+ir palaikant šią tvarką, klasių skaičius pakete gali išaugti. Tokį pavyzdį galima matyti paieškos įrankio \textit{Elasticsearch}\footnote{\url{https://github.com/elastic/elasticsearch/tree/main/server/src/main/java/org/elasticsearch/transport}}
+\textit{transport} pakete. Nors klasės yra sugrupuotos pagal dalykinės srities esybę, bendras jų skaičius pakete siekia beveik devyniasdešimt.
+Tokiame pakete naviguoti sunku, jis taip pat gali turėti daug priklausomybių.
+Sprendimo būdas galėtų būti tokius paketus skirstyti papildomai.
 Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
 daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
 Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingesnis, kadangi yra paveikiama daugiau klasių.
 Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete,
-akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant
+akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant ir
 glaudų tarpusavyje susijusių klasių saryšį.
-Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis racionalų aferentinių jungčių skaičių paketuose.
+Šis principas galėtų būti kodo skirstymo šablonas, užtikrinantis mažesnį klasių bei aferentinių jungčių skaičių paketuose.
 Vadovaujantis šiuo šablonu, kiekvieną paketą reikėtų realizuoti kaip komponentą, teikiantį vieną funkcionalumą.
-Funkcionalumas kitiems paketams yra pasiekiamas per vieną minimalią sąsają \angl{interface},
+Tokį skirstymo tipą galima stebėti \textit{IntelliJ} įskiepyje \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
+Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos domeno sistemos esybes.
+Šį šabloną dar būtų galima patobulinti sprendžiant aferentinių jungčių skaičiaus problemą.
+Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms.
+Funkcionalumas kitiems paketams galėtų būti pasiekiamas per vieną minimalią sąsają \angl{interface},
 kuri atskleidžia tik konceptus (metodus arba duomenų tipus), kurie yra glaudžiai susiję su komponento teikiama paslauga, bei
 klase, grąžinančią minėtos sąsajos įgyvendinimą.
 Tai gali būti paprasta klasė, su statine funkcija, kurios rezultatas yra ši sąsaja, arba, esant keliomis sąsajos implementacijomis,
