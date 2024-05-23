@@ -292,7 +292,7 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
-        $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $sum(C)$ \\ [0.5ex]
+        $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$  \\ [0.5ex]
         \hline\hline
         5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
         \hline
@@ -333,30 +333,6 @@ Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{Par
 \end{figure}
 Šiam paketui sutvarkyti taikomas \textit{Sąsajų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkliami į minėto
 paketo subpaketus.
-Taip pat sukuriama \textit{ParseDataFactory} klasė, kurį grąžina tinkamą \textit{ParseData} sąsajos implementiciją, pagal nurodytą turinio tipą, paslepiant įgyvendinimo pavadinimą nuo
-funkcijos naudotojo.
-\begin{figure}[H]
-    \begin{lstlisting}[language=Python]
-public final class ParseDataFactory {
-
-    public static ParseData parseDataOf(String contentType) {
-        if (Util.hasBinaryContent(contentType)) {
-            return new BinaryParseData();
-        }
-
-        if (Util.hasCssTextContent(contentType)) {
-            return new CssParseData();
-        }
-
-        if (Util.hasPlainTextContent(contentType)) {
-            return new TextParseData();
-        }
-        throw new UnsupportedContentTypeException(contentType);
-    }
-}
-    \end{lstlisting}
-    \caption{\textit{ParseDataFactory} klasė įgyvendinimas }
-\end{figure}
 Šie pertvarkymai pakeičia \textit{parser} paketo struktūrą:
 \begin{figure}[H]
     \snugshade
@@ -372,11 +348,11 @@ public final class ParseDataFactory {
         .4 {CssParseData // Trečias sąsajos įgyvendinimas}.
         .3 {binary}.
         .4 {BinaryParseData // Ketvirtas sąsajos įgyvendinimas}.
-        .3 {factory}.
-        .4 {ParseDataFactory // Klasė grąžinanti tinkamą sąsajos įgyvendnimą}.
+        .2 {AllTagMapper}.
         .2 {ExtractedUrlAnchorPair}.
         .2 {HtmlParser}.
         .2 {HtmlContentHandler}.
+        .2 {NotAllowedContentException}.
         .2 {TikaHtmlParser}.
         .2 {Parser}.
     }
@@ -385,26 +361,26 @@ public final class ParseDataFactory {
 \end{figure}
 Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
-Šis pertvarkymas taip išsprendė \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 5.
-Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, nors nukrito
-vidutinis stabilumas, abstrakcijos lygi pakilo, todėl atstumas nuo pagrindinės sekos nežymiai pagerėjo.
+Šis pertvarkymas taip dalinai sumažino \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 7.
+Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, tačiau neženkliai nukrito
+vidutinis stabilumas ir abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos nežymiai padidėjo.
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        Paketas \textit{edu.uci.ics.crawler4j.parser} & \textit{N} & \textit{A} & \textit{E} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
+        \textit{crawler4j.parser} & \textit{N} & \textit{A} & \textit{E} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
         \hline\hline
-        Prieš pakeitimus & 12 & 1 & 4 & 0.8 & 0.167 & 0.033 & 1 \\
+        Prieš & 12 & 1 & 4 & 0.8 & 0.167 & 0.033 & 1 \\
         \hline
-        Po pakeitimų & 5 & 1 & 7 & 0.875 & 0.167 & 0.042 & 1 \\
+        Po & \cellcolor{green!25} 7 (-5) & 1 & 9 & \cellcolor{red!25} 0.9 + (0.1) & \cellcolor{red!25} 0.143 (-0.024) & \cellcolor{red!25} 0.043 (+0.01) & 1 \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        & $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $sum(C)$\\ [0.5ex]
+        Vidurkiai & $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$ \\ [0.5ex]
         \hline\hline
-        Prieš pakeitimus & 5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
+        Prieš & 5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
         \hline
-        Po pakeitimus & 4 & 3 & 3 & 0.505 & 0.108 & 0.409 & 5 \\
+        Po & \cellcolor{green!25}  4 (-1) & 3 & 3 & \cellcolor{red!25} 0.488 (+0.033) & \cellcolor{green!25} 0.114 (+0.045) & \cellcolor{green!25} 0.425 (-0.051) & 5 \\
         \hline
     \end{tabular}
 \end{center}
@@ -447,9 +423,9 @@ buvo sukurti atskiri paketai:
     \item Iš \textit{parser} paketo iškeltas funkcionalumas \textit{html} turiniui apdoroti, patalpintas į \textit{parser/html} paketą.
     Po šio pertvarkymo \textit{parser} paketas pasidaro pakankamai mažas ir turi vieną funkcionalumą - priimti puslapį ir deleguoti jį apdorojimui kitai klasei pagal puslapio tipą.
     \item Iš \textit{robotstxt} paketo funkcionalumas patikrinti ar sistema autorizuota apdoroti pasirinktą puslapį iškeltas į \textit{robotstxt/permissions} paketą.
-    \item Iš \textit{crawler} paketo funkcionalumas programiškai aprašantis internetinį puslapį iškeltas į \textit{page} paketą.
+    \item Iš \textit{crawler}, bei \textit{parser} paketų funkcionalumas programiškai aprašantis internetinio puslapio elementus iškeltas į \textit{web} paketą.
     \item Iš \textit{crawler} paketo funkcionalumas nustatyti įrankio konfigūraciją iškeltas į \textit{config} paketą.
-    \item Iš \textit{url} paketo funkcionalumas gauti internetinių domenų pavadinimus iškeltas į  \textit{tld} paketą.
+    \item Iš \textit{url} paketo funkcionalumas gauti internetinių domenų pavadinimus iškeltas į \textit{tld} paketą.
 \end{itemize}
 
 \begin{figure}[H]
@@ -485,24 +461,20 @@ buvo sukurti atskiri paketai:
         .3 {config}.
         .3 {crawler}.
         .4 {authentication}.
-        .4 {exceptions}.
         .3 {fetcher}.
         .3 {frontier}.
-        .3 {page}.
         .3 {parser}.
         .4 {html}.
         .4 {parse}.
         .5 {binary}.
         .5 {css}.
-        .5 {factory}.
         .5 {html}.
         .5 {text}.
         .3 {robotstxt}.
         .4 {permissions}.
-        .3 {url}.
-        .4 {canonicalizer}.
-        .4 {tld}.
+        .3 {tld}.
         .3 {util}.
+        .3 {web}.
     }
     \endsnugshade
     \caption{\textit{crawler4j} paketų medis iškėlus minėtus funkcionalumus}
@@ -525,64 +497,54 @@ padidėjo vidutinis abstrakcijos lygis:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        Paketo vardas & \textit{N} & \textit{A} & \textit{E} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
+        Paketo vardas & \textit{N} & \textit{Af} & \textit{Ef} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
         \hline\hline
-        edu.uci.ics.crawler4j.parser.parse.binary & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 0\\
+        edu.uci.ics.crawler4j.parser.parse.binary & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.url & 1 & 12 & 1 & 0.077 & 0.0 & 0.923 & 0\\
+        edu.uci.ics.crawler4j.crawler & 4 & 0 & 11 & 1.0 & 0.25 & 0.25 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.crawler.exceptions & 1 & 3 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
+        edu.uci.ics.crawler4j.tld & 3 & 13 & 1 & 0.071 & 0.333 & 0.596 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.crawler & 4 & 0 & 13 & 1.0 & 0.25 & 0.25 & 0  \\
+        edu.uci.ics.crawler4j.parser.html & 6 & 2 & 4 & 0.667 & 0.167 & 0.166 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.parser.html & 2 & 1 & 7 & 0.875 & 0.5 & 0.375 & 0 \\
-        \hline
-        edu.uci.ics.crawler4j.robotstxt.permissions & 2 & 1 & 7 & 0.875 & 0.5 & 0.375 & 0\\
+        edu.uci.ics.crawler4j.robotstxt.permissions & 2 & 1 & 6 & 0.857 & 0.5 & 0.357 & 0 \\
         \hline
         edu.uci.ics.crawler4j.config & 1 & 8 & 1 & 0.111 & 0.0 & 0.889 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.frontier & 6 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0  \\
+        edu.uci.ics.crawler4j.frontier & 6 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.page & 2 & 5 & 2 & 0.286 & 0.5 & 0.214 & 0 \\
-        \hline
-        edu.uci.ics.crawler4j.parser.parse.factory & 1 & 1 & 5 & 0.833 & 0.0 & 0.167 & 0 \\
-        \hline
-        edu.uci.ics.crawler4j.parser & 6 & 2 & 8 & 0.8 & 0.0 & 0.2 &0 \\
+        edu.uci.ics.crawler4j.parser & 2 & 1 & 10 & 0.909 & 0.0 & 0.091 & 0\\
         \hline
         edu.uci.ics.crawler4j.crawler.authentication & 4 & 2 & 0 & 0.0 & 0.25 & 0.75 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.parser.parse.css & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0\\
+        edu.uci.ics.crawler4j.parser.parse.css & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
         \hline
         edu.uci.ics.crawler4j.robotstxt & 5 & 1 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.url.tld & 2 & 5 & 1 & 0.167 & 0.5 & 0.333 & 0 \\
+        edu.uci.ics.crawler4j.parser.parse.html & 1 & 3 & 2 & 0.4 & 0.0 & 0.6 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.parser.parse.html & 1 & 3 & 2 & 0.4 & 0.0 & 0.6 & 0\\
+        edu.uci.ics.crawler4j.parser.parse & 1 & 7 & 1 & 0.125 & 1.0 & 0.125 & 0\\
         \hline
-        edu.uci.ics.crawler4j.parser.parse & 1 & 8 & 1 & 0.111 & 1.0 & 0.111 & 0 \\
+        edu.uci.ics.crawler4j.fetcher & 6 & 2 & 5 & 0.714 & 0.0 & 0.286 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.fetcher & 6 & 2 & 6 & 0.75 & 0.0 & 0.25 & 0 \\
+        edu.uci.ics.crawler4j.util & 4 & 5 & 2 & 0.286 & 0.0 & 0.714 & 0 \\
         \hline
-        edu.uci.ics.crawler4j.util & 3 & 5 & 3 & 0.375 & 0.0 & 0.625 & 0 \\
+        edu.uci.ics.crawler4j.web & 5 & 6 & 2 & 0.25 & 0.4 & 0.35 & 0 \\
         \hline
         edu.uci.ics.crawler4j.parser.parse.text & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 0 \\
-        \hline
-        edu.uci.ics.crawler4j.url.canonicalizer & 3 & 4 & 0 & 0.0 & 0.333 & 0.667 & 0 \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        & $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $sum(C)$\\ [0.5ex]
+        Vidurkiai & $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$\\ [0.5ex]
         \hline\hline
-        Prieš pakeitimus & 5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
+        Prieš & 5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
         \hline
-        Po pirmos iteracijos & 4 & 3 & 3 & 0.505 & 0.108 & 0.409 & 5 \\
-        \hline
-        Po visų pakeitimų & 3 & 3 & 3 & 0.452 & 0.183 & 0.471 & 0 \\
+        Po  & \cellcolor{green!25} 3 (-2) & 3 & 3 & \cellcolor{green!24} 0.452 (-0.03) & \cellcolor{green!25} 0.183 (+0.114) & \cellcolor{green!25} 0.471 (-0.005) & \cellcolor{green!25} 0 (-5)\\
         \hline
     \end{tabular}
 \end{center}
-Todėl po šio pertvarkymo galima teigti, kad šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
+Iš gautų rezultatų galime teigti jog po pertvarkymo galima teigti, kad šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
 padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, ir turėjo teigiama įtaka matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
