@@ -386,7 +386,8 @@ public final class ParseDataFactory {
 Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
 Šis pertvarkymas taip išsprendė \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 5.
-Palyginus pertvarkytos ir buvusios sitemos matus matome, kad nors sistema tapo aiškesnė, tai nesumažino paketų kokybės matų:
+Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, nors nukrito
+vidutinis stabilumas, abstrakcijos lygi pakilo, todėl atstumas nuo pagrindinės sekos nežymiai pagerėjo.
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -518,8 +519,9 @@ Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daug daugiau pa
 \end{figure}
 todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
 
-
-Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė nenukrito:
+Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė pagerėjo,
+sumažėjo vidutinis klasių skaičius pakete, ciklinių priklausomybių rodiklis tapo lygus nuliui,
+padidėjo vidutinis abstrakcijos lygis:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -581,7 +583,7 @@ Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė ne
     \end{tabular}
 \end{center}
 Todėl po šio pertvarkymo galima teigti, kad šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
-padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, taip pat neturėjo neigiamos įtakos matams, nurodantiems
+padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, ir turėjo teigiama įtaka matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
 todo: parašyti, pertvarkymo tikslas nėra gerinti matus, o jie yra naudojami norint įsitikinti, jog kokybė nesuprastejo. Šiuo atveju svarbiau skaitomumas, o ne kokybė paremta matais
