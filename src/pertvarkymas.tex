@@ -1,6 +1,6 @@
 \section{Esamų sistemų pertvarkymas}
 Apibrėžus šablonus paketų skirstymui galima pradėti vertinti jų įtaką sistemai, juos pritaikant esamoms sistemoms.
-Šio skyriaus tikslas - pasirinkti ir išnagrinėti kelias sistemas, pasitelkus paketų kokybės matus, bei bendrą sistemos struktūros analizę,
+Šio skyriaus tikslas - pasirinkti ir išnagrinėti kelias sistemas pasitelkus paketų kokybės matus bei bendrą sistemos struktūros analizę,
 taip identifikuojant programiniam kodui būdingas problemas, rastas problemas išspręsti pritaikant aprašytus šablonus.
 Atlikus pertvarkymus sistemose, dar kartą paskaičiuoti paketų kokybės matus,
 taip gaunant įrodymus, ar gauti šablonai yra efektyvūs ir iš tiesų sprendžia
@@ -8,7 +8,7 @@ jiems priskirtas problemas.
 
 
 \subsection{Sistemų pasirinkimas}
-Sistemų pertvarkymui pasirinktos atviro kodo sistemos, kurių kodas yra viešai prietinamas \textit{github} platformoje.
+Sistemų pertvarkymui pasirinktos atviro kodo sistemos, kurių kodas yra viešai prieinamas \textit{github} platformoje.
 Pasirinktos sistemos yra vidutinio dydžio, todėl nėra labai sudėtinga jas suprasti ir pertvarkyti, bet taip pat jos nėra
 tokios paprastos, kad neturėtų sistemos dizaino problemų.
 Pasirinktos sistemos yra skirtingo tipo projektai, taip užtikrinant didesnę problemų ivairovę ir objektyvesnius įvertinimus.
@@ -253,11 +253,11 @@ Per visą pasirinktų sistemų imtį yra sutinkamos visos aprašytos problemos, 
 
 \subsection{\textit{crawler4j} sistema}
 \textbf{crawler4j\footnote{\url{https://github.com/yasserg/crawler4j}}} yra atvirojo kodo
-žiniatinklio tikrinimo \angl{crawling} programa parašyta su \textit{Java} programavimo kalba, leidžianti
-efektyviai tikrinti žiniatinklį naudojant daugiagiji angl{multithreaded} mechanizmą.
-Tai taikomosios programinės įrangos tipas, kurios naudotojas yra žmogus.
+žiniatinklio tikrinimo \angl{crawling} programa parašyta \textit{Java} programavimo kalba, leidžianti
+efektyviai tikrinti žiniatinklį naudojant daugiagijį angl{multithreaded} metodą.
+Tai taikomosios programinės įrangos tipas, skirtas vartotojams.
 
-Prieš visus pakeitimus \textit{crawler4j} sistemos, paketų struktūra atrodo taip:
+Prieš visus pakeitimus \textit{crawler4j} sistemos paketų struktūra atrodo taip:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{img/crawler_packages_orig}
@@ -298,20 +298,20 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
         \hline
     \end{tabular}
 \end{center}
-Iš bendros sistemos analizės bei matų lentelės rezultatu matomos kelios sistemos problemos -
+Iš bendros sistemos analizės bei matų lentelės rezultatų matomos kelios sistemos problemos -
 \begin{itemize}
-    \item \textbf{Problema numeris 1} - nors ši tai nesimato kokybės matuose, bet atlikus bendra sistemos kodo analizę matoma,
+    \item \textbf{Problema numeris 1} - atlikus bendrą sistemos kodo analizę matoma,
     kad sistemos paketuose yra daug sąsajų su skirtingais jų įgyvendinimais, todėl yra sunku
-    rasti visus specifinės sąsajos įgyvendinimus, esama paketų struktūra tam negelbėja
+    rasti visus specifinės sąsajos įgyvendinimus, esama paketų struktūra tam nepadeda
     \item \textbf{Problema numeris 2} - paketo \textit{edu.uci.ics.crawler4j.parser} viduje yra 12 klasių, todėl sunku suprasti už kokius funkcionalumus jis atsakingas
     ir kada jį reikėtų nagrinėti bei keisti.
-    \item \textbf{Problema numeris 3} - Sistema turi daug ciklinių prilausomynbių kur du arba daugiau paketų priklauso vienas nuo kito.
+    \item \textbf{Problema numeris 3} - Sistema turi daug ciklinių prilausomynbių, kur du arba daugiau paketų priklauso vienas nuo kito.
     Tai aiškiai matosi sistemos paketų diagramoje\ref{img:crawler_packages_orig}, ciklinėse priklausomybėse išviso dalyvauja 10 paketų ir kartu jie sudaro 5 ciklinių priklausomybių sekas,
     kurios turėtų būti pašalintos.
 \end{itemize}
 
 Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{ParseData} bei 4 skirtingųs jos įgyvendinimus - \textit{CssParseData, TextParseData, HtmlParseData, BinaryParseData},
-šios klasės pakete dalinasi vieta dar su 9 klasėmis, todėl yra gan nepatogu rasti ieškomo paketo įgyvendinimo.
+šios klasės pakete dalinasi vieta dar su 9 klasėmis, todėl yra gan nepatogu rasti ieškomą įgyvendinimą.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -333,7 +333,7 @@ Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{Par
 \end{figure}
 Šiam paketui sutvarkyti taikomas \textit{Sąsajų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkliami į minėto
 paketo subpaketus.
-Taip pat sukuriama \textit{ParseDataFactory} klasė, kurį grąžina tinkamą \textit{ParseData} sąsajos implementiciją, pagal nurodyta turinio tipą, paslepiant įgyvendinimo pavadinimą nuo
+Taip pat sukuriama \textit{ParseDataFactory} klasė, kurį grąžina tinkamą \textit{ParseData} sąsajos implementiciją, pagal nurodytą turinio tipą, paslepiant įgyvendinimo pavadinimą nuo
 funkcijos naudotojo.
 \begin{figure}[H]
     \begin{lstlisting}[language=Python]
@@ -357,7 +357,7 @@ public final class ParseDataFactory {
     \end{lstlisting}
     \caption{\textit{ParseDataFactory} klasė įgyvendinimas }
 \end{figure}
-Šie pertvarkymai pakeičią \textit{parser} paketo struktūra:
+Šie pertvarkymai pakeičia \textit{parser} paketo struktūrą:
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -383,10 +383,10 @@ public final class ParseDataFactory {
     \endsnugshade
     \caption{\textit{parser} paketo struktūra po pirmojo pertvarkymo}
 \end{figure}
-Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti, bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
+Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
 Šis pertvarkymas taip išsprendė \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 5.
-Palyginus pertvarkytos ir buvusios sitemos matus matome, kad nors sistemą tapo aiškensė, tai nepadarė nesumažino paketų kokybės matų:
+Palyginus pertvarkytos ir buvusios sitemos matus matome, kad nors sistema tapo aiškesnė, tai nesumažino paketų kokybės matų:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -407,16 +407,16 @@ Palyginus pertvarkytos ir buvusios sitemos matus matome, kad nors sistemą tapo 
         \hline
     \end{tabular}
 \end{center}
-Kad išspresti \textbf{problemą numeris 3} - ciklines priklausomybes, reikia identifikuoti klases, kurių priklausomybės
-sudaro ciklus ir iškelti jas į atskirūs paketus.
-todo: pridėti citavima iš straipsnio apie ciklinių priklausomybiu eliminavimą
+Norint išspręsti \textbf{problemą numeris 3} - ciklines priklausomybes, reikia identifikuoti klases, kurių priklausomybės
+sudaro ciklus ir iškelti jas į atskirus paketus.
+todo: pridėti citavimą iš straipsnio apie ciklinių priklausomybių eliminavimą
 
 Kuriant naujus paketus vadovaujamasi \textit{skirstymo pagal teikiamą funkcionalumą} šablonu, užtikrinant, kad kiekvienas
 paketas teikia vieną, aiškiai apibrėžtą funkciją, kuri yra pasiekiama per pakete aprašytą sąsają.
-Paketo vidus yra pasleptas su \textit{Java} kalbos pasiekiamumo modifikatoriais - konkrečių klasių negalima inicializuoti už paketo ribų,
-nes jų konstruktoriai privatus.
+Paketo vidus yra paslėptas su \textit{Java} kalbos pasiekiamumo modifikatoriais - konkrečių klasių negalima inicializuoti už paketo ribų,
+nes jų konstruktoriai privatūs.
 Sąsajos įgyvendinimas gaunamas \textit{static factory} pagalba.
-todo: aprašyti kas tai yra
+todo: aprašyti, kas tai yra
 
 \begin{figure}[H]
     \begin{lstlisting}[language=Python]
@@ -440,15 +440,15 @@ class TikaHtmlParser implements HtmlParser {
     \end{lstlisting}
     \caption{\textit{skirstymo pagal teikiamą funkcionalumą} šablono sąsaja}
 \end{figure}
-Peržiūrėjus paketus su ciklinėmis priklausomybės iš jų buvo išskirti šie nauji funkcionalumai, kuriems
+Peržiūrėjus paketus su ciklinėmis priklausomybės, iš jų buvo išskirti šie nauji funkcionalumai, kuriems
 buvo sukurti atskiri paketai:
 \begin{itemize}
     \item Iš \textit{parser} paketo iškeltas funkcionalumas \textit{html} turiniui apdoroti, patalpintas į \textit{parser/html} paketą.
-    Po šio pertvarkymo \textit{parser} paketas pasidaro pakankamai mažas turėti viena funkcionalumą - primti puslapį ir deleguoti jį apdorojimui kitai klasėi, pagal puslapio tipą.
-    \item Iš \textit{robotstxt} paketo iškeltas funkcionalumas patikrinti ar sistema autorizuota apdoroti pasirinktą puslapi į \textit{robotstxt/permissions} paketą.
-    \item Iš \textit{crawler} paketo iškeltas funkcionalumas, programiškai aprašantys internetinį puslapį į \textit{page} paketą.
-    \item Iš \textit{crawler} paketo iškeltas funcionalumas, nustatyti įrankio konfiguraciją į \textit{config} paketą.
-    \item Iš \textit{url} paketo iškeltas funcionalumas, gauti internetinių domenų pavadinimus į  \textit{tld} paketą.
+    Po šio pertvarkymo \textit{parser} paketas pasidaro pakankamai mažas ir turi vieną funkcionalumą - priimti puslapį ir deleguoti jį apdorojimui kitai klasei pagal puslapio tipą.
+    \item Iš \textit{robotstxt} paketo funkcionalumas patikrinti ar sistema autorizuota apdoroti pasirinktą puslapį iškeltas į \textit{robotstxt/permissions} paketą.
+    \item Iš \textit{crawler} paketo funkcionalumas programiškai aprašantis internetinį puslapį iškeltas į \textit{page} paketą.
+    \item Iš \textit{crawler} paketo funkcionalumas nustatyti įrankio konfigūraciją iškeltas į \textit{config} paketą.
+    \item Iš \textit{url} paketo funkcionalumas gauti internetinių domenų pavadinimus iškeltas į  \textit{tld} paketą.
 \end{itemize}
 
 \begin{figure}[H]
@@ -473,7 +473,7 @@ buvo sukurti atskiri paketai:
         .3 {util}.
     }
     \endsnugshade
-    \caption{\textit{crawler4j} paketų medis prieš iškėliant minėtus funkcionalumus}
+    \caption{\textit{crawler4j} paketų medis prieš iškeliant minėtus funkcionalumus}
 \end{figure}
 
 \begin{figure}[H]
@@ -507,7 +507,7 @@ buvo sukurti atskiri paketai:
     \caption{\textit{crawler4j} paketų medis iškėlus minėtus funkcionalumus}
 \end{figure}
 
-Atlikus šiuos funkcionalumų ištraukimus į atskirus paketus buvo panaikintos žiedinės priklausomybės.
+Atlikus šiuos funkcionalumų suskaidymus į atskirus paketus buvo panaikintos žiedinės priklausomybės.
 Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daug daugiau paketų, tačiau jų priklausomybių kryptys daug aiškesnės:
 \subsection{\textit{Crawler} sistema}
 \begin{figure}[H]
@@ -516,10 +516,10 @@ Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daug daugiau pa
     \caption{\textit{crawler4j} sistemos struktūra po antro pertvarkymo}
     \label{img:crawler_packages_v2}
 \end{figure}
-todo: ranka perpaišyti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapi
+todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
 
 
-Atlikus matų analizę ant naujai pertvarkytos sistemos yra matoma, kad sistemos kokybė nenukrito:
+Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė nenukrito:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -581,8 +581,8 @@ Atlikus matų analizę ant naujai pertvarkytos sistemos yra matoma, kad sistemos
     \end{tabular}
 \end{center}
 Todėl po šio pertvarkymo galima teigti, kad šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
-padarė sistemą lengviau suprantamą žmogui, panaikino ciklinės priklausomybes bet taip pat neturėjo neigiamos įtakos matams, nurodantiems
+padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, taip pat neturėjo neigiamos įtakos matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
-todo: parašyti, pertvarkymo tikslas nėra gerinti matus, o jie yra naudojami tik tam kad isitikinti, jog kokybė nesuprastejo. Svarbiau skaitomumas, o ne kokybė paremta matais
+todo: parašyti, pertvarkymo tikslas nėra gerinti matus, o jie yra naudojami norint įsitikinti, jog kokybė nesuprastejo. Šiuo atveju svarbiau skaitomumas, o ne kokybė paremta matais
 todo: prideti figures prie lenteliu
