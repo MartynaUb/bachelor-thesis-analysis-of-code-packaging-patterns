@@ -17,17 +17,21 @@ Diskusijose, kaip reikėtų skirstyti programinį kodą, paprastai akcentuojami 
 kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuriamas paketas,
 arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
 esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
-Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo bei
-palaikomumo~\cite{DivideByDomain}.
+Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo,
+palaikomumo, mažesnės sankibos~\cite{DivideByDomain}. Skirstymas pagal dalykinės srities esybes taip pat gali padidinti
+enkapsuliaciją naudojant prieigos modifikatorius \textit{Java} programavimo kalboje.
+
 Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi -
 klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
-Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai,
+Kadangi nėra aiškiai apibrėžtų gairių, kaip skirstymo metodas gali būti pritaikomas kilus sudėtingesnei situacijai, praktikoje pasitaiko skirtingų
+jų sprendimo būdų, galinčių neigiamai paveikti sistemos kokybę.
+Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai tokiose situacijose,
 tam jog jo struktūra darytų teigiamą įtaką sistemai, reikalinga atlikti skirstymo į paketus šablonų analizę -
 išsiaiškinti galimus šablonus, naudojamus kylančių projektavimo problemų sprendimui, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
-Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisyklių arba metodų rinkinį,
-nurodantį, kaip grupuoti klases į paketus, užtikrintant nuoseklų stilių bei sprendžiant iškilusią problemą.
+Šiame darbe minint \textit{šabloną kodo skirstymui į paketus} turima omenyje taisykles,
+nurodančias, kaip grupuoti klases į paketus, sprendžiant iškilusią problemą bei užtikrintant nuoseklų stilių.
 
 Šio darbo tikslas - identifikuoti ir įvertinti praktikoje naudojamus šablonus kodo skirstymui į paketus.
 
@@ -48,7 +52,6 @@ sistemos stabilumą ir palaikomumą, remiantis Martin Kleppmann \textit{Designin
 ir Robert C. Martin \textit{Agile Software Development, Principles, Patterns, and Practices} knygomis.
 Ieškomi kriterijai, kuriuos naudojant galima įvertinti kodo suskirstymo įtaką sistemos kokybei, pavyzdžiui - komponentų skaičius,
 tiesioginės ir netiesioginės priklausomybės, paketų stabilumas~\cite{AgileSoftwareDevelopment}.
-Tyrinėjami šablonai kodo skirstymui į paketus įvardinti Martin Sadin straipsnyje \textit{Four Strategies for Organizing Code}.
 Nagrinėjamos atviro kodo sistemos, pasirenkant skirtingo tipo projektus, siekiant
 objektyvesnės šablonų analizės skirtingose srityse.
 Galimi tipai:
@@ -65,9 +68,10 @@ Spring karkasas internetinių programėlių kūrimui
 Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirstymo šablonus, pertvarkyti projektai įvertinti, naudojant išskirtus kriterijus, nustatant, kokią įtaką
 skirtingi skirstymo šablonai turi sistemos kokybei.
 
-Likusi šio dokumento dalis yra išdėstyta taip - pirmas skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, įgyvendinimo kokybę ir kaip galima ją įvertinti.
+Likusi šio dokumento dalis yra išdėstyta taip:
+Pirmas skyrius tyrinėja skirtingus šablonus klasėms į paketus skirstyti, jų privalumus bei trūkumus.
+Antras skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, įgyvendinimo kokybę ir kaip galima ją įvertinti.
 Aprašyti kriterijai, kaip įvertinti paketų struktūros įtaką sistemos kokybei.
-Antras skyrius tyrinėja skirtingus šablonus klasėms į paketus skirstyti, jų privalumus bei trūkumus.
 Trečiame skyriuje aprašomi sukurti įrankiai, reikalingi sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
 Ketvirtame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
 Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.

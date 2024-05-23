@@ -1,7 +1,9 @@
 \section{Galimi kodo skirstymo į paketus šablonai}
 Skirstymo pagal dalykinės srities esybes metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje.
 Tai lemia, kad praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
-siekiant išspręsti sistemos planavimo metu kylančias problemas.
+siekiant išspręsti sistemos planavimo metu kylančias problemas. Bandant pritaikyti skirstymo į paketus būdą iškilusiai
+problemai, nukrypstama nuo pradinio skirstymo būdo ir taip apsunkinamas sistemos suprantamumas -
+hibridinis metodas nesuteikia pilnos informacijos nei apie dalykinės srities esybes, nei apie technines sistemos dalis, o tik prideda painumo.
 Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
 stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias jais buvo bandoma išspresti.
 
@@ -9,7 +11,7 @@ stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausi
 Praktikoje naudojamų šablonų paieška buvo atliekama stebint atviro kodo sistemų struktūrą ir bandant nustatyti, kodėl pasirenkama nukrypti
 nuo pagrindinio skirstymo būdo. Nagrinėtos įvairių tipų sistemos - tiek taikomoji, tiek techninė programinė įranga.
 Pastebėta, kad nukrypimai nuo pagrindinio skirstymo būdo dažnai pasikartodavo bandant išspręsti tas pačias problemas,
-tačiau jų sprendimo šablonai gali būti skirtingi.
+tačiau jų sprendimo būdai gali būti skirtingi.
 
 \subsection{Problemos}
 Analizuotose sistemose buvo rastos šios problemos, būdingos sistemų dizainui, kartu su jas sprendžiančiais šablonais ir pavyzdžiais,
@@ -42,7 +44,7 @@ tai veda prie didesnio kodo pasikartojimo arba kelių skirtingų to paties pagal
 egzistuoja todėl, kad inžinierius nerado jau įgyvendintos klasės, dėl aiškios struktūros daugkartinio
 panaudojimo klasėms trūkumo.}
 \end{figure}
-Vienas iš šablonų, sprendžiančių šią problemą, galėtų būti turėti vieną paketą, skirtą visoms pagalbinėmis klasėmis, kuris yra paminėtas sistemos
+Vienas iš šablonų, sprendžiančių šią problemą, galėtų būti turėti vieną paketą, skirtą visoms pagalbinėms klasėms, kuris yra paminėtas sistemos
 dokumentacijoje ir apie jo egzistavimą teoriškai žino visi komandos nariai.
 Pakete reikėtų turėti atskiras klases kiekvienai bendrinei dalykinei sričiai, iš kurios pavadinimo programuotojas galėtų nuspresti,
 kad jo ieškomas funkcionalumas bus būtent toje klasėje.
@@ -126,6 +128,7 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
     \endsnugshade
     \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{utils} pakete esančiame po dalykinės srities subpaketais}
 \end{figure}
+Tačiau toks sprendimo būdas gali būti žalingas -
 
 \subsubsection{Didelis klasių skaičius pakete}
 Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus tinkamą skirstymo klasių skirstymo į paketus metodą
@@ -304,6 +307,8 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
+        Siekiamybė &  Mažesnė kodo duplikacija, lengvai randamos pagalbinės klasės \\
+        \hline
         Siūlomas sprendimas & Sukurti atskirą pagalbinių klasių paketą dalykinės srities esybių lygmenyje \\
         \hline
         Galimos variacijos & Gali būti papildomai sukuriami subpaketai pagal pagalbinių klasių dengiamą funkcionalumą \\
@@ -318,6 +323,8 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
+        Siekiamybė &  \\
+        \hline
         Siūlomas sprendimas & klases laikyti \textit{util} paketuose, žemesniame lygmenyje nei dalykinės srities esybės \\
         \hline
     \end{tabular}
@@ -329,6 +336,8 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
         Šablonas &  Skirstymas pagal teikiamą funkcionalumą \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Didelis klasių skaičius pakete\\
+        \hline
+        Siekiamybė &  \\
         \hline
         Siūlomas sprendimas & klases suskirstyti pagal smulkesnį jų teikiamą funkcionalumą \\
         \hline
@@ -344,6 +353,8 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
         \hline\hline
         Sprendžiama problema & Daug skirtingų sąsajų implementacijų\\
         \hline
+        Siekiamybė &  \\
+        \hline
         Siūlomas sprendimas & Kiekvienam paketo įgyvendinimui sukurti subpaketą, kuriame yra tiek klasę įgyvendinanti sąsaja, tiek kitos, įgyvendinimui reikalingos klasės \\
         \hline
     \end{tabular}
@@ -355,6 +366,8 @@ Apibendrinant, galima išskirti aukščiau aprašytus šablonus:
         Šablonas &  Atskirų versijų skirstymas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Esybių pokyčių ir versijavimo valdymas\\
+        \hline
+        Siekiamybė &  \\
         \hline
         Siūlomas sprendimas & Sukurti atskirus paketus skirtingoms versijoms bei iškelti bendrą, abiejų esybių naudojamą kodą į paketus \\
         \hline
