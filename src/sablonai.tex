@@ -35,7 +35,7 @@ Pateiktas šablonų ir problemų sąrašas nėra baigtinis, tačiau minimi šabl
 \subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
 Pagalbinės klasės galėtų būti apibrėžiamos kaip tiesiogiai su dalykine sritimi nesusijusios, techninių funkcijų klasės,
 pavyzdžiui, atsakingos už masyvų filtravimą, darbą su failais.
-Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal dalykinės srities esybes - pagalbines klases gali
+Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal dalykinę sritį - pagalbines klases gali
 naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti.
 Vienas iš šablonų, sprendžiančių šią problemą - turėti vieną paketą, skirtą visoms pagalbinėms klasėms.
 Pakete galima turėti atskiras klases kiekvienai bendrinei dalykinei sričiai, iš kurios pavadinimo programuotojas galėtų nuspresti,
@@ -152,14 +152,14 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
 \subsubsection{Didelis klasių skaičius pakete}
 Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus klasių skirstymo į paketus metodą
 ir palaikant šią tvarką, klasių skaičius pakete gali išaugti. Tokį pavyzdį galima matyti paieškos įrankio \textit{Elasticsearch}\footnote{\url{https://github.com/elastic/elasticsearch/tree/main/server/src/main/java/org/elasticsearch/transport}}
-\textit{transport} pakete. Nors klasės yra sugrupuotos pagal dalykinės srities esybę, bendras jų skaičius pakete siekia beveik devyniasdešimt.
+\textit{transport} pakete. Nors klasės yra sugrupuotos pagal dalykinę sritį, bendras jų skaičius pakete siekia beveik devyniasdešimt.
 Tokiame pakete naviguoti sunku, jis taip pat gali turėti daug priklausomybių.
 Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti pokyčiams, kadangi net ir paprastas pakeitimas
 daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
 Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingesnis, kadangi yra paveikiama daugiau klasių.
-Dažnai matoma, kad susidarius šiai situacijai, nukrypstama nuo skirstymo pagal dalykinės srities esybes, pradedamos grupuoti
+Dažnai matoma, kad susidarius šiai situacijai, nukrypstama nuo skirstymo pagal dalykinę sritį, pradedamos grupuoti
 techninio funkcionalumo klasės. Tokį skirstymą galima matyti \textit{DBeaver} duomenų bazės įrankyje \footnote{\url{https://github.com/dbeaver/dbeaver/tree/devel/plugins/org.jkiss.dbeaver.ext.mssql/src/org/jkiss/dbeaver/ext/mssql}} -
-aukštesniame lygmenyje grupuojant pagal dalykinės srities esybes, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
+aukštesniame lygmenyje grupuojant pagal dalykinę sritį, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
 pagal techninį funkcionalumą pakete \textit{model}.
 Šio šablono aprašymas (\ref{table:technical})
 \begin{figure}[H]
@@ -254,7 +254,7 @@ kur kiekviena esybė turi savo modulį, atliekantį vieną funkciją, kurios kon
 
 \subsubsection{Skirtingų sąsajų implementacijų skirstymas}
 Sistemai plečiantis galima susidurti su problema, kad išauga sąsajos įgyvendinimų skaičius.
-Ši problema aktuali skirstant klases pagal dalykinės srities esybes - laikant sąsajų įgyvendinimus
+Ši problema aktuali skirstant klases pagal dalykinę sritį - laikant sąsajų įgyvendinimus
 skirtinguose esybių paketuose (kai sąsaja nėra susijusi su viena esybe, pavyzdžiui, ją įgyvendina kelios esybės),
 navigacija paketuose pasidaro sudėtinga, neaišku, kas kurią klasę įgyvendina.
 Galimas šios problemos sprendimas - sukurti sąsajos implementacijas tame pačiame pakete kaip ir pati sąsaja.

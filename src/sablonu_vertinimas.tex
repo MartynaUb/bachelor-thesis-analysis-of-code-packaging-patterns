@@ -31,14 +31,14 @@ problemai yra atskiras pagalbinių klasių paketas.
 \subsubsection{Didelio klasių skaičius pakete skirstymo šablonų analizė}
 Dideliam klasių pakete skaičiui spręsti buvo išskirti du šablonai - žemesnio lygio paketų sudarymas grupuojant pagal techninį sluoksnį ir
 skirstymas pagal smulkų funkcionalumą.
-Klasių skirstymas į paketus pagal techninį sluoksnį dažnu atveju yra mažiau pastangų reikalaujantis metodas - atskirti,
+Klasių skirstymas į paketus pagal techninį funkcionalumą dažnu atveju yra mažiau pastangų reikalaujantis metodas - atskirti,
 pavyzdžiui, kurios klasės priklauso \textit{service} sluoksniui yra paprasčiau, nei įvertinti, kurių klasių teikiamas funkcionalumas yra glaudžiau susijęs.
 Tačiau šis būdas ne taip efektyviai prisideda prie lengviau suprantamos sistemos struktūros -
 hibridinis skirstymo metodas nesuteikia pilnos informacijos nei apie dalykinės srities esybes, nei apie technines sistemos dalis.
 Taip pat, taikant šį metodą, gali kilti papildomų problemų - ne visas klases galima užtikrintai priskirti vienam sluoksniui.
 Tokiu atveju, pavyzdžiui, esybės pagalbinėms klasėms, \textit{orchestrator} tipo klasėms reikėtų kurti papildomus paketus.
 
-Skirstymą pagal smulkų funkcionalumą pagrindžia Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti vienam pakete ir
+Skirstymą pagal smulkų funkcionalumą pagrindžia Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti viename pakete ir
 akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant ir
 glaudų tarpusavyje susijusių klasių sąryšį.
 Šis principas taip pat gali padėti užtikrinti aferentinių jungčių skaičių paketuose.
@@ -98,7 +98,7 @@ problemai yra įgyvendinimų atskyrimas.
 \subsubsection{Esybių pokyčių ir versijavimo skirstymo šablonų analizė}
 Esybių versijavimo skirstymui buvo išskirtas skirtingų versijų grupavimo į paketus šablonas.
 Toks skirstymo būdas leidžia išvengti kodo duplikacijos bei perteklinio klasių skaičiaus paketuose, bei užtikrina aiškią skirtingų versijų
-atskirtį. Toks būdas gali praplėsti skirstymą pagal dalykinės srities esybes - skirstomos versijos gali atspindėti reikalingus
+atskirtį. Toks būdas gali praplėsti skirstymą pagal dalykinę sritį - skirstomos versijos gali atspindėti reikalingus
 palaikyti besikeičiančius verslo reikalavimus.
 
 \subsection{Kodo skirstymo į paketus šablonų analizės išvados}
@@ -107,11 +107,10 @@ pagalbinių klasių skirstymui tinkamesnis naudoti atskiras pagalbinių klasių 
 didelio klasių skaičiaus pakete skirstymui - skirstymas pagal smulkų funkcionalumą,
 o skirtingų sąsajų implementacijoms - įgyvendinimų atskyrimą.
 
-
-Lentelėje~\ref{table:analizedSystems} pateiktas sąrašas nagrinėtų sistemų, bei nurodytą ar sistemos įgyvendina aprašytus šablonus.
+Lentelėje~\ref{table:analizedSystems} pateiktas nagrinėtų sistemų sąrašas, bei nurodyta, ar sistemos įgyvendina aprašytus šablonus.
 Ši lentelė padeda suprasti šablonų pasikartojimą ribotos apimties sistemų imtyje.
 
-Šablonų vardai lentelės antraštėje yra sutrumpinti siekiant sutalpintį lentelę į dokumento puslapi, todėl pateikiamas lentelės antraštės reikšmių aprašas:
+Šablonų pavadinimai lentelės antraštėje yra sutrumpinti siekiant sutalpinti lentelę į dokumento puslapį, todėl pateikiamas lentelės antraštės reikšmių aprašas:
 \begin{itemize}
     \item \textit{P1} - \textit{atskiro pagalbinių klasių paketo} šablonas (aprašytas pavyzdyje~\ref{table:atskiras})
     \item \textit{P2} - \textit{pagalbinių klasių priskyrimo dalykinės srities paketui} šablonas (aprašytas pavyzdyje~\ref{table:domainHelper})
@@ -154,6 +153,6 @@ Lentelėje~\ref{table:analizedSystems} pateiktas sąrašas nagrinėtų sistemų,
         19 & 13 & 5 & 2 & 8 & 5 & 4 & 5 \\ \hline
     \end{tabular}
     \end{center}
-    \caption{Nagrinėtų sistemų sąrašas ir jų šablonais}
+    \caption{Nagrinėtų sistemų sąrašas ir jų šablonai}
     \label{table:analizedSystems}
 \end{figure}

@@ -20,7 +20,7 @@ Yra daug skirtingų elementų, sudarančių sistemą, kuri tenkintų aukščiau 
 pavyzdžiui, pasirinktos technologijos, aukšto lygio architektūra, dokumentacija, sistemos testavimo
 procesai, jų kiekis ir pan.
 Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos yra programinio kodo struktūra, todėl
-laikas, skirtas rasti sistemai tinkamus paketų skirstymo šablonus ir tų šablonų laikytis, atsiperka padarant
+laikas, skirtas rasti sistemai tinkamus skirstymo į paketus šablonus ir tų šablonų laikytis, atsiperka padarant
 programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos patikimumo, plečiamumo ir lengvesnio palaikomumo.
 
 Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}~\cite{ModularStability}, autoriai akcentuoja, kad
@@ -37,9 +37,9 @@ jog pasirinktas sprendimas yra būtent toks, kokio reikia, ir kokia jo įtaka ko
 Tvarkingai bei aiškiai išskirstytų klasių apibrėžimas gali priklausyti nuo komandos,
 naudojamos programavimo kalbos ar programinių įrankių bei programinės sistemos dalykinės srities.
 Kodo grupavimo į paketus metodai, taip, kaip ir bendros tvarkingo kodo praktikos,
-gali būti labai subjektyvūs ir patogūs tik metodą formavusiam asmeniui.
+gali būti subjektyvūs ir patogūs tik metodą formavusiam asmeniui.
 Tam, kad būtų galima pagrįstai įvertinti skirtingus kodo skirstymo šablonus, pasiekiant kuo objektyvesnį,
-įtaką sistemos kokybei nusakantį rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
+įtaką sistemos skaitomumui bei palaikomumui nusakantį rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
 
 Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices}~\cite{AgileSoftwareDevelopment} aprašo
 principus, padedančius grupuoti klases į paketus.
@@ -53,7 +53,7 @@ kuris paveikia paketą, paveikia visas to paketo klases ir jokių kitų paketų.
 Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle}, klasė turėtų neturėti skirtingų priežasčių keistis.
 Šis principas taip pat teigia, kad paketas taip pat neturėtų turėti skirtingų priežasčių pasikeisti.
 Principas ragina suburti visas klases, kurios gali keistis dėl tų pačių priežasčių, į vieną vietą.
-Jei dvi klasės yra taip stipriai susietos, kad jos dažniausiai keičiasi kartu, tada
+Jei dvi klasės yra taip stipriai susietos, kad jos įprastai keičiasi kartu,
 jos turėtų būti tame pačiame pakete.
 Kai reikia išleisti pakeitimus, geriau, kad visi pakeitimai būtų viename pakete.
 Tai sumažina darbo krūvį, susijusį su pakeitimu išleidimu, pakartotiniu patvirtinimu ir programinės įrangos perskirstymu,
@@ -146,3 +146,4 @@ Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys ski
 Jų buvo paprašyta pilnai suprasti paketų funkcionalumą ir nuo vieno iki dešimt įvertinti pastangas, reikalingas suprasti kiekvieną paketą.
 Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliaciją tarp daugumos matų ir
 paketų suprantamumo.
+Sistemos suprantamumui įtakos nedarė tik eferentinių jungčių skaičius, tačiau šis matas reikalingas apskaičiuoti paketų stabilumo matą.
