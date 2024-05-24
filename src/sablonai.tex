@@ -39,7 +39,7 @@ Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai
 naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti.
 Vienas iš šablonų, sprendžiančių šią problemą - turėti vieną paketą, skirtą visoms pagalbinėms klasėms.
 Pakete galima turėti atskiras klases kiekvienai bendrinei dalykinei sričiai, iš kurios pavadinimo programuotojas galėtų nuspresti,
-kad jo ieškomas funkcionalumas bus būtent toje klasėje.
+kad jo ieškomas funkcionalumas bus būtent toje klasėje (pavyzdys~\ref{fig:utils}).
 \begin{figure}[H]
 \snugshade
 \dirtree{%
@@ -60,9 +60,11 @@ kad jo ieškomas funkcionalumas bus būtent toje klasėje.
 }
 \endsnugshade
 \caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{utils} pakete, pirmame sistemos paketų lygyje}
+\label{fig:utils}
 \end{figure}
+
 Jei pagalbinių klasių dydis labai išauga, galima vietoje vienos atskiros klasės vienai bendrinei sričiai sukurti vieną paketą,
-ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi.
+ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi (pavyzdys~\ref{fig:common}).
 \begin{figure}[H]
 \snugshade
 \dirtree{%
@@ -83,31 +85,33 @@ ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi.
 }
 \endsnugshade
 \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{common} pakete, po dalykinės srities subpaketais, taip sumažinant klasių dydį }
+\label{fig:common}
 \end{figure}
 Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavyzdžiui, užrašinės aplikacijos \textit{Omni-Notes}\footnote{\url{https://github.com/federicoiosue/Omni-Notes/tree/develop/omniNotes/src/main/java/it/feio/android/omninotes/utils}} bei
 \textit{Fire Sticker}\footnote{\url{https://github.com/hackjutsu/Fire_Sticker/tree/master/app/src/main/java/com/gogocosmo/cosmoqiu/fire_sticker/Utils}}.
 \textit{Omni-Notes} atveju, \textit{utils} pakete esančios klasės papildomai skirstomos pagal atitinkamą dalykinę sritį.
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:atskiras})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Atskiras pagalbinių klasių paketas \\ [0.5ex]
+        Šablonas & Atskiras pagalbinių klasių paketas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
-        Siekiamybė &  Mažesnis kodo dubliavimas, lengvai randamos pagalbinės klasės \\
+        Siekiamybė & Mažesnis kodo dubliavimas, lengvai randamos pagalbinės klasės \\
         \hline
         Siūlomas sprendimas & Sukurti atskirą pagalbinių klasių paketą dalykinės srities esybių lygmenyje \\
         \hline
         Galimos variacijos & Gali būti papildomai sukuriami subpaketai pagal pagalbinių klasių teikiamą funkcionalumą \\
         \hline
     \end{tabular}
+    \label{table:atskiras}
 \end{center}
 
 Šiai problemai spręsti galimas ir kitoks būdas - turėti keletą pagalbinių klasių paketų, patalpintų po atitinkamu bendresniu dalykinės srities
  paketu.
 Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė įranga \textit{Seata}\footnote{\url{https://github.com/apache/incubator-seata/tree/2.x/saga/seata-saga-engine/src/main/java/org/apache/seata/saga/engine/utils}}.
-Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje (pavyzdys~\ref{img:domainHelpers}), pavyzdžiui, po \textit{engine} paketu.
+Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje (pavyzdys~\ref{fig:domainHelpers}), pavyzdžiui, po \textit{engine} paketu.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -121,21 +125,22 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
     }
     \endsnugshade
     \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{utils} pakete esančiame po dalykinės srities subpaketais}
-    \label{img:domainHelpers}
+    \label{fig:domainHelpers}
 \end{figure}
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:domainHelper})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Pagalbinių klasių priskyrimas dalykinės srities paketui \\ [0.5ex]
+        Šablonas & Pagalbinių klasių priskyrimas dalykinės srities paketui \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
-        Siekiamybė &  Kiekvienai esybei priskirtos pagalbinės klasės\\
+        Siekiamybė & Kiekvienai esybei priskirtos pagalbinės klasės\\
         \hline
         Siūlomas sprendimas & Klases laikyti \textit{util} paketuose, žemesniame lygmenyje nei dalykinės srities esybės \\
         \hline
     \end{tabular}
+    \label{table:domainHelper}
 \end{center}
 
 \subsubsection{Didelis klasių skaičius pakete}
@@ -150,25 +155,26 @@ Dažnai matoma, kad susidarius šiai situacijai, nukrypstama nuo skirstymo pagal
 techninio funkcionalumo klasės. Tokį skirstymą galima matyti \textit{DBeaver} duomenų bazės įrankyje \footnote{\url{https://github.com/dbeaver/dbeaver/tree/devel/plugins/org.jkiss.dbeaver.ext.mssql/src/org/jkiss/dbeaver/ext/mssql}} -
 aukštesniame lygmenyje grupuojant pagal dalykinės srities esybes, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
 pagal techninį funkcionalumą pakete \textit{model}.
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:technical})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Žemesnio lygio paketų sudarymas grupuojant pagal techninį funkcionalumą \\ [0.5ex]
+        Šablonas & Žemesnio lygio paketų sudarymas grupuojant pagal techninį funkcionalumą \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Didelis klasių skaičius pakete\\
         \hline
-        Siekiamybė &  Išskirti dalykinės srities esybės techninius funkcionalumus \\
+        Siekiamybė & Išskirti dalykinės srities esybės techninius funkcionalumus \\
         \hline
         Siūlomas sprendimas & Dalykinės srities esybių klases skirstyti pagal techninį funkcionalumą \\
         \hline
     \end{tabular}
+    \label{table:technical}
 \end{center}
 
 Kitą skirstymo būdą galima stebėti \textit{IntelliJ Source Wizard} įskiepio kode \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
 Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos dalykinės srities esybes.
 Vadovaujantis šiuo šablonu, klasės skirstomos pagal smulkesnį jų teikiamą funkcionalumą - \textit{actions}, \textit{extensions}, \textit{ui},
-šiame kontekste yra ne techniniai sluoksniai, o \textit{Intellij} įskiepio dalykinės srities dalis.
+šiame kontekste yra ne techniniai sluoksniai, o \textit{Intellij} įskiepio dalykinės srities dalis (pavyzdys~\ref{fig:modules}).
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -179,6 +185,7 @@ Vadovaujantis šiuo šablonu, klasės skirstomos pagal smulkesnį jų teikiamą 
     }
     \endsnugshade
     \caption{\textit{Source Wizard} sistemos dalis, kurioje matomi smulkiau išskirstyti moduliai}
+    \label{fig:modules}
 \end{figure}
 
 Šio šablono variacija - smulkūs moduliai su atskirose klasėse aprašytais kontraktais.
@@ -192,7 +199,7 @@ kad jos nebus pasiektos iš išorės.
 Toks principas yra sutinkamas \textit{Typescript} programavimo kalboje, kur modulis (šios kalbos paketo atitikmuo) gali turėti
 \textit{index.ts} failą, veikiantį kaip sąsaja, apibrėžianti, kokios modulio klasės bei funkcijos gali būti pasiekiamos už modulio ribų.
 Toki šabloną naudoja turinio valdymo sistema \textit{Keystone}\footnote{\url{https://github.com/keystonejs/keystone/tree/main/packages/core/src/fields/types}},
-kur kiekviena esybė turi savo modulį, atliekantį vieną funkciją, kurios kontraktas aprašytas \textit{index.ts} faile.
+kur kiekviena esybė turi savo modulį, atliekantį vieną funkciją, kurios kontraktas aprašytas \textit{index.ts} faile (pavyzdys~\ref{fig:kontraktai}).
 
 \begin{figure}[H]
     \snugshade
@@ -212,23 +219,25 @@ kur kiekviena esybė turi savo modulį, atliekantį vieną funkciją, kurios kon
     }
     \endsnugshade
     \caption{\textit{Keystone} sistemos dalis, kurioje matomi smulkūs moduliai su \textit{index.ts} failuose aprašytais kontraktais}
+    \label{fig:kontraktai}
 \end{figure}
 
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:module})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Skirstymas pagal smulkų funkcionalumą \\ [0.5ex]
+        Šablonas & Skirstymas pagal smulkų funkcionalumą \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Didelis klasių skaičius pakete\\
         \hline
-        Siekiamybė &  Maži paketai, turintys aiškiai apibrėžtą funkcionalumą\\
+        Siekiamybė & Maži paketai, turintys aiškiai apibrėžtą funkcionalumą\\
         \hline
         Siūlomas sprendimas & Klases suskirstyti pagal smulkesnį jų teikiamą funkcionalumą \\
         \hline
         Galimos variacijos & Smulkūs moduliai su atskirose klasėse aprašytais kontraktais \\
         \hline
     \end{tabular}
+    \label{table:module}
 \end{center}
 
 \subsubsection{Skirtingų sąsajų implementacijų skirstymas}
@@ -238,7 +247,7 @@ skirtinguose esybių paketuose (kai sąsaja nėra susijusi su viena esybe, pavyz
 navigacija paketuose pasidaro sudėtinga, neaišku, kas kurią klasę įgyvendina.
 Galimas šios problemos sprendimas - sukurti sąsajos implementacijas tame pačiame pakete kaip ir pati sąsaja.
 Toks skirstymo į paketus šablonas yra sutinkamas \textit{Java} standartinėje bibliotekoje\footnote{\url{https://github.com/AdoptOpenJDK/openjdk-jdk11/tree/master/src/java.base/share/classes/java/util}},
-kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame pakete.
+kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame pakete module (pavyzdys~\ref{fig:implJava}).
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -255,9 +264,10 @@ kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame paket
     }
     \endsnugshade
     \caption{\textit{Java} standartinės bibliotekos pavyzdys, kuriame sąsajų įgyvendinimai guli tame pačiame pakete, kaip ir sąsajos}
+    \label{fig:implJava}
 \end{figure}
 
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:implGr})
 \begin{center}
 \begin{tabular}{|p{5cm}|p{10cm}|}
     \hline
@@ -265,18 +275,19 @@ kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame paket
     \hline\hline
     Sprendžiama problema & Daug skirtingų sąsajų implementacijų\\
     \hline
-    Siekiamybė &  Susieti sąsają ir jos implementacijas lengvesnei jų paieškai\\
+    Siekiamybė & Susieti sąsają ir jos implementacijas lengvesnei jų paieškai\\
     \hline
     Siūlomas sprendimas & Sąsajų įgyvendinimus laikyti tame pačiame pakete, kaip ir sąsajas \\
     \hline
 \end{tabular}
+\label{table:implGr}
 \end{center}
 
 Kitas galimas sprendimo būdas - sąsaja, kuri turi daug skirtingų įgyvendinimų, turėtų turėti specifiškai jai sukurtą paketą, o kiekvienam paketo
 įgyvendinimui sukuriama po subpaketą, kuriame yra tiek klasę įgyvendinanti sąsają, tiek kitos, įgyvendinimui reikalingos klasės.
 Tokia paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
 skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, bei
-\textit{Leaf}\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master/leaf-core/src/main/java/com/sankuai/inf/leaf}}, naudojamoje unikalaus identifikatoriaus generavimui.
+\textit{Leaf}\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master/leaf-core/src/main/java/com/sankuai/inf/leaf}} (pavyzdys~\ref{fig:leaf}), naudojamoje unikalaus identifikatoriaus generavimui.
 
 \begin{figure}[H]
     \snugshade
@@ -293,8 +304,9 @@ skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, 
     }
     \endsnugshade
     \caption{\textit{Leaf} sistema, kur kiekvienas sąsajos įgyvendinimas yra aprašytas subpakete}
+    \label{fig:leaf}
 \end{figure}
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:implSub})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
@@ -302,11 +314,12 @@ skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, 
         \hline\hline
         Sprendžiama problema & Daug skirtingų sąsajų implementacijų\\
         \hline
-        Siekiamybė &  Skirtingų sąsajų bei implementacijų atskyrimas\\
+        Siekiamybė & Skirtingų sąsajų bei implementacijų atskyrimas\\
         \hline
         Siūlomas sprendimas & Kiekvienam paketo įgyvendinimui sukurti subpaketą, kuriame yra tiek klasę įgyvendinanti sąsaja, tiek kitos, įgyvendinimui reikalingos klasės \\
         \hline
     \end{tabular}
+    \label{table:implSub}
 \end{center}
 
 \subsubsection{Esybių pokyčių ir versijavimo valdymas}
@@ -329,24 +342,26 @@ versijoms (v1, v2, v3, \ldots) bei iškeliant bendrą, abiejų esybių naudojam�
     }
     \endsnugshade
     \caption{\textit{Mongo} duomenų bazės pavyzdys, kuriame skirtingos versijos patalpintos atskiruose paketuose}
+    \label{fig:mongo}
 \end{figure}
-Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}} duomenų bazėje,
+Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}} duomenų bazėje (pavyzdys~\ref{fig:mongo}),
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
 Šiose repozitorijose v1, v2 (\textit{Mongo} atveju - v4, v5) pavadinti paketai saugo skirtingas esybių versijas.
-Šio šablono aprašymas -
+Šio šablono aprašymas (\ref{table:versions})
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Atskirų versijų skirstymas \\ [0.5ex]
+        Šablonas & Atskirų versijų skirstymas \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Esybių pokyčių ir versijavimo valdymas\\
         \hline
-        Siekiamybė &  Palaikyti skirtingas esybių versijas \\
+        Siekiamybė & Palaikyti skirtingas esybių versijas \\
         \hline
         Siūlomas sprendimas & Sukurti atskirus paketus skirtingoms versijoms bei iškelti bendrą, abiejų esybių naudojamą kodą į paketus \\
         \hline
     \end{tabular}
+    \label{table:versions}
 \end{center}
 
 
