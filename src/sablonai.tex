@@ -1,31 +1,43 @@
 \section{Kodo skirstymo į paketus šablonai}
-Renkantis kodo skirstymo į paketus metodą, dažniausiai rekomenduojamas skirstymas pagal dalykinės srities esybes.
+Renkantis kodo skirstymo į paketus metodą, dažniausiai rekomenduojamas skirstymas pagal dalykinės srities esybes~\cite{DomainDrivenDesign}.
 Tokį skirstymą galima apibrėžti kaip paketų sudarymą iš klasių ar sąsajų, kurios tarpusavyje yra konceptualiai susijusios~\cite{Functional}.
 Šis skirstymo būdas dažniausiai bent jau iš dalies naudojamas net sistemose, kurios neturi aiškiai apibrėžto skirstymo būdo.
 Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje.
 Tai lemia, kad praktikoje jo nėra griežtai laikomasi - klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
-Norint išskirti šias papildomas taisykles, šablonus, buvo nagrinėjamos atviro kodo sistemos,
-stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias jais buvo bandoma išspresti.
+Norint išskirti šias papildomas taisykles, šablonus, nagrinėjamos atviro kodo sistemos,
+stebimi nukrypimai nuo bendresnio kodo skirstymo būdo ir identifikuojami klausimai arba problemos, kurias jais buvo bandoma išspręsti.
 
-\subsection{Sistemų analizės procesas}
-Praktikoje naudojamų šablonų paieška buvo atliekama stebint atviro kodo sistemų struktūrą ir bandant nustatyti, kodėl pasirenkama nukrypti
+\subsection{Šablonų paieškos procesas}
+Praktikoje naudojamų kodo skirstymo į paketus šablonų paieška buvo atliekama stebint atviro kodo sistemų struktūrą ir bandant nustatyti, kodėl pasirenkama nukrypti
 nuo pagrindinio skirstymo būdo.
-Nagrinėtos įvairių tipų sistemos - tiek taikomoji, tiek techninė programinė įranga.
-Pastebėta, kad nukrypimai nuo pagrindinio skirstymo būdo dažnai pasikartodavo bandant išspręsti tas pačias problemas,
-tačiau jų sprendimo būdai gali būti skirtingi.
+Nagrinėjamos atviro kodo sistemos, pasirenkant skirtingo tipo projektus, siekiant
+objektyvesnės šablonų analizės skirtingose srityse.
+Galimi tipai:
+\begin{itemize}
+    \item Taikomoji programinė įranga, teikianti paslaugas įrangos naudotojams. Pavyzdžiui,
+    internetinė programėlė priminimams ir darbams užsirašyti
+    \item Techninė programinė įranga, naudojama taikomosios programinės įrangos duomenų
+    saugojimui, siuntimui, paieškai. Pavyzdžiui, duomenų bazės, pranešimų eilės, talpyklos
+    (angl. cache)
+    \item Programinės įrangos įrankiai, skirti naudoti kitose sistemose supaprastinant programinį
+    kodą, naudojant jau įgyvendintas funkcijas. Pavyzdžiui, Java programavimo kalbos
+    Spring karkasas internetinių programėlių kūrimui
+\end{itemize}
+Pastebėta, kad nukrypimai nuo skirstymo pagal dalykinės srities esybes - pagrindinio skirstymo būdo, dažnai pasikartodavo bandant išspręsti tas pačias problemas,
+tačiau jų sprendimo būdai buvo skirtingi.
 
-\subsection{Problemos}
-Šiame skyriuje pateikiamos analizuotose sistemose rastos problemos, kartu su jas sprendžiančiais šablonais ir pavyzdžiais,
+\subsection{Sistemos planavimo metu kylančios problemos}
+Šiame skyriuje pateikiamos analizuotose sistemose rasti kodo skirstymo į paketus šablonai, kartu su jais sprendžiamomis problemomis ir pavyzdžiais,
 kokiose sistemose jie yra.
+Pateiktas šablonų ir problemų sąrašas nėra baigtinis, tačiau minimi šablonai pasikartoja ne vienoje sistemoje.
 
 \subsubsection{Pagalbinių, daugkartinio naudojimo klasių skirstymas}
-Pagalbinės klasės galėtų būti apibrėžiamos kaip tiesiogiai su domeno sritimi nesusijusios, techninių funkcijų klasės,
+Pagalbinės klasės galėtų būti apibrėžiamos kaip tiesiogiai su dalykine sritimi nesusijusios, techninių funkcijų klasės,
 pavyzdžiui, atsakingos už masyvų filtravimą, darbą su failais.
 Pagalbinės ir daugkartinio naudojimo klasės dažniausiai negali būti patogiai grupuojamos skirstant pagal dalykinės srities esybes - pagalbines klases gali
 naudoti kelios esybės, todėl neaišku, prie kurios jas reikėtų priskirti.
-Vienas iš šablonų, sprendžiančių šią problemą - turėti vieną paketą, skirtą visoms pagalbinėms klasėms, kuris yra paminėtas sistemos
-dokumentacijoje ir apie jo egzistavimą teoriškai žino visi komandos nariai.
+Vienas iš šablonų, sprendžiančių šią problemą - turėti vieną paketą, skirtą visoms pagalbinėms klasėms.
 Pakete galima turėti atskiras klases kiekvienai bendrinei dalykinei sričiai, iš kurios pavadinimo programuotojas galėtų nuspresti,
 kad jo ieškomas funkcionalumas bus būtent toje klasėje.
 \begin{figure}[H]
@@ -40,14 +52,14 @@ kad jo ieškomas funkcionalumas bus būtent toje klasėje.
     .2 {\ldots} .
     .2 {transactions} .
     .3 {TransactionBatching} .
-    .2 {common} .
+    .2 {utils} .
     .3 {Arrays} .
     .3 {Maps} .
     .3 {SqlQueries} .
     .3 {Users} .
 }
 \endsnugshade
-\caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{common} pakete, pirmame sistemos paketų lygyje}
+\caption{Sistemos pavyzdys, kur visas bendrinio panaudojimo kodas guli \textit{utils} pakete, pirmame sistemos paketų lygyje}
 \end{figure}
 Jei pagalbinių klasių dydis labai išauga, galima vietoje vienos atskiros klasės vienai bendrinei sričiai sukurti vieną paketą,
 ir jame turėti kelias pagalbines klases, susijusias su ta dalykine sritimi.
@@ -83,11 +95,11 @@ Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavy
         \hline\hline
         Sprendžiama problema & Pagalbinių klasių skirstymas\\
         \hline
-        Siekiamybė &  Mažesnė kodo duplikacija, lengvai randamos pagalbinės klasės \\
+        Siekiamybė &  Mažesnis kodo dubliavimas, lengvai randamos pagalbinės klasės \\
         \hline
         Siūlomas sprendimas & Sukurti atskirą pagalbinių klasių paketą dalykinės srities esybių lygmenyje \\
         \hline
-        Galimos variacijos & Gali būti papildomai sukuriami subpaketai pagal pagalbinių klasių dengiamą funkcionalumą \\
+        Galimos variacijos & Gali būti papildomai sukuriami subpaketai pagal pagalbinių klasių teikiamą funkcionalumą \\
         \hline
     \end{tabular}
 \end{center}
@@ -126,7 +138,7 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
 \end{center}
 
 \subsubsection{Didelis klasių skaičius pakete}
-Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus tinkamą klasių skirstymo į paketus metodą
+Sistemai plečiantis, neišvengiamai didėja ir klasių skaičius. Net pasirinkus klasių skirstymo į paketus metodą
 ir palaikant šią tvarką, klasių skaičius pakete gali išaugti. Tokį pavyzdį galima matyti paieškos įrankio \textit{Elasticsearch}\footnote{\url{https://github.com/elastic/elasticsearch/tree/main/server/src/main/java/org/elasticsearch/transport}}
 \textit{transport} pakete. Nors klasės yra sugrupuotos pagal dalykinės srities esybę, bendras jų skaičius pakete siekia beveik devyniasdešimt.
 Tokiame pakete naviguoti sunku, jis taip pat gali turėti daug priklausomybių.
@@ -134,28 +146,28 @@ Jei tokia tendencija yra būdinga visai sistemai, sistema tampa mažiau lanksti 
 daro įtaką reišmingai sistemos daliai, pokyčiai yra labiau linkę keisti bendrą sistemos architektūrą.
 Taip pat naujos sistemos versijos išleidimo \angl{release} procesas tampa sudetingesnis, kadangi yra paveikiama daugiau klasių.
 Dažnai matoma, kad susidarius šiai situacijai, nukrypstama nuo skirstymo pagal dalykinės srities esybes, pradedamos grupuoti
-techninio sluoksnio klasės. Tokį skirstymą galima matyti \textit{DBeaver} duomenų bazės įrankyje \footnote{\url{https://github.com/dbeaver/dbeaver/tree/devel/plugins/org.jkiss.dbeaver.ext.mssql/src/org/jkiss/dbeaver/ext/mssql}} -
-Aukštesniame lygmenyje grupuojant pagal dalykinės srities esybes, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
-pagal techninį sluoksnį pakete \textit{model}.
+techninio funkcionalumo klasės. Tokį skirstymą galima matyti \textit{DBeaver} duomenų bazės įrankyje \footnote{\url{https://github.com/dbeaver/dbeaver/tree/devel/plugins/org.jkiss.dbeaver.ext.mssql/src/org/jkiss/dbeaver/ext/mssql}} -
+aukštesniame lygmenyje grupuojant pagal dalykinės srities esybes, pavyzdžiui, \textit{MsSql}, vėliau pereinama prie skirstymo
+pagal techninį funkcionalumą pakete \textit{model}.
 Šio šablono aprašymas -
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
         \hline
-        Šablonas &  Žemesnio lygio paketų sudarymas grupuojant pagal techninį sluoksnį \\ [0.5ex]
+        Šablonas &  Žemesnio lygio paketų sudarymas grupuojant pagal techninį funkcionalumą \\ [0.5ex]
         \hline\hline
         Sprendžiama problema & Didelis klasių skaičius pakete\\
         \hline
-        Siekiamybė &  Išskirti dalykinės srities esybės techninius sluoksnius \\
+        Siekiamybė &  Išskirti dalykinės srities esybės techninius funkcionalumus \\
         \hline
-        Siūlomas sprendimas & Dalykinės srities esybių klases skirstyti pagal techninį sluoksnį \\
+        Siūlomas sprendimas & Dalykinės srities esybių klases skirstyti pagal techninį funkcionalumą \\
         \hline
     \end{tabular}
 \end{center}
 
 Kitą skirstymo būdą galima stebėti \textit{IntelliJ Source Wizard} įskiepio kode \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
-Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos domeno esybes.
+Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos dalykinės srities esybes.
 Vadovaujantis šiuo šablonu, klasės skirstomos pagal smulkesnį jų teikiamą funkcionalumą - \textit{actions}, \textit{extensions}, \textit{ui},
-šiame kontekste yra ne techniniai sluoksniai, o \textit{Intellij} įskiepio domeno dalis.
+šiame kontekste yra ne techniniai sluoksniai, o \textit{Intellij} įskiepio dalykinės srities dalis.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -176,8 +188,8 @@ Tai gali būti paprasta klasė, su statine funkcija, kurios rezultatas yra ši s
 \textit{Static factory} dizaino šablonas, kuris nusprendžia, kurį įgyvendinimą reikėtų grąžinti pagal paduotus argumentus.
 Visos kitos klasės naudoja \textit{package} pasiekiamumo modifikatorių, taip kompiliatoriaus pagalba užtikrinant,
 kad jos nebus pasiektos iš išorės.
-Toks principas yra sutinkamas \textit{Typescript} programavimo kalboje, kur kiekvienas modulis (šios kalbos paketo atitikmuo) turi
-\textit{index.ts} failą, veikiantį kaip sąsaja, apibrėžianti, kokios modulio klasės bei funkcijos gali būti pasiekiamos už paketo ribų.
+Toks principas yra sutinkamas \textit{Typescript} programavimo kalboje, kur modulis (šios kalbos paketo atitikmuo) gali turėti
+\textit{index.ts} failą, veikiantį kaip sąsaja, apibrėžianti, kokios modulio klasės bei funkcijos gali būti pasiekiamos už modulio ribų.
 Toki šabloną naudoja turinio valdymo sistema \textit{Keystone}\footnote{\url{https://github.com/keystonejs/keystone/tree/main/packages/core/src/fields/types}},
 kur kiekviena esybė turi savo modulį, atliekantį vieną funkciją, kurios kontraktas aprašytas \textit{index.ts} faile.
 
@@ -261,7 +273,7 @@ kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame paket
 
 Kitas galimas sprendimo būdas - sąsaja, kuri turi daug skirtingų įgyvendinimų, turėtų turėti specifiškai jai sukurtą paketą, o kiekvienam paketo
 įgyvendinimui sukuriama po subpaketą, kuriame yra tiek klasę įgyvendinanti sąsają, tiek kitos, įgyvendinimui reikalingos klasės.
-Šablone aprašyta paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
+Tokia paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
 skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, bei
 \textit{Leaf}\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master/leaf-core/src/main/java/com/sankuai/inf/leaf}}, naudojamoje unikalaus identifikatoriaus generavimui.
 
@@ -320,7 +332,7 @@ versijoms (v1, v2, v3, \ldots) bei iškeliant bendrą, abiejų esybių naudojam�
 Toks skirstymo būdas matomas keliose repozitorijose - \textit{Mongo}\footnote{\url{https://github.com/mongodb/mongo/tree/master/src/third_party/boost/boost/regex}} duomenų bazėje,
 API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://github.com/mariazevedo88/travels-java-api/tree/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller}}
  bei duomenų saugojimo įrankyje \textit{nocodb}\footnote{\url{https://github.com/nocodb/nocodb/tree/c7cc1f92fd77f8b5daefceb7148aab4a69cb9b4e/packages/nocodb/src/meta/migrations}}.
-Šiose repozitorijose v1, v2 pavadinti paketai saugo skirtingas esybių versijas.
+Šiose repozitorijose v1, v2 (\textit{Mongo} atveju - v4, v5) pavadinti paketai saugo skirtingas esybių versijas.
 Šio šablono aprašymas -
 \begin{center}
     \begin{tabular}{|p{5cm}|p{10cm}|}
