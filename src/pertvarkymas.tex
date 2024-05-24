@@ -505,3 +505,17 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, nesukuriant sistemos 
 \caption{\textit{azure-storage-blob-cryptograph} paketų kokybės matai po visų pertvarkymų}
 \label{table:verts}
 \end{figure}
+
+
+Pavyzdyje~\ref{table:sistemos}matomos pertvarkytos sistemos, joses rasto problemos ir šablonų, panaudotų problemų išsprenimui sąrašas.
+Pertvarkytų programinis kodas yra pasiekiamas viešoje \textit{GitHub}\footnote{\url{https://github.com/MartynaUb/bachelor-thesis-analysis-of-code-packaging-patterns/tree/main/code/refactored_systems}} repozitorijoje.
+\begin{figure}[H]
+    \begin{tabular}{|p{2cm}|p{7cm}|p{7cm}|}
+        \hline
+        Sistema                                                                                           & Ispręstos problemos                                                                                                   & Panaudoti šablonai                                                                                    \\ \hline\hline
+        crawler4j                        & dideli paketai su skirtingomis atsakomybėmis, neaiški struktūra sąsajos įgyvendimams saugoti, ciklinės priklausomybės & skirstymas pagal smulkų funkcionalumą, įgyvendinimų atskyrimas                                        \\ \hline
+        azure-storage-blob-cryptography  & dideli paketai su skirtingomis atsakomybėmis, nėra pagalbinių klasių paketų, skirtingos tos pačios esybės versijos    & skirstymas pagal smulkų funkcionalumą, atskirų versijų skirstymas, atskiras pagalbinių klasių paketas \\ \hline
+    \end{tabular}
+    \caption{Pertvarkytos sistemos ir jų panaudoti šablonai}
+    \label{table:sistemos}
+\end{figure}
