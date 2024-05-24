@@ -1,15 +1,15 @@
 \sectionnonum{Įvadas}
-Gerai suprojektuota kompiuterinė sistema yra vienas iš kritinių sėkmingo verslo
+Gerai suprojektuota kompiuterinė sistema yra vienas iš kritinių sėkmingo ją naudojančio verslo
 elementų.
-Tam, jog informacines sistemas naudojantis verslas išlaikytų stabilų augimą, yra būtina sukurti sistemą, kuri sumažintų
+Tam, jog kompiuterines sistemas naudojantis verslas išlaikytų stabilų augimą, yra būtina sukurti sistemą, kuri sumažintų
 atotrūkį tarp organizacijos tikslų ir jų įgyvendinimo galimybių.
 Mąstant apie programinio kodo
 projektavimą, kodo paketų kūrimas, klasių priskyrimas jiems ir paketų hierarchijos sudarymas paprastai
 nėra pagrindinis prioritetas, tačiau tai parodo praleistą galimybę padaryti sistemos struktūrą labiau
 patikima [Sho19], suprantama [Eli10] ir lengviau palaikoma.
-Modernios informacinės sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
-kurie išskaidyti per skirtingo gylio direktorijas, todėl apgalvotai išskirstytas programinis
-kodas daro daug didesnę įtaką bendram sistemos našumui, suprantamumui bei palaikomumui, nei gali atrodyti iš pirmo žvilgsnio.
+Modernios kompiuterinės sistemos yra didžiulės, programinis kodas yra padalintas į daugybę failų,
+kurie yra išskaidyti per skirtingo gylio direktorijas, todėl apgalvotai išskirstytas programinis
+kodas daro didesnę įtaką bendram sistemos našumui, suprantamumui bei palaikomumui, nei gali atrodyti iš pirmo žvilgsnio.
 Sistemos paketų struktūros analizė norint įvertinti programinės įrangos kokybę
 tampa vis svarbesne tema dėl augančio failų ir paketų skaičiaus~\cite{DesignMetrics}.
 
@@ -18,15 +18,16 @@ kur kiekvienam funkcionalumui arba kompiuterinės sistemos sluoksniui yra sukuri
 arba pagal \textit{dalykinės srities esybes}, kur vienos esybės kodas, dalykinės srities
 esybės funkcionalumas skirtingose programiniuose sluoksniuose yra patalpintas viename pakete~\cite{PackagingWays}.
 Dažniausiai, prioritetas teikiamas kodo skirstymui pagal dalykinės srities esybes~\cite{DomainDrivenDesign} dėl lengvesnio skaitomumo,
-palaikomumo, mažesnės sankibos~\cite{DivideByDomain}. Skirstymas pagal dalykinės srities esybes taip pat gali padidinti
+palaikomumo, mažesnės sankibos~\cite{DivideByDomain}.
+Skirstymas pagal dalykinės srities esybes taip pat gali padidinti
 enkapsuliaciją naudojant prieigos modifikatorius \textit{Java} programavimo kalboje.
 
-Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir, dažniausiai praktikoje jo nėra griežtai laikomasi -
+Tačiau šis metodas negali būti vienareikšmiškai pritaikomas kiekvienoje situacijoje ir dažniausiai praktikoje jo nėra griežtai laikomasi -
 klasės būna išskaidytos remiantis papildomomis taisyklėmis,
 siekiant išspręsti sistemos planavimo metu kylančias problemas.
 Kadangi nėra aiškiai apibrėžtų gairių, kaip skirstymo metodas gali būti pritaikomas kilus sudėtingesnei situacijai, praktikoje pasitaiko skirtingų
 jų sprendimo būdų, galinčių neigiamai paveikti sistemos kokybę.
-Norint išsiaiškinti, kaip programinis kodas gali būti skirstomas efektyviausiai tokiose situacijose,
+Norint išsiaiškinti, koks programinio kodo skirstymo būdas tinkamiausias tokiose situacijose,
 tam jog jo struktūra darytų teigiamą įtaką sistemai, reikalinga atlikti skirstymo į paketus šablonų analizę -
 išsiaiškinti galimus šablonus, naudojamus kylančių projektavimo problemų sprendimui, turėti aiškius šablonų apibrėžimus su jų
 privalumais bei trūkumais.
@@ -39,7 +40,7 @@ Tikslui pasiekti yra iškeliami šie uždaviniai:
 \begin{itemize}
     \item  Išskirti gerai įgyvendinto kodo požymius
     \item  Aprašyti skirstymo į paketus šablonus, remiantis praktikoje sutinkamais pavyzdžiais
-    \item  Pasiūlyti kriterijus, įvertinančius kodo suskirstymo šablono įtaką sistemos kokybei, remiantis
+    \item  Pasiūlyti kriterijus, įvertinančius kodo skirstymo šablono įtaką sistemos kokybei, remiantis
 rastais gerai įgyvendintos sistemos požymiais
     \item  Pasirinkti kelias sistemas ir pertvarkyti jų failų struktūrą pagal aprašytus šablonus, įvertinant,
 kiek sudėtinga pasiekti kiekvieno šablono strukūrą
@@ -65,14 +66,15 @@ saugojimui, siuntimui, paieškai. Pavyzdžiui, duomenų bazės, pranešimų eil�
 kodą, naudojant jau įgyvendintas funkcijas. Pavyzdžiui, Java programavimo kalbos
 Spring karkasas internetinių programėlių kūrimui
     \end{itemize}
-Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirstymo šablonus, pertvarkyti projektai įvertinti, naudojant išskirtus kriterijus, nustatant, kokią įtaką
+Tyrinėjamų projektų paketų sturktūros pertvarkomos pagal pasirinktus skirstymo šablonus, pertvarkyti projektai įvertinti naudojant išskirtus kriterijus, nustatant, kokią įtaką
 skirtingi skirstymo šablonai turi sistemos kokybei.
 
 Likusi šio dokumento dalis yra išdėstyta taip:
-Pirmas skyrius tyrinėja skirtingus šablonus klasėms į paketus skirstyti, jų privalumus bei trūkumus.
-Antras skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, įgyvendinimo kokybę ir kaip galima ją įvertinti.
-Aprašyti kriterijai, kaip įvertinti paketų struktūros įtaką sistemos kokybei.
-Trečiame skyriuje aprašomi sukurti įrankiai, reikalingi sistemų analizei ir šablonų įvertinimui, minima, kaip jie įgyvendinti ir kaip jie yra naudojami.
-Ketvirtame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
-Penktame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra perdaromos, kad tiksliai laikytųsi antrame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.
-Nagrinėjama perdarytų sistemų kokybė pagal pirmame skyriuje aprašytus kriterijus, vertinami šablonų privalumai bei trūkumai.
+pirmas skyrius tyrinėja praktikoje naudojamus šablonus klasėms į paketus skirstyti.
+Antrame skyriuje analizuojami išskirti šablonai.
+Trečias skyrius nagrinėja tvarkingos kompiuterinės sistemos sąvoką, kas ją sudaro, įgyvendinimo kokybę ir kaip galima ją įvertinti,
+aprašyti matai, vertinantys paketų struktūros įtaką sistemos kokybei.
+Ketvirtame skyriuje aprašomi sukurti įrankiai, reikalingi sistemų analizei ir šablonų įvertinimui.
+Penktame skyriuje analizuojamos pasirinktos atviro kodo sistemos - bandoma nustatyti jų naudojamus šablonus, vertinama sistemų kokybė.
+Šeštame skyriuje aprašomas procesas, kaip pasirinktos sistemos yra pertvarkomos, kad laikytųsi pirmame skyriuje aprašytų kodo skirstymų šablonų, įvertinama, kiek sudėtinga pasiekti kiekvieno šablono struktūrą.
+Nagrinėjamas pertvarkytų sistemų atitikimas trečiame skyriuje aprašytiems kriterijams.

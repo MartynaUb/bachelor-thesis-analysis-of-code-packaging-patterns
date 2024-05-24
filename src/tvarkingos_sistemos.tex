@@ -1,7 +1,8 @@
 \section{Kompiuterinės sistemos vertinimas}
 \subsection{Kompiuterinės sistemos kokybė}
-Norint išsiaiškinti, kokią įtaką sistemos kokybei daro skirtingi paketų skirstymo šablonai ir kaip objektyviai pamatuoti jų įtaką, pirmiausia
-reikėtų apsibrėžti, kokiais požymiais pasižymi gerai įgyvendinta kompiuterinė sistema.
+Išskyrus tinkamesnius naudoti kodo skirstymo į paketus šablonus, reikėtų objektyviai pamatuoti jų įtaką sistemos kokybei ir užtikrinti,
+ kad jie prisideda prie labiau patikimos, suprantamos ir lengviau palaikomos sistemos struktūros.
+Tam reikėtų apsibrėžti, kokiais požymiais pasižymi gerai įgyvendinta kompiuterinė sistema.
 Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems}~\cite{DataIntensiveApplications} išskiria šiuos pagrindinius kriterijus:
 \begin{itemize}
     \item Patikimumas, reiškiantis, kad net ir klaidų (įrangos, programinių ar žmogiškųjų) atveju,
@@ -18,21 +19,20 @@ Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The
 Yra daug skirtingų elementų, sudarančių sistemą, kuri tenkintų aukščiau paminėtus kriterijus,
 pavyzdžiui, pasirinktos technologijos, aukšto lygio architektūra, dokumentacija, sistemos testavimo
 procesai, jų kiekis ir pan.
-Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos yra programinio kodo struktūra, jo skaitomumas, patikimumas.
-Konvencijos, kaip vadinti kodo paketus, kokias klases jiems priskirti ir kokios paketų hierarchijos laikytis sudaro svarbią programinio kodo struktūros dalį.
-Todėl, kuriant programinę įrangą, laikas, skirtas rasti sistemai tinkamus paketų skirstymo šablonus ir tų šablonų laikytis, atsiperka padarant
+Vienas iš svarbių elementų, prisidedančių prie gerai įgyvendintos sistemos yra programinio kodo struktūra, todėl
+laikas, skirtas rasti sistemai tinkamus paketų skirstymo šablonus ir tų šablonų laikytis, atsiperka padarant
 programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos patikimumo, plečiamumo ir lengvesnio palaikomumo.
 
 Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}~\cite{ModularStability}, autoriai akcentuoja, kad
 gerai įgyvendintos objektinio stiliaus sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
 To siekiama, nes architektūriniai pakeitimai paveikia didelę sistemos dalį ir
 jų įgyvendinimo ir sistemos priežiūros kaštai yra žymiai didesni\cite{ModularStability}.
-Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų TODO performuluoti, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
+Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
 išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, nepristatant nebūtinų pokyčių ir sutaupant programos priežiūros kaštus.
 
 \subsection{Kodo skirstymo į paketus šablonų vertinimas}
 Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka gerai kompiuterinės sistemos struktūrai,
-tačiau lieka neatsakytas klausimas - kaip įvertinti šabloną kodui į paketus grupuoti, kaip objektyviai užtikrinti,
+tačiau lieka neatsakytas klausimas - kaip įvertinti šabloną kodui į paketus grupuoti ir kaip užtikrinti,
 jog pasirinktas sprendimas yra būtent toks, kokio reikia, ir kokia jo įtaka kompiuterinei sistemai?
 Tvarkingas, aiškiai suprantamas kodas yra subjektyvi tema, priklausanti nuo komandos,
 naudojamos programavimo kalbos ar programinių įrankių bei programinės sistemos dalykinės srities.
