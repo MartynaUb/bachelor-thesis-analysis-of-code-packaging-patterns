@@ -300,9 +300,9 @@ kur visos standartinės sąsajos bei jų implementacijos yra tame pačiame paket
 \label{table:implGr}
 \end{figure}
 Kitas galimas sprendimo būdas - sąsaja, kuri turi daug skirtingų įgyvendinimų, turėtų turėti specifiškai jai sukurtą paketą, o kiekvienam paketo
-įgyvendinimui sukuriama po subpaketą, kuriame yra tiek klasę įgyvendinanti sąsają, tiek kitos, įgyvendinimui reikalingos klasės.
+įgyvendinimui sukuriama po subpaketą, kuriame yra tiek klasę įgyvendinanti sąsają, tiek kitos įgyvendinimui reikalingos klasės.
 Tokia paketų struktūra buvo sutikta tokiose sistemose kaip \textit{HikariCP}\footnote{\url{https://github.com/brettwooldridge/HikariCP/tree/dev/src/main/java/com/zaxxer/hikari}},
-skirtoje efektyviam \textit{Java} programos prisijungimui prie duomenų bazių, bei
+skirtoje \textit{Java} programos prisijungimui prie duomenų bazių, bei
 \textit{Leaf}\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master/leaf-core/src/main/java/com/sankuai/inf/leaf}} (pavyzdys~\ref{fig:leaf}), naudojamoje unikalaus identifikatoriaus generavimui.
 
 \begin{figure}[H]
@@ -388,7 +388,7 @@ API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://
 \end{figure}
 
 \subsection{Kodo skirstymo į paketus šablonų paieškos išvados}
-Išanalizavus dividešimt pasirinktų sistemų matoma, kad kodo skirstymo į paketus šablonai bei jų sprendžiamos problemos
+Išanalizavus dvidešimt pasirinktų sistemų matoma, kad kodo skirstymo į paketus šablonai bei jų sprendžiamos problemos
 pasikartoja - išskirtus pagalbinių, daugkartinio naudojimo klasių skirstymo šablonus naudoja aštuoniolika sistemų,
 didelio klasių skaičiaus pakete šablonus - devynios, skirtingų sąsajų implementacijų skirstymo šablonus - dešimt,
 o esybių versijavimo valdymo - penkios.
