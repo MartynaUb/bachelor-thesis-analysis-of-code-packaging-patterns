@@ -107,10 +107,26 @@ pagalbinių klasių skirstymui tinkamesnis naudoti atskiras pagalbinių klasių 
 didelio klasių skaičiaus pakete skirstymui - skirstymas pagal smulkų funkcionalumą,
 o skirtingų sąsajų implementacijoms - įgyvendinimų atskyrimą.
 
+
+Lentelėje~\ref{table:analizedSystems} pateiktas sąrašas nagrinėtų sistemų, bei nurodytą ar sistemos įgyvendina aprašytus šablonus.
+Ši lentelė padeda suprasti šablonų pasikartojimą ribotos apimties sistemų imtyje.
+
+Šablonų vardai lentelės antraštėje yra sutrumpinti siekiant sutalpintį lentelę į dokumento puslapi, todėl pateikiamas lentelės antraštės reikšmių aprašas:
+\begin{itemize}
+    \item \textit{P1} - \textit{atskiro pagalbinių klasių paketo} šablonas (aprašytas pavyzdyje~\ref{table:atskiras})
+    \item \textit{P2} - \textit{pagalbinių klasių priskyrimo dalykinės srities paketui} šablonas (aprašytas pavyzdyje~\ref{table:domainHelper})
+    \item \textit{D1} - \textit{žemesnio lygio paketų sudarymo grupuojant pagal techninį funkcionalumą} šablonas (aprašytas pavyzdyje~\ref{table:technical})
+    \item \textit{D2} - \textit{skirstymo pagal smulkų funkcionalumą} šablonas (aprašytas pavyzdyje~\ref{table:module})
+    \item \textit{S1} - \textit{sąsajų ir implementacijų grupavimo} šablonas (aprašytas pavyzdyje~\ref{table:implGr})
+    \item \textit{S2} - \textit{įgyvendinimų atskyrimo} šablonas (aprašytas pavyzdyje~\ref{table:implSub})
+    \item \textit{V} - \textit{atskirų versijų skirstymo} šablonas (aprašytas pavyzdyje~\ref{table:versions})
+\end{itemize}
+
 \begin{figure}[H]
+    \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
         \hline
-        Sistema                         & Sistemos tipas & P1 & P2 & D1 & D2 & S1 & S2 & V \\ \hline \hline
+        Sistema                         & Sistemos tipas & $ P1 $ & $ P2 $ & $ D1 $ & $ D2 $ & $ S1 $ & $ S2 $ & $ V $ \\ \hline\hline
         HikariCP                        & Įrankis                   & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Ne                  \\ \hline
         H2                              & Techninis                 & Taip                          & Ne                            & Ne                         & Ne                         & Taip               & Ne                 & Ne                  \\ \hline
         Leaf                            & Techninis                 & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Ne                  \\ \hline
@@ -131,4 +147,13 @@ o skirtingų sąsajų implementacijoms - įgyvendinimų atskyrimą.
         Fire Sticker                    & Taikomasis                & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Ne                 & Ne                  \\ \hline
         Omni-Notes                      & Taikomasis                & Taip                          & Ne                            & Ne                         & Ne                         & Ne                 & Ne                 & Ne                  \\ \hline
     \end{tabular}
+
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        Bendras sistemų skaičiųs & $\Sigma P1 $ & $\Sigma P2 $ & $\Sigma D1 $ & $\Sigma D2 $ & $\Sigma  S1 $ & $\Sigma  S2 $ & $\Sigma V $ \\ \hline\hline
+        19 & 13 & 5 & 2 & 8 & 5 & 4 & 5 \\ \hline
+    \end{tabular}
+    \end{center}
+    \caption{Nagrinėtų sistemų sąrašas ir jų šablonais}
+    \label{table:analizedSystems}
 \end{figure}
