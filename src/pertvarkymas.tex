@@ -28,7 +28,8 @@ Prieš visus pakeitimus \textit{crawler4j} sistemos paketų struktūra atrodo ta
     \label{fig:crawler_packages_orig}
 \end{figure}
 
-Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas problemas (pavyzdys~\ref{table:crawler},~\ref{table:crawlers}).
+Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas problemas (pavyzdys~\ref{table:crawlers}).
+\begin{figure}[H]
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -52,7 +53,6 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
         \hline
         edu.uci.ics.crawler4j.parser & 12 & 1 & 4 & 0.8 & 0.167 & 0.033 & 1 \\
         \hline
-        \label{table:crawler}
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
@@ -60,9 +60,11 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
         \hline\hline
         5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
         \hline
-    \label{table:crawlers}
     \end{tabular}
 \end{center}
+\caption{\textit{crawler4j} paketų kokybės matai}
+\label{table:crawlers}
+\end{figure}
 \textbf{Matų lentelės paaiškinimas}:
 \begin{itemize}
     \item \textit{N} - matas žymintis klasių skaičių pakete.
@@ -73,7 +75,7 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
     \item \textit{D} - Atstumas nuo pagrindinės sekos arba atstumas nuo sąryšio tarp stabilumo ir abstrakcijos, reikšmės rėžiai - nuo nulio iki vieno, nulis reiškia paketą, sutampantį su pagrindine seka,vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos, siekiama reikšmė - 0.
     \item \textit{C} - ciklinių priklausomybių matas, rodo ciklines priklausomybės, siekiama reikšmė - 0.
 \end{itemize}
-Kaip skaičiuojami matai aprašyta \hyperref[sec:matai]{paketų kokybės matų} skyriuje.
+Kaip skaičiuojami matai aprašyta paketų kokybės matų skyriuje~\ref{sec:matai}, puslapyje~\pageref{sec:matai}.
 
 Iš bendros sistemos analizės bei matų lentelės rezultatų matomos kelios sistemos problemos -
 \begin{itemize}
@@ -142,7 +144,8 @@ Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti b
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
 Šis pertvarkymas taip pat dalinai sumažino \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 7.
 Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, nežymiai sumažėjo
-vidutinis stabilumas, bet pakilo abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos sumažėjo (pavyzdys~\ref{table:parser},~\ref{table:parsers}).
+vidutinis stabilumas, bet pakilo abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos sumažėjo (pavyzdys~\ref{table:parsers}).
+\begin{figure}[H]
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -152,7 +155,6 @@ vidutinis stabilumas, bet pakilo abstrakcijos lygis, todėl atstumas nuo pagrind
         \hline
         Po & \cellcolor{green!25} 7 (-5) & 1 & 9 & \cellcolor{red!25} 0.9 + (0.1) & \cellcolor{red!25} 0.143 (-0.024) & \cellcolor{red!25} 0.043 (+0.01) & 1 \\
         \hline
-        \label{table:parser}
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -162,9 +164,11 @@ vidutinis stabilumas, bet pakilo abstrakcijos lygis, todėl atstumas nuo pagrind
         \hline
         Po & \cellcolor{green!25} 4 (-1) & 3 & 3 & \cellcolor{red!25} 0.488 (+0.033) & \cellcolor{green!25} 0.114 (+0.045) & \cellcolor{green!25} 0.425 (-0.051) & 5 \\
         \hline
-        \label{table:parsers}
     \end{tabular}
 \end{center}
+\caption{\textit{crawler4j} paketų kokybės matai po pirmo pertvarkymo}
+\label{table:parsers}
+\end{figure}
 Matų pokyčio didėjimas nebūtinai susijęs su sistemos kokybės gerėjimu, todėl teigiamas pokytis paženklintas žaliai, o neigiamas - raudonai.
 Norint išspręsti \textbf{problemą numeris 3} - ciklines priklausomybes, reikia identifikuoti klases, kurių priklausomybės
 sudaro ciklus ir iškelti jas į atskirus paketus.
@@ -273,7 +277,8 @@ Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daugiau paketų
 
 Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė pagerėjo,
 sumažėjo vidutinis klasių skaičius pakete, ciklinių priklausomybių rodiklis tapo lygus nuliui,
-padidėjo vidutinis abstrakcijos lygis (pavyzdys~\ref{table:abstr},~\ref{table:abstrs}).
+padidėjo vidutinis abstrakcijos lygis (pavyzdys~\ref{table:abstrs}).
+\begin{figure}[H]
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -313,7 +318,6 @@ padidėjo vidutinis abstrakcijos lygis (pavyzdys~\ref{table:abstr},~\ref{table:a
         \hline
         edu.uci.ics.crawler4j.parser.parse.text & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 0 \\
         \hline
-        \label{table:abstr}
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -323,9 +327,11 @@ padidėjo vidutinis abstrakcijos lygis (pavyzdys~\ref{table:abstr},~\ref{table:a
         \hline
         Po & \cellcolor{green!25} 3 (-2) & 3 & 3 & \cellcolor{green!24} 0.452 (-0.03) & \cellcolor{green!25} 0.183 (+0.114) & \cellcolor{green!25} 0.471 (-0.005) & \cellcolor{green!25} 0 (-5)\\
         \hline
-    \label{table:abstrs}
     \end{tabular}
 \end{center}
+\caption{\textit{crawler4j} paketų kokybės matai po galutinių pertvarkymų}
+\label{table:abstrs}
+\end{figure}
 Iš gautų rezultatų galime teigti, jog po pertvarkymo šablonai \textit{skirstymas pagal smulkų funkcionalumą} ir \textit{įgyvendinimų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
 padarė sistemą lengviau suprantama, panaikino ciklines priklausomybes ir turėjo teigiamą įtaką matams, nurodantiems
 sistemos įgyvendinimo kokybę.
@@ -372,6 +378,7 @@ taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčią klasę, kuri
 \end{figure}
 Šis pertvarkymas pagal \textit{skirtingų versijų grupavimo į paketus} šabloną, atskiria esybės versijas ir pristato kelis paketus, apibrėžiančius aiškesnius funkcionalumus.
 Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybės matus:
+\begin{figure}[H]
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -393,7 +400,6 @@ Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybė
         \hline
         specialized.cryptography.decryptor & 2 & 3 & 1 & 0.25 & 0.5 & 0.25 & 1 \\
         \hline
-    \label{table:matai}
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
@@ -401,10 +407,12 @@ Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybė
         \hline\hline
         3 & 3 & 3 & 0.561 & 0.188 & \cellcolor{green!25} 0.335 & \cellcolor{red!25} 6 \\
         \hline
-    \label{table:matais}
     \end{tabular}
 \end{center}
-Apskaičiuoti matai (pavyzdys~\ref{table:matai},~\ref{table:matais})rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti, kad sistemos abstraktumas bei stabilumas
+\caption{\textit{azure-storage-blob-cryptograph} paketų kokybės matai po pirmo pertvarkymo}
+\label{table:matais}
+\end{figure}
+Apskaičiuoti matai (pavyzdys~\ref{table:matais})rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti, kad sistemos abstraktumas bei stabilumas
 yra subalansuoti, tačiau šis skirstymas turėjo ir neigiamų padarinių - sukelė 6 ciklines priklausomybes.
 Šiais priklausomybes galima matyti sistemos paketų diagramoje (pavyzdys~\ref{fig:azure_packages_v1}).
 \begin{figure}[H]
@@ -437,7 +445,8 @@ taip pat pašalinamos ciklinės priklausomybės (pavyzdys~\ref{fig:azure_package
 Pakartotinai įvertinus matus matoma, kad nuokrypis nuo pagrindinės sekos šiek tiek padidėjo, tačiau
 vis dar yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal smulkų funkcionalumą},
 \textit{atskiro pagalbinių klasių paketo} ir \textit{skirtingų versijų grupavimo į paketus} šablonai prisidėjo prie bendro
-sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyviai gerus sistemos kokybės matus (pavyzdys~\ref{table:vert},~\ref{table:verts}).
+sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyviai gerus sistemos kokybės matus (pavyzdys~\ref{table:verts}).
+\begin{figure}[H]
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -463,7 +472,6 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyvia
         \hline
         specialized.cryptography.util & 3 & 6 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
         \hline
-    \label{table:vert}
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -472,6 +480,8 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyvia
         Pirmas pertvarkymas & 3 & 3 & 3 & 0.561 & 0.188 & 0.335 & 6 \\
         Galutinis variantas & \cellcolor{green!25} 2 (-1) & 3 & 3 & \cellcolor{green!25} 0.529 (-0.032) & \cellcolor{red!25} 0.15 (-0.03) & \cellcolor{red!25} 0.388 (+0.053) &  \cellcolor{green!25} 0 (-5) \\
         \hline
-        \label{table:verts}
     \end{tabular}
 \end{center}
+\caption{\textit{azure-storage-blob-cryptograph} paketų kokybės matai po visų pertvarkymų}
+\label{table:verts}
+\end{figure}
