@@ -1,5 +1,5 @@
 \section{Esamų sistemų pertvarkymas}
-Atrinkus šablonus kodo skirstymui į paketus, galima pradėti vertinti jų įtaką sistemai, juos pritaikant esamoms sistemoms.
+Išskyrus šablonus kodo skirstymui į paketus ir juos išanalizavus, reikia įvertinti jų įtaką, juos pritaikant esamoms sistemoms.
 Šio skyriaus tikslas - pasirinkti ir išnagrinėti kelias sistemas pasitelkus paketų kokybės matus bei bendrą sistemos struktūros analizę,
 taip identifikuojant programiniam kodui būdingas problemas bei rastas problemas išspręsti pritaikant aprašytus šablonus.
 Atlikus pertvarkymus sistemose, dar kartą paskaičiuoti paketų kokybės matus,
@@ -72,14 +72,13 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
     \item \textit{C} - ciklinių priklausomybių matas, rodo ciklines priklausomybės, siekiama reikšmė - 0.
 \end{itemize}
 Kaip skaičiuojami matai aprašyta \hyperref[sec:matai]{paketų kokybės matų} skyriuje.
-\linebreak
 
 Iš bendros sistemos analizės bei matų lentelės rezultatų matomos kelios sistemos problemos -
 \begin{itemize}
     \item \textbf{Problema numeris 1} - atlikus bendrą sistemos kodo analizę matoma,
     kad sistemos paketuose yra daug sąsajų su skirtingais jų įgyvendinimais, todėl yra sunku
     rasti visus specifinės sąsajos įgyvendinimus.
-    \item \textbf{Problema numeris 2} - paketo \textit{edu.uci.ics.crawler4j.parser} viduje yra 12 klasių, todėl sunku suprasti už kokius funkcionalumus jis atsakingas
+    \item \textbf{Problema numeris 2} - paketo \textit{edu.uci.ics.crawler4j.parser} viduje yra 12 klasių, todėl sunku suprasti, už kokius funkcionalumus jis atsakingas
     ir kada jį reikėtų nagrinėti bei keisti.
     \item \textbf{Problema numeris 3} - Sistema turi daug ciklinių prilausomynbių, kur du arba daugiau paketų priklauso vienas nuo kito.
     Tai matoma sistemos paketų diagramoje\ref{img:crawler_packages_orig}, ciklinėse priklausomybėse dalyvauja 10 paketų ir kartu jie sudaro 5 ciklinių priklausomybių sekas,
@@ -107,7 +106,7 @@ Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{Par
     \endsnugshade
     \caption{\textit{parser} paketo struktūra}
 \end{figure}
-Šiam paketui sutvarkyti taikomas \textit{Sąsajų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkeliami į minėto
+Šiam paketui sutvarkyti taikomas \textit{įgyvendinimų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkeliami į minėto
 paketo subpaketus.
 Šie pertvarkymai pakeičia \textit{parser} paketo struktūrą:
 \begin{figure}[H]
@@ -138,8 +137,8 @@ paketo subpaketus.
 Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
 Šis pertvarkymas taip pat dalinai sumažino \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 7.
-Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, tačiau neženkliai nukrito
-vidutinis stabilumas ir abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos nežymiai padidėjo.
+Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, nežymiai sumažėjo
+vidutinis stabilumas, bet pakilo abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos sumažėjo.
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -160,10 +159,11 @@ vidutinis stabilumas ir abstrakcijos lygis, todėl atstumas nuo pagrindinės sek
         \hline
     \end{tabular}
 \end{center}
+Matų pokyčio didėjimas nebūtinai susijęs su sistemos kokybės gerėjimu, todėl teigiamas pokytis paženklintas žaliai, o neigiamas - raudonai.
 Norint išspręsti \textbf{problemą numeris 3} - ciklines priklausomybes, reikia identifikuoti klases, kurių priklausomybės
 sudaro ciklus ir iškelti jas į atskirus paketus.
 
-Kuriant naujus paketus vadovaujamasi \textit{skirstymo pagal teikiamą funkcionalumą} šablonu, užtikrinant, kad kiekvienas
+Kuriant naujus paketus vadovaujamasi \textit{skirstymo pagal smulkų funkcionalumą} šablonu, užtikrinant, kad kiekvienas
 paketas teikia vieną, aiškiai apibrėžtą funkciją, kuri yra pasiekiama per pakete aprašytą sąsają.
 Paketo vidus yra paslėptas su \textit{Java} kalbos pasiekiamumo modifikatoriais - konkrečių klasių negalima inicializuoti už paketo ribų,
 nes jų konstruktoriai privatūs.
@@ -315,7 +315,7 @@ padidėjo vidutinis abstrakcijos lygis:
         \hline
     \end{tabular}
 \end{center}
-Iš gautų rezultatų galime teigti, jog po pertvarkymo šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
+Iš gautų rezultatų galime teigti, jog po pertvarkymo šablonai \textit{skirstymas pagal smulkų funkcionalumą} ir \textit{įgyvendinimų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
 padarė sistemą lengviau suprantama, panaikino ciklines priklausomybes ir turėjo teigiamą įtaką matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
@@ -335,7 +335,7 @@ Taip pat sistemoje yra kelios skirtingos tos pačios esybės versijos - \textit{
 suprasti, su kokia esybės versija yra susijusios kitos klasės bei yra kodo pasikartojimo.
 Ši sistema būtų aiškesnė ir greičiau perprantama, jei būtų išskirti mažesni funcionalumai ir kodas būtų išskaidytas į smulkesnius paketus, taip pat atskiriant juos
 pagal esybių versijas.
-Norint atlikti esybių versijavimą naudojamas \textit{atskirų versijų skirstymo} šablonas, pagal jį kiekvienai esybės versijai sukuriamas atskiras paketas,
+Norint atlikti esybių versijavimą naudojamas \textit{skirtingų versijų grupavimo į paketus} šablonas, pagal jį kiekvienai esybės versijai sukuriamas atskiras paketas,
 taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčią klasę, kuri yra pakete vienu lygiu auksčiau nei versijų paketai:
 \begin{figure}[H]
     \snugshade
@@ -358,7 +358,7 @@ taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčią klasę, kuri
     \endsnugshade
     \caption{\textit{azure-storage-blob-cryptograph} paketų medis su paketais, skirtais esybių versijų valdymui}
 \end{figure}
-Šis pertvarkymas pagal \textit{atskirų versijų skirstymo} šabloną, atskiria esybės versijas ir pristato kelis paketus, apibrėžiančius aiškesnius funkcionalumus.
+Šis pertvarkymas pagal \textit{skirtingų versijų grupavimo į paketus} šabloną, atskiria esybės versijas ir pristato kelis paketus, apibrėžiančius aiškesnius funkcionalumus.
 Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybės matus:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -391,7 +391,7 @@ Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybė
     \end{tabular}
 \end{center}
 Apskaičiuoti matai rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti, kad sistemos abstraktumas bei stabilumas
-yra subalansuoti, tačiau šis skirstymas turėjo ir neigiamų padarinių - sukelė 5 ciklines priklausomybes.
+yra subalansuoti, tačiau šis skirstymas turėjo ir neigiamų padarinių - sukelė 6 ciklines priklausomybes.
 Šiais priklausomybes galima matyti sistemos paketų diagramoje:
 \begin{figure}[H]
     \centering
@@ -399,10 +399,10 @@ yra subalansuoti, tačiau šis skirstymas turėjo ir neigiamų padarinių - suke
     \caption{\textit{azure-storage-blob-cryptograph} sistemos struktūra po pirmojo pertvarkymo}
     \label{img:azure_packages_v1}
 \end{figure}
-Norint panaikinti ciklines priklausomybes, reikia panaudoti šabloną \textit{skirstymas pagal teikiamą funkcionalumą} ir, išskaidant pagrindinį paketą
+Norint panaikinti ciklines priklausomybes, reikia panaudoti šabloną \textit{skirstymas pagal smulkų funkcionalumą} ir, išskaidant pagrindinį paketą
 į dar smulkesnius vienetus - yra sukuriamas \textit{encription.data} paketas, atsakingas už užkoduotų duomenų vaizdavimą, taip pat
 aprašomas paketas \textit{blob} skirtas \textit{blob} esybių, reprezentuojančių saugyklos duomenų formatą, kriptografijai.
-Taip pat vadovaujantis \textit{pagalbinių klasių priskyrimas dalykinės srities paketui} šablonu, visos pagalbinės klasės, neturinčios priklausomybių į kitus paketus ir
+Taip pat vadovaujantis \textit{atskiro pagalbinių klasių paketo} šablonu, visos pagalbinės klasės, neturinčios priklausomybių į kitus paketus ir
 padedančios vykdyti kertinius funcionalumus yra iškeliamos į \textit{util} paketą.
 Minėtame pakete atsiranda tokios klasės:
 \begin{itemize}
@@ -414,14 +414,14 @@ Minėtame pakete atsiranda tokios klasės:
 Pritaikius visus šiuos šablonus, gaunama sistemos struktūra turinti nedidelius, aiškesniais funkcionalumais apibrėžtus paketus, taip pat pašalinamos ciklinės priklausomybės:
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{img/azure_packages_v2}
+    \includegraphics[scale=0.3]{img/azure_packages_v2}
     \caption{Galutinė \textit{azure-storage-blob-cryptograph} sistemos struktūra}
     \label{img:azure_packages_v2}
 \end{figure}
 
 Pakartotinai įvertinus matus matoma, kad nuokrypis nuo pagrindinės sekos šiek tiek padidėjo, tačiau
-vis dar yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal teikiamą funkcionalumą},
-\textit{pagalbinių klasių priskyrimo} ir \textit{atskirų versijų skirstymo} šablonai prisidėjo prie bendro
+vis dar yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal smulkų funkcionalumą},
+\textit{atskiro pagalbinių klasių paketo} ir \textit{skirtingų versijų grupavimo į paketus} šablonai prisidėjo prie bendro
 sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyviai gerus sistemos kokybės matus.
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -458,8 +458,3 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyvia
         \hline
     \end{tabular}
 \end{center}
-
-todo: parasyti bendras isvadas
-todo: sutikrinti pavadinimus
-todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
-

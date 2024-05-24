@@ -152,9 +152,22 @@ pagal techninį sluoksnį pakete \textit{model}.
     \end{tabular}
 \end{center}
 
-Kitą skirstymo būdą galima stebėti \textit{IntelliJ} įskiepyje \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
+Kitą skirstymo būdą galima stebėti \textit{IntelliJ Source Wizard} įskiepio kode \footnote{\url{https://github.com/wix-incubator/source-wizard/tree/master/src/main/kotlin/plugin}}.
 Čia \textit{plugin} paketo esybė yra papildomai išskirstyta pagal \textit{IntelliJ} sistemos domeno esybes.
-Vadovaujantis šiuo šablonu, klasės skirstomos pagal smulkesnį jų teikiamą funkcionalumą.
+Vadovaujantis šiuo šablonu, klasės skirstomos pagal smulkesnį jų teikiamą funkcionalumą - \textit{actions}, \textit{extensions}, \textit{ui},
+šiame kontekste yra ne techniniai sluoksniai, o \textit{Intellij} įskiepio domeno dalis.
+\begin{figure}[H]
+    \snugshade
+    \dirtree{%
+        .1 {/plugin} .
+        .2 {actions} .
+        .2 {extensions} .
+        .2 {ui} .
+    }
+    \endsnugshade
+    \caption{\textit{Source Wizard} sistemos dalis, kurioje matomi smulkiau išskirstyti moduliai}
+\end{figure}
+
 Šio šablono variacija - smulkūs moduliai su atskirose klasėse aprašytais kontraktais.
 Funkcionalumas kitiems paketams galėtų būti pasiekiamas per vieną minimalią sąsają \angl{interface},
 kuri atskleidžia tik konceptus (metodus arba duomenų tipus), kurie yra glaudžiai susiję su komponento teikiama paslauga, bei
