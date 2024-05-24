@@ -365,7 +365,7 @@ taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčią klasę, kuri
         .2 {DecryptorV2 // Antra esybės versija} .
         .2 {Encryptor} .
         .2 {EncryptorV1 // Pirma esybės versija} .
-        .4 {EncryptorV2 // Antra esybės versija} .
+        .2 {EncryptorV2 // Antra esybės versija} .
         .2 {\ldots // Likusios klasės lieka pagrindiniame pakete} .
     }
     \endsnugshade
@@ -512,13 +512,13 @@ Pertvarkytų sistemų programinis kodas yra pasiekiamas viešoje \textit{GitHub}
 \begin{figure}[H]
     \begin{tabular}{|p{3cm}|p{6cm}|p{6cm}|}
         \hline
-        Sistema                                                                                           & Ispręstos problemos                                                                                                   & Panaudoti šablonai                                                                                    \\ \hline\hline
-        crawler4j                        & dideli paketai su skirtingomis atsakomybėmis, neaiški struktūra sąsajos įgyvendimams saugoti, ciklinės priklausomybės & skirstymas pagal smulkų funkcionalumą, įgyvendinimų atskyrimas                                        \\ \hline
-        azure storage blob cryptography  & dideli paketai su skirtingomis atsakomybėmis, nėra pagalbinių klasių paketų, skirtingos tos pačios esybės versijos    & skirstymas pagal smulkų funkcionalumą, atskirų versijų skirstymas, atskiras pagalbinių klasių paketas \\ \hline
+        Sistema                                                                                           & Išspręstos problemos                                                                                                   & Panaudoti šablonai                                                                                    \\ \hline\hline
+        crawler4j                        & Dideli paketai su skirtingomis atsakomybėmis, neaiški struktūra sąsajos įgyvendimams saugoti, ciklinės priklausomybės & Skirstymas pagal smulkų funkcionalumą, įgyvendinimų atskyrimas                                        \\ \hline
+        azure storage blob cryptography  & Dideli paketai su skirtingomis atsakomybėmis, nėra pagalbinių klasių paketų, skirtingos tos pačios esybės versijos    & Skirstymas pagal smulkų funkcionalumą, atskirų versijų skirstymas, atskiras pagalbinių klasių paketas \\ \hline
     \end{tabular}
-    \caption{Pertvarkytos sistemos ir jų panaudoti šablonai}
+    \caption{Pertvarkytos sistemos ir panaudoti šablonai}
     \label{table:sistemos}
 \end{figure}
 
-Atlikus sistemų pertvarkymus buvo gauti matų rezultatai, įrodantys, jog atrinkti šablonai, prisideda ne tik prie kodo suprantamumo žmogui, bet ir daro
+Atlikus sistemų pertvarkymus buvo gauti matų rezultatai, įrodantys, jog atrinkti šablonai prisideda ne tik prie kodo suprantamumo žmogui, bet ir daro
 teigiamą įtaką sistemos kokybei - daugumoje atvejų mažina ciklines priklausomybes, vidutinį klasių skaičių pakete, atstumą nuo pagrindinės sekos.
