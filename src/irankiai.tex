@@ -1,6 +1,6 @@
 \section{Įrankiai šablonų analizei ir įvertinimui}
-Kompiuterinės sistemos, kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai yra labai didelės.
-Pilnai perprasti tokias sistemas, nustatyti jų įgyvendinimo kokybę, naudojamus šablonus kodui skirstyti,
+Kompiuterinės sistemos, kurioms yra aktualu klasių ir paketų skirstymo metodai, paprastai tokio dydžio, kad
+pilnai jas perprasti, nustatyti jų įgyvendinimo kokybę, naudojamus šablonus kodui skirstyti,
 apskaičiuoti paketų kokybės matus yra sudėtingas procesas.
 Daryti tai rankiniu būdu užtrunka daug laiko bei yra paliekama daug vietos potencialioms klaidoms,
 todėl yra būtina šį procesą optimizuoti, skaitmenizuoti analizės procedūras pasitelkiant
@@ -51,12 +51,25 @@ Abiejuose įrankiuose vienas iš palaikomų išvesties formatų turėtų būti \
 Nors beveik visiems reikalavimuose minimiems funkcionalumams galima rasti jau sukurtų įrankių, greit ir efektyviai pritaikyti juos skirtingoms sistemoms
 (arba posistemėms) nėra patogu - kiekvieną įrankį reikėtų vykdyti atskirai, skirtingais vykdymo procesais ir argumentais.
 Taip išvestų rezultatų formatai yra skirtingi.
-Todėl, norint palengvinti ši procesą - suvienodinti procesų vykdymą bei gautus rezultus, visi įrankiai, reikalingi analizei, įgyvendinti kaip viena programa, kuri
-apdoroja failus nurodytoje direktorijoje į analizuojamą sistemą - nuskaito \textit{Java} failų turinį ir išveda informaciją apie sistemos paketus bei klases.
-Surinkta informacija naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten, kur galima, naudojant jau parašytus įrankius, taip programiškai supaprastinant
-skirtingų įrankių vykdymą.
-Gauti atliktos analizės rezultatai išvedami į failus nurodytoje direktorijoje.
-Rezultatus sudaro apdorotos sistemos paketų kokybės matai, paketų struktūros medis, paketų priklausomybės grafikas.
-Gauti rezultatai išvesti \textit{latex} formatu, todėl gali būti pridedami į darbo dokumentą, taip padarant sistemų analizę greitesne bei efektyvesne.
+Todėl, norint palengvinti šį procesą - suvienodinti procesų vykdymą bei gautus rezultus, visi įrankiai, reikalingi analizei, yra įgyvendinti kaip viena programa, kuri
+apdoroja \textit{java} sistemos failus ir naudojant trečiųjų šalių rankius, suvienodinant jų įvesti į išvestį, suskaičiuoja reikiamus rezultatus apie analizuotą sistemą.
 
-
+Sistema parašyta \textit{Kotlin} programavimo kalba, o jos vykdomas kodas yra \textit{jar} programėle kuri paleidžiama iš komandinės eilutes:
+\begin{lstlisting}
+ java -jar system-analyzer.jar -output /isvesties/direktorija -system  kelias/iki/sistemos
+\end{lstlisting}
+Įvykdyta programa rekursyviai nuskaito visus failus, bei paketus sistemos direktorijoje, nurodytoje \textit{system} argumetu.
+Nuskaitytų failu struktūros yra apdorojamos įrankiu \textit{javaparser}\footnote{\url{https://github.com/javaparser/javaparser}}, kuris leidžia
+programiškai pasiekti \textit{Java} klasės failo elementus - klasių, paketų vardus, metodus.
+Gavus paketų, bei jų priklausomybių vaizdus, jie yra naudojami paskaičiuoti kiekvieno paketo kokybės matus.
+Paketų atvaizdas taip pat yra paduodami įrankiui \textit{graphviz}\footnote{\url{https://graphviz.org/}}, kuris iš jų sukuria paveikslėlius, atvaizduojančius paketus
+priklausomybių grafike (pavyzdys \ref{img:graphviz})
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{img/packages_example}
+    \caption{\textit{graphviz} įrankio sugeneruotas priklausomybių grafikas}
+    \label{img:graphviz}
+\end{figure}
+Gauti matai, priklausomybiu grafikas, bei bendras sistemos paketų medis yra išvedami į išvesties direktoriją nurodyta \textit{output} argumentu.
+Matai, paketų medis grąžinami kaip \textit{latex} formato failai, todėl juos galima iškarto įdėti į darbo projektą, nesirūpinant tinkamu formatavimu,
+taip padarant sistemų analizę greitesne bei efektyvesne.
