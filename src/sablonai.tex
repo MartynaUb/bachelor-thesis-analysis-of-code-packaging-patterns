@@ -95,7 +95,7 @@ Tokį pagalbinių klasių skirstymo metodą naudoja keletas repozitorijų - pavy
 Šiai problemai spręsti galimas ir kitoks būdas - turėti keletą pagalbinių klasių paketų, patalpintų po atitinkamu bendresniu dalykinės srities
  paketu.
 Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė įranga \textit{Seata}\footnote{\url{https://github.com/apache/incubator-seata/tree/2.x/saga/seata-saga-engine/src/main/java/org/apache/seata/saga/engine/utils}}.
-Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje, pavyzdžiui, po \textit{engine} paketu.
+Čia pagalbinės klasės yra \textit{utils} pakete žemesniame sistemos lygmenyje (pavyzdys~\ref{img:domainHelpers}), pavyzdžiui, po \textit{engine} paketu.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -109,6 +109,7 @@ Tokį skirstymo į paketus šabloną naudoja transakcijoms skirta programinė į
     }
     \endsnugshade
     \caption{Sistemos pavyzdys, kur bendrinio panaudojimo kodas guli \textit{utils} pakete esančiame po dalykinės srities subpaketais}
+    \label{img:domainHelpers}
 \end{figure}
 Šio šablono aprašymas -
 \begin{center}
@@ -335,4 +336,6 @@ API skirtame kelionių valdymui \textit{travels-java-api}\footnote{\url{https://
         \hline
     \end{tabular}
 \end{center}
+
+
 
