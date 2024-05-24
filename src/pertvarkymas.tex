@@ -61,6 +61,19 @@ Atlikus sistemos kokybės matų analizę galima pamatyti sistemai būdingas prob
         \hline
     \end{tabular}
 \end{center}
+\textbf{Matų lentelės paaiškinimas}:
+\begin{itemize}
+    \item \textit{N} - matas žymintis klasių skaičių pakete.
+    \item \textit{Af} - aferentinės jungtys. Nurodo, kiek kitų paketų priklauso nuo pasirinkto paketo.
+    \item \textit{Ef} - eferentinės jungtys. Nurodo, nuo kiek kitų paketų priklauso pasirinktas paketas.
+    \item \textit{S} - stabilumas. Rodo paketo atsparumą pokyčiams, reikšmės rėžiai - nuo nulio iki vieno, nulis visiškai stabilus paketas, o vienetas - visiškai nestabilus.
+    \item \textit{A} - nurodo paketo abstraktumą, reikšmės rėžiai - nuo nulio iki vieno, nulis reiškia, kad paketas neturi abstrakčių klasių, o vienetas nurodo, kad pakete yra tik abstrakčios klasės.
+    \item \textit{D} - Atstumas nuo pagrindinės sekos arba atstumas nuo sąryšio tarp stabilumo ir abstrakcijos, reikšmės rėžiai - nuo nulio iki vieno, nulis reiškia paketą, sutampantį su pagrindine seka,vienas - paketą, maksimaliai nutolusį nuo pagrindinės sekos, siekiama reikšmė - 0.
+    \item \textit{C} - ciklinių priklausomybių matas, rodo ciklines priklausomybės, siekiama reikšmė - 0.
+\end{itemize}
+Kaip skaičiuojami matai aprašyta \hyperref[sec:matai]{paketų kokybės matų} skyriuje.
+\linebreak
+
 Iš bendros sistemos analizės bei matų lentelės rezultatų matomos kelios sistemos problemos -
 \begin{itemize}
     \item \textbf{Problema numeris 1} - atlikus bendrą sistemos kodo analizę matoma,
@@ -161,14 +174,13 @@ public interface HtmlParser {
 
     HtmlParseData parse(ParsedPage page, String contextURL) throws ParseException;
 
-    // Grąžinamas sąsajos įgyvendinimas
+    // Grazinamas sasajos igyvendinimas
     static HtmlParser newHtmlParser(CrawlConfig config, TLDList tldList) throws InstantiationException, IllegalAccessException  {
         return new TikaHtmlParser(config, tldList);
     }
 }
 
-// Sąsajos įgyvendinimas. Nėra viešas, pasiekiamas tik paketo viduje,
-// nes klasė ir konstruktorius nenaudoja public raktažodžių
+// Sasajos igyvendinimas. Nera viesas, pasiekiamas tik paketo viduje, nes klase ir konstruktorius nenaudoja public raktazodziu
 class TikaHtmlParser implements HtmlParser {
    ...
     TikaHtmlParser(CrawlConfig config, TLDList tldList) throws InstantiationException, IllegalAccessException {
@@ -249,7 +261,6 @@ Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daug daugiau pa
     \caption{\textit{crawler4j} sistemos struktūra po antro pertvarkymo}
     \label{img:crawler_packages_v2}
 \end{figure}
-todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
 
 Atlikus matų analizę pertvarkytai sistemai yra matoma, kad sistemos kokybė pagerėjo,
 sumažėjo vidutinis klasių skaičius pakete, ciklinių priklausomybių rodiklis tapo lygus nuliui,
@@ -451,4 +462,5 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyvia
 todo: padaryti grazesne izanga
 todo: parasyti bendras isvadas
 todo: sutikrinti pavadinimus
-todo: paaiškinti metricas
+todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
+
