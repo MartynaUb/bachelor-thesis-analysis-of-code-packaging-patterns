@@ -41,7 +41,7 @@ Tokiu atveju, pavyzdžiui, esybės pagalbinėms klasėms, \textit{orchestrator} 
 Skirstymą pagal smulkų funkcionalumą pagrindžia Robert C. Martin bendro sąryšio principas, kuris teigia, kad visos tarpusavyje susijusios klasės turėtų būti viename pakete ir
 akcentuoja siekiamybę turėti gan mažus paketus, turinčius aiškiai apibrėžtą funkcionalumą, priežastį egzistuoti, taip užtikrinant ir
 glaudų tarpusavyje susijusių klasių sąryšį.
-Šis principas taip pat gali padėti užtikrinti aferentinių jungčių skaičių paketuose.
+Šis principas taip pat gali padėti sumažinti aferentinių jungčių skaičių paketuose.
 Didelis priklausomybių nuo specifinio paketo skaičius (arba aferentinės jungtys), reiškia, kad pokyčiai tame pakete turės įtaką kelioms klasėms.
 Funkcionalumas kitiems paketams galėtų būti pasiekiamas per vieną minimalią sąsają \angl{interface},
 kuri atskleidžia tik konceptus (metodus arba duomenų tipus), kurie yra glaudžiai susiję su komponento teikiama paslauga, bei
@@ -100,59 +100,3 @@ Esybių versijavimo skirstymui buvo išskirtas skirtingų versijų grupavimo į 
 Toks skirstymo būdas leidžia išvengti kodo duplikacijos bei perteklinio klasių skaičiaus paketuose, bei užtikrina aiškią skirtingų versijų
 atskirtį. Toks būdas gali praplėsti skirstymą pagal dalykinę sritį - skirstomos versijos gali atspindėti reikalingus
 palaikyti besikeičiančius verslo reikalavimus.
-
-\subsection{Kodo skirstymo į paketus šablonų analizės išvados}
-Išanalizavus skirtingus kylančias problemas sprendžiančius šablonus matoma, kad
-pagalbinių klasių skirstymui tinkamesnis naudoti atskiras pagalbinių klasių paketas,
-didelio klasių skaičiaus pakete skirstymui - skirstymas pagal smulkų funkcionalumą,
-o skirtingų sąsajų implementacijoms - įgyvendinimų atskyrimą.
-
-Lentelėje~\ref{table:analizedSystems} pateiktas nagrinėtų sistemų sąrašas, bei nurodyta, ar sistemos įgyvendina aprašytus šablonus.
-Ši lentelė padeda suprasti šablonų pasikartojimą ribotos apimties sistemų imtyje.
-
-Šablonų pavadinimai lentelės antraštėje yra sutrumpinti siekiant sutalpinti lentelę į dokumento puslapį, todėl pateikiamas lentelės antraštės reikšmių aprašas:
-\begin{itemize}
-    \item \textit{P1} - \textit{atskiro pagalbinių klasių paketo} šablonas (aprašytas pavyzdyje~\ref{table:atskiras})
-    \item \textit{P2} - \textit{pagalbinių klasių priskyrimo dalykinės srities paketui} šablonas (aprašytas pavyzdyje~\ref{table:domainHelper})
-    \item \textit{D1} - \textit{žemesnio lygio paketų sudarymo grupuojant pagal techninį funkcionalumą} šablonas (aprašytas pavyzdyje~\ref{table:technical})
-    \item \textit{D2} - \textit{skirstymo pagal smulkų funkcionalumą} šablonas (aprašytas pavyzdyje~\ref{table:module})
-    \item \textit{S1} - \textit{sąsajų ir implementacijų grupavimo} šablonas (aprašytas pavyzdyje~\ref{table:implGr})
-    \item \textit{S2} - \textit{įgyvendinimų atskyrimo} šablonas (aprašytas pavyzdyje~\ref{table:implSub})
-    \item \textit{V} - \textit{atskirų versijų skirstymo} šablonas (aprašytas pavyzdyje~\ref{table:versions})
-\end{itemize}
-
-\begin{figure}[H]
-    \begin{center}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-        \hline
-        Sistema                         & Sistemos tipas & $ P1 $ & $ P2 $ & $ D1 $ & $ D2 $ & $ S1 $ & $ S2 $ & $ V $ \\ \hline\hline
-        HikariCP                        & Įrankis                   & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Ne                  \\ \hline
-        H2                              & Techninis                 & Taip                          & Ne                            & Ne                         & Ne                         & Taip               & Ne                 & Ne                  \\ \hline
-        Leaf                            & Techninis                 & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Ne                  \\ \hline
-        crawler4j                       & Taikomasis                & Taip                          & Ne                            & Ne                         & Ne                         & Ne                 & Ne                 & Ne                  \\ \hline
-        Chronicle-Map                   & Techninis                 & Ne                            & Ne                            & Taip                       & Ne                         & Taip               & Ne                 & Ne                  \\ \hline
-        RxJava                          & Įrankis                   & Ne                            & Ne                            & Ne                         & Ne                         & Taip               & Ne                 & Ne                  \\ \hline
-        guice                           & Įrankis                   & Taip                          & Taip                          & Ne                         & Ne                         & Taip               & Ne                 & Ne                  \\ \hline
-        azure-storage                   & Įrankis                   & Ne                            & Ne                            & Ne                         & Ne                         & Ne                 & Ne                 & Ne                  \\ \hline
-        elasticsearch                   & Techninis                 & Taip                          & Taip                          & Ne                         & Ne                         & Ne                 & Ne                 & Ne                  \\ \hline
-        incubator-seata                 & Techninis                 & Ne                            & Taip                          & Ne                         & Ne                         & Ne                 & Ne                 & Taip                \\ \hline
-        mongo                           & Techninis                 & Taip                          & Ne                            & Ne                         & Ne                         & Ne                 & Ne                 & Taip                \\ \hline
-        nocodb                          & Taikomasis                & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Ne                 & Taip                \\ \hline
-        travels-java-api                & Taikomasis                & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Taip                \\ \hline
-        openjdk-jdk11                   & Techninis                 & Taip                          & Ne                            & Ne                         & Ne                         & Taip               & Ne                 & Taip                \\ \hline
-        keystone                        & Taikomasis                & Taip                          & Taip                          & Ne                         & Taip                       & Ne                 & Ne                 & Ne                  \\ \hline
-        source-wizard                   & Taikomasis                & Ne                            & Ne                            & Ne                         & Taip                       & Ne                 & Taip               & Ne                  \\ \hline
-        dbeaver                         & Techninis                 & Ne                            & Taip                          & Taip                       & Taip                       & Ne                 & Ne                 & Ne                  \\ \hline
-        Fire Sticker                    & Taikomasis                & Taip                          & Ne                            & Ne                         & Taip                       & Ne                 & Ne                 & Ne                  \\ \hline
-        Omni-Notes                      & Taikomasis                & Taip                          & Ne                            & Ne                         & Ne                         & Ne                 & Ne                 & Ne                  \\ \hline
-    \end{tabular}
-
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-        \hline
-        Bendras sistemų skaičiųs & $\Sigma P1 $ & $\Sigma P2 $ & $\Sigma D1 $ & $\Sigma D2 $ & $\Sigma  S1 $ & $\Sigma  S2 $ & $\Sigma V $ \\ \hline\hline
-        19 & 13 & 5 & 2 & 8 & 5 & 4 & 5 \\ \hline
-    \end{tabular}
-    \end{center}
-    \caption{Nagrinėtų sistemų sąrašas ir jų šablonai}
-    \label{table:analizedSystems}
-\end{figure}
