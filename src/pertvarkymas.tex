@@ -14,243 +14,6 @@ tokios paprastos, kad neturėtų sistemos dizaino problemų.
 Pasirinktos sistemos yra skirtingo tipo projektai, taip užtikrinant didesnę problemų ivairovę ir objektyvesnius įvertinimus.
 Per visą pasirinktų sistemų imtį yra sutinkamos visos aprašytos problemos, taip įvertinant visus aprašytus šablonus.
 
-%\subsection{\textit{Leaf} sistema}
-%\textbf{Leaf\footnote{\url{https://github.com/Meituan-Dianping/Leaf/tree/master}}} sistema, per \textit{http}
-%protokolą teikianti aplikacijų programavimo sąsają unikalaus identifikatoriaus generavimui.
-%Ši sistema užtikrina identifikatoriaus unikalų pasiskirstymą tarp skirtingų paskirstytų sistemų \angl{distributed systems},
-%servisais orientuotoje \angl{service-oriented} architektūroje.
-%Tai techninės programinės įrangos tipas, kuris naudojamas kitų taikomosios programinės įrangos sistemų.
-%Sistema Leaf susideda iš dviejų modulių \textit{server} ir \textit{core}, šiame darbe dėmesys bus skirtas tik \textit{core} moduliui,
-%kadangi \textit{server} modulis yra labai mažas
-%ir paketų struktūra jame neatlieka esminio vaidmens.
-%Prieš visus pakeitimus \textit{Leaf} sistemos, \textit{core} modulio paketų struktūra atrodo taip:
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale=0.5]{img/leaf_packages_orig}
-%    \caption{\textit{Leaf} sistemos \textit{core} modulio struktūra}
-%    \label{img:leaf_packages_orig}
-%\end{figure}
-%
-%\dirtree{%
-%.1 {/}.
-%.2 {common}.
-%.2 {segment}.
-%.3 {dao}.
-%.4 {impl}.
-%.3 {model}.
-%.2 {snowflake}.
-%.3 {exception}.
-%}
-%
-%\begin{center}
-%    \begin{tabular}{|c|c|c|c|c|c|c|}
-%        \hline
-%        Paketo vardas & \textit{N} & \textit{A} & \textit{E} & \textit{S} & \textit{A} & \textit{D} \\ [0.5ex]
-%        \hline\hline
-%        leaf.segment.dao.impl & 1 & 0 & 2 & 1.0 & 0.0 & 0.0 \\
-%        \hline
-%        leaf.segment & 1 & 0 & 4 & 1.0 & 0.0 & 0.0 \\
-%        \hline
-%        leaf.snowflake.exception & 3 & 1 & 0 & 0.0 & 0.0 & 1.0 \\
-%        \hline
-%        leaf.segment.model & 3 & 3 & 0 & 0.0 & 0.0 & 1.0 \\
-%        \hline
-%        leaf.segment.dao & 2 & 2 & 1 & 0.333 & 1.0 & 0.333 \\
-%        \hline
-%        leaf & 1 & 3 & 1 & 0.25 & 1.0 & 0.25 \\
-%        \hline
-%        leaf.common & 6 & 3 & 1 & 0.25 & 0.0 & 0.75 \\
-%        \hline
-%        leaf.snowflake & 2 & 0 & 3 & 1.0 & 0.0 & 0.0 \\
-%        \hline
-%    \end{tabular}
-%    \begin{tabular}{|c|c|c|c|c|c|}
-%        \hline
-%        $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ \\ [0.5ex]
-%        \hline\hline
-%        2 & 2 & 2 & 0.479 & 0.25 & 0.417 \\
-%        \hline
-%    \end{tabular}
-%\end{center}
-
-%
-%\subsection{\textit{HikariCP} sistema}
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale=0.5]{img/hikari_packages_orig}
-%    \caption{\textit{Hikari} sistemos struktūra}
-%    \label{img:hikari_packages_orig}
-%\end{figure}
-%
-%
-%\dirtree{%
-%    .1 {/} .
-%    .2 {hikari}.
-%    .3 {hibernate}.
-%    .3 {metrics}.
-%    .4 {dropwizard}.
-%    .4 {micrometer}.
-%    .4 {prometheus}.
-%    .3 {pool}.
-%    .3 {util}.
-%}
-%
-%
-%\begin{center}
-%    \begin{tabular}{|c|c|c|c|c|c|c|}
-%        \hline
-%        Paketo vardas & \textit{N} & \textit{Af} & \textit{Ef} & \textit{S} & \textit{A} & \textit{D} \\ [0.5ex]
-%        \hline\hline
-%        com.zaxxer.hikari.metrics & 4 & 5 & 0 & 0.0 & 0.75 & 0.25 \\
-%        \hline
-%        com.zaxxer.hikari.metrics.prometheus & 5 & 0 & 1 & 1.0 & 0.0 & 0.0 \\
-%        \hline
-%        com.zaxxer.hikari & 6 & 4 & 3 & 0.429 & 0.5 & 0.071 \\
-%        \hline
-%        com.zaxxer.hikari.metrics.micrometer & 2 & 1 & 1 & 0.5 & 0.0 & 0.5 \\
-%        \hline
-%        com.zaxxer.hikari.metrics.dropwizard & 3 & 1 & 3 & 0.75 & 0.0 & 0.25 \\
-%        \hline
-%        com.zaxxer.hikari.pool & 12 & 3 & 5 & 0.625 & 0.583 & 0.208 \\
-%        \hline
-%        com.zaxxer.hikari.hibernate & 2 & 0 & 1 & 1.0 & 0.0 & 0.0 \\
-%        \hline
-%        com.zaxxer.hikari.util & 9 & 2 & 2 & 0.5 & 0.111 & 0.389 \\
-%        \hline
-%    \end{tabular}
-%    \begin{tabular}{|c|c|c|c|c|c|}
-%        \hline
-%        $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ \\ [0.5ex]
-%        \hline\hline
-%        5 & 2 & 2 & 0.601 & 0.243 & 0.209 \\
-%        \hline
-%    \end{tabular}
-%\end{center}
-%
-%\subsection{\textit{chronicle map} sistema}
-%\begin{center}
-%    \begin{tabular}{|c|c|c|c|c|c|c|}
-%        \hline
-%        Paketo vardas & \textit{N} & \textit{A} & \textit{E} & \textit{S} & \textit{A} & \textit{D} \\ [0.5ex]
-%        \hline\hline
-%        net.openhft.chronicle.map.impl.stage.data.bytes & 2 & 3 & 3 & 0.5 & 0.0 & 0.5 \\
-%        \hline
-%        net.openhft.chronicle.map & 32 & 12 & 4 & 0.25 & 0.531 & 0.219 \\
-%        \hline
-%        net.openhft.chronicle.map.locks & 2 & 0 & 1 & 1.0 & 0.5 & 0.5 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.ret & 2 & 3 & 1 & 0.25 & 1.0 & 0.25 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.data & 2 & 5 & 2 & 0.286 & 0.0 & 0.714 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.entry & 2 & 5 & 5 & 0.5 & 1.0 & 0.5 \\
-%        \hline
-%        net.openhft.chronicle.map.impl & 16 & 10 & 13 & 0.565 & 0.313 & 0.122 \\
-%        \hline
-%        net.openhft.chronicle.map.replication & 3 & 5 & 1 & 0.167 & 1.0 & 0.167 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.query & 9 & 2 & 7 & 0.778 & 0.667 & 0.445 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.map & 7 & 4 & 5 & 0.556 & 0.857 & 0.413 \\
-%        \hline
-%        net.openhft.chronicle.map.internal & 3 & 1 & 0 & 0.0 & 0.0 & 1.0 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.ret & 2 & 2 & 1 & 0.333 & 1.0 & 0.333 \\
-%        \hline
-%        net.openhft.chronicle.map.channel & 3 & 1 & 2 & 0.667 & 0.667 & 0.334 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.data.instance & 1 & 3 & 1 & 0.25 & 0.0 & 0.75 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.iter & 6 & 1 & 7 & 0.875 & 0.333 & 0.208 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.replication & 2 & 5 & 3 & 0.375 & 0.5 & 0.125 \\
-%        \hline
-%        net.openhft.chronicle.map.channel.internal & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 \\
-%        \hline
-%        net.openhft.chronicle.map.impl.stage.input & 1 & 1 & 6 & 0.857 & 1.0 & 0.857 \\
-%        \hline
-%    \end{tabular}
-%    \begin{tabular}{|c|c|c|c|c|c|}
-%        \hline
-%        $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ \\ [0.5ex]
-%        \hline\hline
-%        5 & 4 & 4 & 0.493 & 0.52 & 0.432 \\
-%        \hline
-%    \end{tabular}
-%\end{center}
-%
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale=0.5]{img/open_hft_packages_orig}
-%    \caption{\textit{Chronicle-map} sistemos struktūra}
-%    \label{img:open_hft_packages_orig}
-%\end{figure}
-%
-%\begin{center}
-%    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-%        \hline
-%        Paketo vardas & \textit{N} & \textit{Af} & \textit{Ef} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
-%        \hline\hline
-%        net.openhft.chronicle.hash.impl.stage.iter & 6 & 0 & 5 & 1.0 & 0.5 & 0.5 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.util.jna & 1 & 1 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.stage.query & 6 & 2 & 5 & 0.714 & 0.667 & 0.381 & 2 \\
-%        \hline
-%        net.openhft.chronicle.hash.internal & 1 & 0 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.locks & 4 & 3 & 1 & 0.25 & 0.5 & 0.25 & 1 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.stage.replication & 1 & 0 & 1 & 1.0 & 1.0 & 1.0 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.serialization & 11 & 5 & 2 & 0.286 & 0.636 & 0.078 & 2 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.stage.entry & 16 & 4 & 6 & 0.6 & 0.5 & 0.1 & 3 \\
-%        \hline
-%        net.openhft.chronicle.hash.replication & 4 & 2 & 1 & 0.333 & 0.5 & 0.167 & 1 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.util & 8 & 1 & 1 & 0.5 & 0.125 & 0.375 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.stage.hash & 7 & 5 & 4 & 0.444 & 0.571 & 0.015 & 2 \\
-%        \hline
-%        net.openhft.chronicle.hash & 21 & 11 & 4 & 0.267 & 0.762 & 0.029 & 3\\
-%        \hline
-%        net.openhft.chronicle.hash.impl.stage.data.bytes & 2 & 1 & 4 & 0.8 & 0.0 & 0.2 & 1 \\
-%        \hline
-%        net.openhft.chronicle.hash.serialization.impl & 48 & 3 & 2 & 0.4 & 0.083 & 0.517 & 1 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl.util.math & 5 & 0 & 0 & 0.0 & 0.2 & 0.8 & 0 \\
-%        \hline
-%        net.openhft.chronicle.hash.impl & 19 & 5 & 7 & 0.583 & 0.316 & 0.101 & 2 \\
-%        \hline
-%    \end{tabular}
-%    \begin{tabular}{|c|c|c|c|c|c|c|}
-%        \hline
-%        $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $sum(C)$ \\ [0.5ex]
-%        \hline\hline
-%        10 & 3 & 3 & 0.449 & 0.397 & 0.407 & 9 \\
-%        \hline
-%    \end{tabular}
-%\end{center}
-%Matų lentelėje matomos kelios sistemos problemos -
-%\begin{itemize}
-%    \item \textbf{Problema numeris 1} - nuo paketo \textit{net.openhft.chronicle.hash} priklauso 11 kitų paketų.
-%    Nors pagal kokybės matus paketas yra gan stabilus - didelės abstrakcijos deka (\textit{A}=0.762), jo nuokrypis nuo pagrindinės sekos nėra didelis (\textit{D}=0.029) ir
-%    tokio paketo pakeitimai neturės labai didelės įtakos nuo jo priklausantiems paketams, vis dėlto dėl didelio priklauomybių skaičiaus, programuotojui yra gan sunku suprasti funkcijas,
-%    kuriose figuruoja šis paketas, ir kokio domeno tipo funkcionalumas pakeisti reikėtų dirbti su šiuo paketu.
-%    \item \textbf{Problema numeris 2} - Sistema turi labai daug ciklinių prilausomynbių kur du arba daugiau paketų priklauso vienas nuo kito.
-%    Tai aiškiai matosi sistemos paketų diagramoje \ref{img:open_hft_packages_orig}, ciklinėse priklausomybėse išviso dalyvauja 9 paketai ir kartu jie sudaro 9 ciklinių priklausomybių sekas,
-%    kurios turėtų būti pašalintos.
-%    \item \textbf{Problema numeris 3} -
-%\end{itemize}
-%Nors ši tai nesimato kokybės matuose, bet atlikus bendra sistemos kodo analizę matoma \textbf{problema 3} - sistemos paketuose yra daug sąsajų su skirtingais jų įgyvendinimais, todėl yra sunku
-%rasti visus specifinės sąsajos įgyvendinimus, esama paketų struktūra tam negelbėja.
-%
-%
-
-
 \subsection{\textit{crawler4j} sistema}
 \textbf{crawler4j\footnote{\url{https://github.com/yasserg/crawler4j}}} yra atvirojo kodo
 žiniatinklio tikrinimo \angl{crawling} programa parašyta \textit{Java} programavimo kalba, leidžianti
@@ -536,7 +299,7 @@ padidėjo vidutinis abstrakcijos lygis:
     \end{tabular}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        Vidurkiai & $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$\\ [0.5ex]
+        Vidurkiai & $\bar{N}$ & $\bar{Af}$ & $\bar{Ef}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$ \\ [0.5ex]
         \hline\hline
         Prieš & 5 & 3 & 3 & 0.455 & 0.069 & 0.476 & 5\\
         \hline
@@ -548,5 +311,147 @@ Iš gautų rezultatų galime teigti jog po pertvarkymo galima teigti, kad šablo
 padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, ir turėjo teigiama įtaka matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
+
+\subsection{\textit{azure-sdk-for-java} sistema}
+\textbf{azure-sdk-for-java\footnote{\url{https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/storage/azure-storage-blob-cryptography}}} yra atvirojo kodo
+biblioteka, parašyta \textit{Java} programavimo kalba, leidžianti programiškai bendrauti su \textit{Microsoft Azure} debesų kompiuterijos platforma.
+Tai programinės įrangos įrankis, skirtas naudoti kitose sistemose supaprastinant programinį kodą.
+Ši biblioteka yra labai didelė ir šio pertvarkymo metu yra dirbama tik su posistemė \textit{azure-storage-blob-cryptograph}, kuri atsakingą už duomenų kriptografiją,
+komunikacijos su \textit{Azure Blog} nestruktūrizuota failų saugykla metu
+
+Prieš visus pakeitimus \textit{azure-storage-blob-cryptograph} sistema turi vieną paketą \textit{com.azure.storage.blob.specialized.cryptography}, kuriame guli visos jos klasės.
+
+Sistemos kokybės matai nėra naudingi dirbant su vienų paketų, nes trūksta konteksto suprasti kaip paketas yra naudojamas.
+Tačiau iš bendrines sistemos analizės galima pamatyti pagrindines sistemos problemas - viename pakete yra 21 skirtinga klasė, tiek sąsajos, tiek konrkečios klasės.
+Taip sistemoje yra kelios skirtingos tos pačios esybės versijos - \textit{DecryptorV1} ir \textit{DecryptorV2}, \textit{EncryptorV1} ir \textit{EncryptorV2}, dėl ko yra sunku
+suprasti kokios klasės su kokią esybės versija yra susijusios, bei yra papildomo kodo pasikartojimo.
+Ši sistema būtų aiškesnę ir greičiau perprantama jei būtų išskirti mažesni funcionalumai ir pagal juos kodas išskaidytas į smulkesnius paketus, taip pat atskyriant juos
+pagal esybių versijas.
+Kad atlikti teisingą esybių versijavima naudojamas \textit{atskirų versijų skirstymo} šablonas, pagal jį kiekvienai esybės versijai sukuriamas po atskiras paketas,
+taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčia klasę, kuri yra padėta pakete, vienu lygiu auksčiau nei versijų paketai:
+\begin{figure}[H]
+    \snugshade
+        \dirtree{%
+            .1 {/cryptography} .
+            .2 {decryptor} .
+            .3 {Decryptor  // Abstrakti klasė su bendru esybės kodu} .
+            .3 {v1} .
+            .4 {DecryptorV1 // Pirma esybės versija} .
+            .3 {v2} .
+            .4 {DecryptorV2 // Antra esybės versija} .
+            .2 {encryptor} .
+            .3 {Encryptor  // Abstrakti klasė su bendrų esybės kodu} .
+            .3 {agent // Papildomas su esybę susijes kodas, naudojamas abieju esybių} .
+            .3 {v1} .
+            .4 {EncryptorV1 // Pirma esybės versija} .
+            .3 {v2} .
+            .4 {EncryptorV2 // Antra esybės versija} .
+        }
+    \endsnugshade
+    \caption{\textit{azure-storage-blob-cryptograph} paketų medis su paketais, dedikuotais esybių versijų valdymui}
+\end{figure}
+Šis pakeitimas, pagal \textit{atskirų versijų skirstymo} šabloną, atskyria esybes versijas ir pristato kelis paketus apibrėžiančius aiškesnius funkcionalumus,
+kadangi atsirado daugiau paketų bei saveiką tarp jų galima paskaičiuoti paketų kokybės matus:
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        Paketo vardas & \textit{N} & \textit{Af} & \textit{Ef} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
+        \hline\hline
+        specialized.cryptography & 13 & 7 & 5 & 0.417 & 0.0 & 0.583 & 5 \\
+        \hline
+        specialized.cryptography.encryptor.v2 & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
+        \hline
+        specialized.cryptography.encryptor.v1 & 1 & 0 & 3 & 1.0 & 0.0 & 0.0 & 1 \\
+        \hline
+        specialized.cryptography.encryptor & 1 & 4 & 2 & 0.333 & 1.0 & 0.333 & 2 \\
+        \hline
+        specialized.cryptography.decryptor.v2 & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 1 \\
+        \hline
+        specialized.cryptography.decryptor.v1 & 1 & 1 & 2 & 0.667 & 0.0 & 0.333 & 1\\
+        \hline
+        specialized.cryptography.encryptor.agent & 2 & 3 & 2 & 0.4 & 0.0 & 0.6 & 1\\
+        \hline
+        specialized.cryptography.decryptor & 2 & 3 & 1 & 0.25 & 0.5 & 0.25 & 1 \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        $\bar{N}$ & $\bar{Ag}$ & $\bar{Eg}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$ \\ [0.5ex]
+        \hline\hline
+        3 & 3 & 3 & 0.561 & 0.188 & \cellcolor{green!25} 0.335 & \cellcolor{red!25} 6 \\
+        \hline
+    \end{tabular}
+\end{center}
+Apskaičiuoti matai rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti kad sistemos abstraktumas bei stabilumas
+yra subalansuoti, tačiau šiš skirstymas turėjo ir neigiamu padaryniu - sukelė 5 cilines priklausomybes.
+Šiais ciklines priklausomybes galima aiškiai matyti sistemos paketų diagramoje:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{img/azure_packages_v1}
+    \caption{\textit{azure-storage-blob-cryptograph} sistemos struktūra po pirminio pertvarkymo}
+    \label{img:azure_packages_v1}
+\end{figure}
+Tam, kad panaikinti ciklines priklausomybes reikia panaudoti šablona \textit{skirstymas pagal teikiamą funkcionalumą} ir išskaidant pagrindinį paketą,
+dar į smulkesnius vienetus - yra sukuriamas paketas \textit{encription.data} paketas, atsakingas programiškai atvaizduoti užkoduotus duomenis, taip pat
+aprašomas paketas \textit{blob} skirtas \textit{blob} esybes, reprezentuojančios saugyklos duomenų formatą, kriptografijai.
+Taip pat vadovaujantys \textit{pagalbinių klasių priskyrimas dalykinės srities paketui} šablonu, visos pagalbinės klasės, neturinčios priklausomybių į kitus paketus ir
+padedančios vykdyti kertinius funcionalumus yra iškeliamos į \textit{util} paketą.
+Minėtame pakete atsiranda tokios klasės:
+\begin{itemize}
+    \item \textit{CryptographyConstants} - klasė saugojanti bendras su kriptografija susijusias konstantas, kurios naudojamos skirtingose vietose sistemoje.
+    \item \textit{EncryptionVersion} - Aprašo kriptografijos versijas ir jų naudojamus protokolos
+    \item \textit{WrappedKeyJson} - palengvina darbą su serializuojant ir deserializuojant kriptografijos raktus į \textit{json} formatą.
+\end{itemize}
+
+Pritaikius visus šiuos šablonus, gaunama sistemos struktūra su nedideliais, aiškesniais funkcionalumais apibrėžtais paketais, taip pat yra pašalinamos ciklinės priklausomybės:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{img/azure_packages_v2}
+    \caption{Galutinė \textit{azure-storage-blob-cryptograph} sistemos struktūra}
+    \label{img:azure_packages_v2}
+\end{figure}
+
+Išnaujo įvertinus matus, matoma, kad nuokrypis pagrindinės sekos šiek tiek padidėjo, tačiau
+vistiek yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal teikiamą funkcionalumą},
+\textit{pagalbinių klasių priskyrimo} ir \textit{atskirų versijų skirstymo} šablonai prisidėjo prie bendro
+sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyviai gerus sistemos kokybės matus.
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        Paketo vardas & \textit{N} & \textit{Af} & \textit{Ef} & \textit{S} & \textit{A} & \textit{D} & \textit{C} \\ [0.5ex]
+        \hline\hline
+        specialized.cryptography & 3 & 1 & 8 & 0.889 & 0.0 & 0.111 & 0 \\
+        \hline
+        specialized.cryptography.blob & 6 & 3 & 5 & 0.625 & 0.0 & 0.375 & 0 \\
+        \hline
+        specialized.cryptography.encription.data & 4 & 8 & 1 & 0.111 & 0.0 & 0.889 & 0 \\
+        \hline
+        specialized.cryptography.encryptor.v2 & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
+        \hline
+        specialized.cryptography.encryptor.v1 & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
+        \hline
+        specialized.cryptography.encryptor & 1 & 4 & 2 & 0.333 & 1.0 & 0.333 & 0 \\
+        \hline
+        specialized.cryptography.decryptor.v2 & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
+        \hline
+        specialized.cryptography.decryptor.v1 & 1 & 1 & 3 & 0.75 & 0.0 & 0.25 & 0 \\
+        \hline
+        specialized.cryptography.decryptor & 2 & 4 & 2 & 0.333 & 0.5 & 0.167 & 0 \\
+        \hline
+        specialized.cryptography.util & 3 & 6 & 0 & 0.0 & 0.0 & 1.0 & 0 \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        Vidurkiai & $\bar{N}$ & $\bar{A}$ & $\bar{E}$ & $\bar{S}$ & $\bar{A}$ & $\bar{D}$ & $\Sigma C$ \\ [0.5ex]
+        \hline\hline
+        Pirmas pertvarkymas & 3 & 3 & 3 & 0.561 & 0.188 & 0.335 &  6 \\
+        Galutinis variantas & \cellcolor{green!25} 2 (-1) & 3 & 3 & \cellcolor{green!25} 0.529 (-0.032) & \cellcolor{red!25} 0.15 (-0.03) & \cellcolor{red!25} 0.388 (+0.053) &  \cellcolor{green!25} 0 (-5) \\
+        \hline
+    \end{tabular}
+\end{center}
+
+todo: parasyti bendras isvadas
 todo: parašyti, pertvarkymo tikslas nėra gerinti matus, o jie yra naudojami norint įsitikinti, jog kokybė nesuprastejo. Šiuo atveju svarbiau skaitomumas, o ne kokybė paremta matais
-todo: prideti figures prie lenteliu
+todo: paaiškinti metricas
+todo: sutvarkyti izanga
