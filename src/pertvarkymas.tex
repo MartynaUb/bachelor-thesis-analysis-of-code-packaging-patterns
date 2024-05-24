@@ -1,7 +1,7 @@
 \section{Esamų sistemų pertvarkymas}
-Apibrėžus šablonus paketų skirstymui galima pradėti vertinti jų įtaką sistemai, juos pritaikant esamoms sistemoms.
+Atrinkus šablonus kodo skirstymui į paketus, galima pradėti vertinti jų įtaką sistemai, juos pritaikant esamoms sistemoms.
 Šio skyriaus tikslas - pasirinkti ir išnagrinėti kelias sistemas pasitelkus paketų kokybės matus bei bendrą sistemos struktūros analizę,
-taip identifikuojant programiniam kodui būdingas problemas, rastas problemas išspręsti pritaikant aprašytus šablonus.
+taip identifikuojant programiniam kodui būdingas problemas bei rastas problemas išspręsti pritaikant aprašytus šablonus.
 Atlikus pertvarkymus sistemose, dar kartą paskaičiuoti paketų kokybės matus,
 taip gaunant įrodymus, ar gauti šablonai yra efektyvūs ir iš tiesų sprendžia
 jiems priskirtas problemas.
@@ -10,9 +10,9 @@ jiems priskirtas problemas.
 \subsection{Sistemų pasirinkimas}
 Sistemų pertvarkymui pasirinktos atviro kodo sistemos, kurių kodas yra viešai prieinamas \textit{github} platformoje.
 Pasirinktos sistemos yra vidutinio dydžio, todėl nėra labai sudėtinga jas suprasti ir pertvarkyti, bet taip pat jos nėra
-tokios paprastos, kad neturėtų sistemos dizaino problemų.
+tokios paprastos, kad neturėtų sistemos projektavimo problemų.
 Pasirinktos sistemos yra skirtingo tipo projektai, taip užtikrinant didesnę problemų ivairovę ir objektyvesnius įvertinimus.
-Per visą pasirinktų sistemų imtį yra sutinkamos visos aprašytos problemos, taip įvertinant visus aprašytus šablonus.
+Per visą pasirinktų sistemų imtį yra sutinkamos visos aprašytos problemos, taip įvertinant visus pasirinktus šablonus.
 
 \subsection{\textit{crawler4j} sistema}
 \textbf{crawler4j\footnote{\url{https://github.com/yasserg/crawler4j}}} yra atvirojo kodo
@@ -78,16 +78,16 @@ Iš bendros sistemos analizės bei matų lentelės rezultatų matomos kelios sis
 \begin{itemize}
     \item \textbf{Problema numeris 1} - atlikus bendrą sistemos kodo analizę matoma,
     kad sistemos paketuose yra daug sąsajų su skirtingais jų įgyvendinimais, todėl yra sunku
-    rasti visus specifinės sąsajos įgyvendinimus, esama paketų struktūra tam nepadeda
+    rasti visus specifinės sąsajos įgyvendinimus.
     \item \textbf{Problema numeris 2} - paketo \textit{edu.uci.ics.crawler4j.parser} viduje yra 12 klasių, todėl sunku suprasti už kokius funkcionalumus jis atsakingas
     ir kada jį reikėtų nagrinėti bei keisti.
     \item \textbf{Problema numeris 3} - Sistema turi daug ciklinių prilausomynbių, kur du arba daugiau paketų priklauso vienas nuo kito.
-    Tai aiškiai matosi sistemos paketų diagramoje\ref{img:crawler_packages_orig}, ciklinėse priklausomybėse išviso dalyvauja 10 paketų ir kartu jie sudaro 5 ciklinių priklausomybių sekas,
+    Tai matoma sistemos paketų diagramoje\ref{img:crawler_packages_orig}, ciklinėse priklausomybėse dalyvauja 10 paketų ir kartu jie sudaro 5 ciklinių priklausomybių sekas,
     kurios turėtų būti pašalintos.
 \end{itemize}
 
-Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{ParseData} bei 4 skirtingųs jos įgyvendinimus - \textit{CssParseData, TextParseData, HtmlParseData, BinaryParseData},
-šios klasės pakete dalinasi vieta dar su 9 klasėmis, todėl yra gan nepatogu rasti ieškomą įgyvendinimą.
+Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{ParseData} bei 4 skirtingus jos įgyvendinimus - \textit{CssParseData, TextParseData, HtmlParseData, BinaryParseData},
+šios klasės pakete dalinasi vieta dar su 9 klasėmis, todėl yra nepatogu rasti ieškomą įgyvendinimą.
 \begin{figure}[H]
     \snugshade
     \dirtree{%
@@ -107,7 +107,7 @@ Sistemos paketas \textit{edu.uci.ics.crawler4j.parse}, turi sąsają \textit{Par
     \endsnugshade
     \caption{\textit{parser} paketo struktūra}
 \end{figure}
-Šiam paketui sutvarkyti taikomas \textit{Sąsajų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkliami į minėto
+Šiam paketui sutvarkyti taikomas \textit{Sąsajų atskyrimo} šablonas - sąsaja iškeliama į atskirą paketą \textit{parse}, jos įgyvendinimai perkeliami į minėto
 paketo subpaketus.
 Šie pertvarkymai pakeičia \textit{parser} paketo struktūrą:
 \begin{figure}[H]
@@ -137,7 +137,7 @@ paketo subpaketus.
 \end{figure}
 Dėl atskirtos sąsajos ir jos įgyvendinimų tampa daug paprasčiau ją rasti bei suprasti sistemoje egzistuojančius jos įgyvendinimus.
 Tokia struktūra išsprendžia sistemos \textbf{problemą numeris 1}.
-Šis pertvarkymas taip dalinai sumažino \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 7.
+Šis pertvarkymas taip pat dalinai sumažino \textbf{problemą numeris 2}, sumažinant klasių skaičių pakete į 7.
 Palyginus pertvarkytos ir buvusios sitemos matus matome, kad sistema tapo aiškesnė, sumažėjo vidutinis klasių skaičius paketuose, tačiau neženkliai nukrito
 vidutinis stabilumas ir abstrakcijos lygis, todėl atstumas nuo pagrindinės sekos nežymiai padidėjo.
 \begin{center}
@@ -189,15 +189,15 @@ class TikaHtmlParser implements HtmlParser {
     \end{lstlisting}
     \caption{\textit{skirstymo pagal teikiamą funkcionalumą} šablono sąsaja}
 \end{figure}
-Peržiūrėjus paketus su ciklinėmis priklausomybės, iš jų buvo išskirti šie nauji funkcionalumai, kuriems
+Peržiūrėjus paketus su ciklinėmis priklausomybėmis, iš jų buvo išskirti šie nauji funkcionalumai, kuriems
 buvo sukurti atskiri paketai:
 \begin{itemize}
     \item Iš \textit{parser} paketo iškeltas funkcionalumas \textit{html} turiniui apdoroti, patalpintas į \textit{parser/html} paketą.
-    Po šio pertvarkymo \textit{parser} paketas pasidaro pakankamai mažas ir turi vieną funkcionalumą - priimti puslapį ir deleguoti jį apdorojimui kitai klasei pagal puslapio tipą.
-    \item Iš \textit{robotstxt} paketo funkcionalumas patikrinti ar sistema autorizuota apdoroti pasirinktą puslapį iškeltas į \textit{robotstxt/permissions} paketą.
-    \item Iš \textit{crawler}, bei \textit{parser} paketų funkcionalumas programiškai aprašantis internetinio puslapio elementus iškeltas į \textit{web} paketą.
-    \item Iš \textit{crawler} paketo funkcionalumas nustatyti įrankio konfigūraciją iškeltas į \textit{config} paketą.
-    \item Iš \textit{url} paketo funkcionalumas gauti internetinių domenų pavadinimus iškeltas į \textit{tld} paketą.
+    Po šio pertvarkymo \textit{parser} paketas pasidaro mažesnis ir turi vieną funkcionalumą - priimti puslapį ir deleguoti jį apdorojimui kitai klasei pagal puslapio tipą.
+    \item Iš \textit{robotstxt} paketo funkcionalumas patikrinti, ar sistema autorizuota apdoroti pasirinktą puslapį, iškeltas į \textit{robotstxt/permissions} paketą.
+    \item Iš \textit{crawler}, bei \textit{parser} paketų funkcionalumas, aprašantis internetinio puslapio elementus, iškeltas į \textit{web} paketą.
+    \item Iš \textit{crawler} paketo funkcionalumas, nustatantis įrankio konfigūraciją, iškeltas į \textit{config} paketą.
+    \item Iš \textit{url} paketo funkcionalumas, gaunantis internetinių domenų pavadinimus, iškeltas į \textit{tld} paketą.
 \end{itemize}
 
 \begin{figure}[H]
@@ -253,7 +253,7 @@ buvo sukurti atskiri paketai:
 \end{figure}
 
 Atlikus šiuos funkcionalumų suskaidymus į atskirus paketus buvo panaikintos žiedinės priklausomybės.
-Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daug daugiau paketų, tačiau jų priklausomybių kryptys daug aiškesnės:
+Naujoje paketų diagramoje galime matyti, jog dabar sistema turi daugiau paketų, tačiau jų priklausomybių kryptys daug aiškesnės:
 \subsection{\textit{Crawler} sistema}
 \begin{figure}[H]
     \centering
@@ -315,28 +315,28 @@ padidėjo vidutinis abstrakcijos lygis:
         \hline
     \end{tabular}
 \end{center}
-Iš gautų rezultatų galime teigti jog po pertvarkymo galima teigti, kad šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
-padarė sistemą lengviau suprantamą žmogui, panaikino ciklines priklausomybes, ir turėjo teigiama įtaka matams, nurodantiems
+Iš gautų rezultatų galime teigti, jog po pertvarkymo šablonai \textit{skirstymas pagal teikiamą funkcionalumą} ir \textit{sąsajų atskyrimas}, išsprendė visas 3 sistemoje matytas problemas,
+padarė sistemą lengviau suprantama, panaikino ciklines priklausomybes ir turėjo teigiamą įtaką matams, nurodantiems
 sistemos įgyvendinimo kokybę.
 
 
 \subsection{\textit{azure-sdk-for-java} sistema}
-\textbf{azure-sdk-for-java\footnote{\url{https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/storage/azure-storage-blob-cryptography}}} yra atvirojo kodo
+\textbf{azure-sdk-for-java\footnote{\url{https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/storage/azure-storage-blob-cryptography}}} yra atviro kodo
 biblioteka, parašyta \textit{Java} programavimo kalba, leidžianti programiškai bendrauti su \textit{Microsoft Azure} debesų kompiuterijos platforma.
-Tai programinės įrangos įrankis, skirtas naudoti kitose sistemose supaprastinant programinį kodą.
-Ši biblioteka yra labai didelė ir šio pertvarkymo metu yra dirbama tik su posistemė \textit{azure-storage-blob-cryptograph}, kuri atsakingą už duomenų kriptografiją,
-komunikacijos su \textit{Azure Blog} nestruktūrizuota failų saugykla metu
+Tai programinės įrangos įrankis, skirtas naudoti kitose sistemose, supaprastinant programinį kodą.
+Ši biblioteka yra labai didelė ir šio pertvarkymo metu yra dirbama tik su posisteme \textit{azure-storage-blob-cryptograph}, kuri atsakinga už duomenų kriptografiją
+komunikacijos su \textit{Azure Blog} nestruktūrizuota failų saugykla metu.
 
 Prieš visus pakeitimus \textit{azure-storage-blob-cryptograph} sistema turi vieną paketą \textit{com.azure.storage.blob.specialized.cryptography}, kuriame guli visos jos klasės.
 
-Sistemos kokybės matai nėra naudingi dirbant su vienų paketų, nes trūksta konteksto suprasti kaip paketas yra naudojamas.
-Tačiau iš bendrines sistemos analizės galima pamatyti pagrindines sistemos problemas - viename pakete yra 21 skirtinga klasė, tiek sąsajos, tiek konrkečios klasės.
-Taip sistemoje yra kelios skirtingos tos pačios esybės versijos - \textit{DecryptorV1} ir \textit{DecryptorV2}, \textit{EncryptorV1} ir \textit{EncryptorV2}, dėl ko yra sunku
-suprasti kokios klasės su kokią esybės versija yra susijusios, bei yra papildomo kodo pasikartojimo.
-Ši sistema būtų aiškesnę ir greičiau perprantama jei būtų išskirti mažesni funcionalumai ir pagal juos kodas išskaidytas į smulkesnius paketus, taip pat atskyriant juos
+Sistemos kokybės matai nėra naudingi dirbant su vienu paketu, nes trūksta konteksto suprasti, kaip paketas yra naudojamas.
+Tačiau iš bendrinės sistemos analizės galima pamatyti pagrindines sistemos problemas - viename pakete yra 21 skirtinga klasė, tiek sąsajos, tiek konkrečios klasės.
+Taip pat sistemoje yra kelios skirtingos tos pačios esybės versijos - \textit{DecryptorV1} ir \textit{DecryptorV2}, \textit{EncryptorV1} ir \textit{EncryptorV2}, todėl sunku
+suprasti, su kokia esybės versija yra susijusios kitos klasės bei yra kodo pasikartojimo.
+Ši sistema būtų aiškesnė ir greičiau perprantama, jei būtų išskirti mažesni funcionalumai ir kodas būtų išskaidytas į smulkesnius paketus, taip pat atskiriant juos
 pagal esybių versijas.
-Kad atlikti teisingą esybių versijavima naudojamas \textit{atskirų versijų skirstymo} šablonas, pagal jį kiekvienai esybės versijai sukuriamas po atskiras paketas,
-taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčia klasę, kuri yra padėta pakete, vienu lygiu auksčiau nei versijų paketai:
+Norint atlikti esybių versijavimą naudojamas \textit{atskirų versijų skirstymo} šablonas, pagal jį kiekvienai esybės versijai sukuriamas atskiras paketas,
+taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčią klasę, kuri yra pakete vienu lygiu auksčiau nei versijų paketai:
 \begin{figure}[H]
     \snugshade
         \dirtree{%
@@ -348,18 +348,18 @@ taip pat bendras, pasikartojantis kodas iškeliamas į abstrakčia klasę, kuri 
             .3 {v2} .
             .4 {DecryptorV2 // Antra esybės versija} .
             .2 {encryptor} .
-            .3 {Encryptor  // Abstrakti klasė su bendrų esybės kodu} .
-            .3 {agent // Papildomas su esybę susijes kodas, naudojamas abieju esybių} .
+            .3 {Encryptor  // Abstrakti klasė su bendru esybės kodu} .
+            .3 {agent // Papildomas, su esybe susijęs kodas, naudojamas abiejų esybių} .
             .3 {v1} .
             .4 {EncryptorV1 // Pirma esybės versija} .
             .3 {v2} .
             .4 {EncryptorV2 // Antra esybės versija} .
         }
     \endsnugshade
-    \caption{\textit{azure-storage-blob-cryptograph} paketų medis su paketais, dedikuotais esybių versijų valdymui}
+    \caption{\textit{azure-storage-blob-cryptograph} paketų medis su paketais, skirtais esybių versijų valdymui}
 \end{figure}
-Šis pakeitimas, pagal \textit{atskirų versijų skirstymo} šabloną, atskyria esybes versijas ir pristato kelis paketus apibrėžiančius aiškesnius funkcionalumus,
-kadangi atsirado daugiau paketų bei saveiką tarp jų galima paskaičiuoti paketų kokybės matus:
+Šis pertvarkymas pagal \textit{atskirų versijų skirstymo} šabloną, atskiria esybės versijas ir pristato kelis paketus, apibrėžiančius aiškesnius funkcionalumus.
+Atsiradus daugiau paketų bei jų sąsajų, galima paskaičiuoti paketų kokybės matus:
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
@@ -390,28 +390,28 @@ kadangi atsirado daugiau paketų bei saveiką tarp jų galima paskaičiuoti pake
         \hline
     \end{tabular}
 \end{center}
-Apskaičiuoti matai rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti kad sistemos abstraktumas bei stabilumas
-yra subalansuoti, tačiau šiš skirstymas turėjo ir neigiamu padaryniu - sukelė 5 cilines priklausomybes.
-Šiais ciklines priklausomybes galima aiškiai matyti sistemos paketų diagramoje:
+Apskaičiuoti matai rodo nedidelį nuokrypį nuo pagrindinės sekos, todėl galima teigti, kad sistemos abstraktumas bei stabilumas
+yra subalansuoti, tačiau šis skirstymas turėjo ir neigiamų padarinių - sukelė 5 ciklines priklausomybes.
+Šiais priklausomybes galima matyti sistemos paketų diagramoje:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.3]{img/azure_packages_v1}
-    \caption{\textit{azure-storage-blob-cryptograph} sistemos struktūra po pirminio pertvarkymo}
+    \caption{\textit{azure-storage-blob-cryptograph} sistemos struktūra po pirmojo pertvarkymo}
     \label{img:azure_packages_v1}
 \end{figure}
-Tam, kad panaikinti ciklines priklausomybes reikia panaudoti šablona \textit{skirstymas pagal teikiamą funkcionalumą} ir išskaidant pagrindinį paketą,
-dar į smulkesnius vienetus - yra sukuriamas paketas \textit{encription.data} paketas, atsakingas programiškai atvaizduoti užkoduotus duomenis, taip pat
-aprašomas paketas \textit{blob} skirtas \textit{blob} esybes, reprezentuojančios saugyklos duomenų formatą, kriptografijai.
-Taip pat vadovaujantys \textit{pagalbinių klasių priskyrimas dalykinės srities paketui} šablonu, visos pagalbinės klasės, neturinčios priklausomybių į kitus paketus ir
+Norint panaikinti ciklines priklausomybes, reikia panaudoti šabloną \textit{skirstymas pagal teikiamą funkcionalumą} ir, išskaidant pagrindinį paketą
+į dar smulkesnius vienetus - yra sukuriamas \textit{encription.data} paketas, atsakingas už užkoduotų duomenų vaizdavimą, taip pat
+aprašomas paketas \textit{blob} skirtas \textit{blob} esybių, reprezentuojančių saugyklos duomenų formatą, kriptografijai.
+Taip pat vadovaujantis \textit{pagalbinių klasių priskyrimas dalykinės srities paketui} šablonu, visos pagalbinės klasės, neturinčios priklausomybių į kitus paketus ir
 padedančios vykdyti kertinius funcionalumus yra iškeliamos į \textit{util} paketą.
 Minėtame pakete atsiranda tokios klasės:
 \begin{itemize}
-    \item \textit{CryptographyConstants} - klasė saugojanti bendras su kriptografija susijusias konstantas, kurios naudojamos skirtingose vietose sistemoje.
-    \item \textit{EncryptionVersion} - Aprašo kriptografijos versijas ir jų naudojamus protokolos
+    \item \textit{CryptographyConstants} - klasė, saugojanti bendras, su kriptografija susijusias konstantas, kurios naudojamos skirtingose sistemos vietose.
+    \item \textit{EncryptionVersion} - aprašo kriptografijos versijas ir jų naudojamus protokolus
     \item \textit{WrappedKeyJson} - palengvina darbą su serializuojant ir deserializuojant kriptografijos raktus į \textit{json} formatą.
 \end{itemize}
 
-Pritaikius visus šiuos šablonus, gaunama sistemos struktūra su nedideliais, aiškesniais funkcionalumais apibrėžtais paketais, taip pat yra pašalinamos ciklinės priklausomybės:
+Pritaikius visus šiuos šablonus, gaunama sistemos struktūra turinti nedidelius, aiškesniais funkcionalumais apibrėžtus paketus, taip pat pašalinamos ciklinės priklausomybės:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.35]{img/azure_packages_v2}
@@ -419,8 +419,8 @@ Pritaikius visus šiuos šablonus, gaunama sistemos struktūra su nedideliais, a
     \label{img:azure_packages_v2}
 \end{figure}
 
-Išnaujo įvertinus matus, matoma, kad nuokrypis pagrindinės sekos šiek tiek padidėjo, tačiau
-vistiek yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal teikiamą funkcionalumą},
+Pakartotinai įvertinus matus matoma, kad nuokrypis nuo pagrindinės sekos šiek tiek padidėjo, tačiau
+vis dar yra gan mažas, ciklinės priklausomybės išnyko, todėl galime teigti, kad \textit{skirstymo pagal teikiamą funkcionalumą},
 \textit{pagalbinių klasių priskyrimo} ir \textit{atskirų versijų skirstymo} šablonai prisidėjo prie bendro
 sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyviai gerus sistemos kokybės matus.
 \begin{center}
@@ -459,7 +459,6 @@ sistemos suprantamumo, įvedė aiškesnę jos struktūrą, išlaikant objektyvia
     \end{tabular}
 \end{center}
 
-todo: padaryti grazesne izanga
 todo: parasyti bendras isvadas
 todo: sutikrinti pavadinimus
 todo: ranka perpiešti sugeneruotus paveikslėlius, kad jie geriau tilptų į puslapį
