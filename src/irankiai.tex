@@ -49,8 +49,14 @@ Išvedimo formatas turėtų būti toks, jog skirtingų analizių rezultatai būt
 
 \subsection{Įrankių įgyvendinimas}
 Nors beveik visiems reikalavimuose minimiems funkcionalumams galima rasti jau sukurtų įrankių, greit ir efektyviai pritaikyti juos skirtingoms sistemoms
-(arba posistemėms) nėra patogu - kiekvieną įrankį reikėtų vykdyti atskirai, skirtingais vykdymo procesais ir argumentais. Taip išvestų rezultatų formatai yra skirtingi.
+(arba posistemėms) nėra patogu - kiekvieną įrankį reikėtų vykdyti atskirai, skirtingais vykdymo procesais ir argumentais.
+Taip išvestų rezultatų formatai yra skirtingi.
 Todėl, norint palengvinti ši procesą - suvienodinti procesų vykdymą bei gautus rezultus, visi įrankiai, reikalingi analizei, įgyvendinti kaip viena programa, kuri
-apdoroja failus nurodytoje sistemos direktorijoje, nuskaito \textit{java} failų turinį ir išveda informaciją apie sistemos paketus bei klases.
-Surinkta informacija naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten, kur galima, naudojant jau parašytus įrankius, taip programiškai supaprastinant
+apdoroja failus nurodytoje direktorijoje į analizuojamą sistemą - nuskaito \textit{Java} failų turinį ir išveda informaciją apie sistemos paketus bei klases.
+Surinkta informacija naudojama įgyvendinti kiekvienam aprašytam įrankio funkcionalumui, ten, kur galima, naudojant jau parašytus trečiųjų įrankius, taip programiškai supaprastinant
 skirtingų įrankių vykdymą.
+Gauti atliktos analizės rezultatais rezultatai išvedami į failus nurodytoje direktorijoje.
+Rezultatus sudaro apdorotos sistemos paketų kokybės matai, paketų struktūros medis, paketų priklausomybės grafikas.
+Gauti rezultatai išvesti \textit{latex} formatu, todėl gali būti lengvai pridedami į darbo dokumentą, taip padarant sistemų analizę daug greitesnę bei efektyvesnę.
+
+
