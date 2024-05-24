@@ -1,7 +1,7 @@
 \section{Kompiuterinės sistemos vertinimas}
 \subsection{Kompiuterinės sistemos kokybė}
-Išskyrus tinkamesnius naudoti kodo skirstymo į paketus šablonus, reikėtų objektyviai pamatuoti jų įtaką sistemos kokybei ir užtikrinti,
- kad jie prisideda prie labiau patikimos, suprantamos ir lengviau palaikomos sistemos struktūros.
+Išskyrus tinkamiausius naudoti kodo skirstymo į paketus šablonus, reikėtų objektyviai pamatuoti jų įtaką sistemos kokybei ir užtikrinti,
+ kad jie prisideda prie labiau suprantamos ir lengviau palaikomos sistemos struktūros~\cite{ComponentModularity}.
 Tam reikėtų apsibrėžti, kokiais požymiais pasižymi gerai įgyvendinta kompiuterinė sistema.
 Martin Kleppmann savo knygoje \textit{Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems}~\cite{DataIntensiveApplications} išskiria šiuos pagrindinius kriterijus:
 \begin{itemize}
@@ -26,15 +26,15 @@ programinį kodą geriau suprantamu, taip prisidedant prie bendro sistemos patik
 Straipsnyje \textit{Investigating The Effect of Software Packaging on Modular Structure Stability}~\cite{ModularStability}, autoriai akcentuoja, kad
 gerai įgyvendintos objektinio stiliaus sistemos turėtų vystytis be didelių pakeitimų jų architektūroje.
 To siekiama, nes architektūriniai pakeitimai paveikia didelę sistemos dalį ir
-jų įgyvendinimo ir sistemos priežiūros kaštai yra žymiai didesni\cite{ModularStability}.
-Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų, enkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
-išplisti už paketų ribų yra pagrindas tvirtai sistemos architektūrai, gebančiai efektyviai plėstis, nepristatant nebūtinų pokyčių ir sutaupant programos priežiūros kaštus.
+jų įgyvendinimo ir sistemos priežiūros kaštai yra žymiai didesni~\cite{ModularStability}.
+Paketų struktūra, kuri užtikrina atsietą \angl{decoupled} komunikavimą tarp paketų, inkapsuliuoja paketų vidinius elementus, neleidžiant pakeitimais
+išplisti už paketų ribų yra pagrindas stabiliai sistemos architektūrai, gebančiai efektyviai plėstis, neįnešant nebūtinų pokyčių ir sutaupant programos priežiūros kaštus.
 
 \subsection{Kodo skirstymo į paketus šablonų vertinimas}
-Ankstesniame skyriuje buvo nagrinėjama gerai įgyvendintos paketų struktūros įtaka gerai kompiuterinės sistemos struktūrai,
+Ankstesniame skyriuje buvo analizuojami kodo skirstymo į paketus šablonai,
 tačiau lieka neatsakytas klausimas - kaip įvertinti šabloną kodui į paketus grupuoti ir kaip užtikrinti,
 jog pasirinktas sprendimas yra būtent toks, kokio reikia, ir kokia jo įtaka kompiuterinei sistemai?
-Tvarkingas, aiškiai suprantamas kodas yra subjektyvi tema, priklausanti nuo komandos,
+Tvarkingai bei aiškiai išskirstytų klasių apibrėžimas gali priklausyti nuo komandos,
 naudojamos programavimo kalbos ar programinių įrankių bei programinės sistemos dalykinės srities.
 Kodo grupavimo į paketus metodai, taip, kaip ir bendros tvarkingo kodo praktikos,
 gali būti labai subjektyvūs ir patogūs tik metodą formavusiam asmeniui.
@@ -42,8 +42,8 @@ Tam, kad būtų galima pagrįstai įvertinti skirtingus kodo skirstymo šablonus
 įtaką sistemos kokybei nusakantį rezultatą, reikėtų aprašyti kriterijus, nusakančius, ko tikimasi iš paketų struktūros.
 
 Robert C. Martin savo knygoje \textit{Agile Software Development, Principles, Patterns, and Practices}~\cite{AgileSoftwareDevelopment} aprašo
-principus, padedančius teisingai grupuoti klases į paketus.
-Rodiklis, kiek kiekvienas paketas sistemoje laikosi nurodytų principų naudojant tam tikrą paketų skirstymo šabloną, gali
+principus, padedančius grupuoti klases į paketus.
+Rodikliai, kiek paketas laikosi kiekvieno iš nurodytų principų naudojant tam tikrą paketų skirstymo šabloną, gali
 būti kriterijus vertinant to šablono kokybę ir įtaką bendrai sistemos struktūrai.
 
 \subsubsection{Bendro sąryšio principas}
@@ -53,14 +53,14 @@ kuris paveikia paketą, paveikia visas to paketo klases ir jokių kitų paketų.
 Kaip teigia vienos atsakomybės principas \angl{Single responsibility principle}, klasė turėtų neturėti skirtingų priežasčių keistis.
 Šis principas taip pat teigia, kad paketas taip pat neturėtų turėti skirtingų priežasčių pasikeisti.
 Principas ragina suburti visas klases, kurios gali keistis dėl tų pačių priežasčių, į vieną vietą.
-Jei dvi klasės yra taip stipriai susietos, kad jos visada keičiasi kartu, tada
+Jei dvi klasės yra taip stipriai susietos, kad jos dažniausiai keičiasi kartu, tada
 jos turėtų būti tame pačiame pakete.
 Kai reikia išleisti pakeitimus, geriau, kad visi pakeitimai būtų viename pakete.
 Tai sumažina darbo krūvį, susijusį su pakeitimu išleidimu, pakartotiniu patvirtinimu ir programinės įrangos perskirstymu,
 be reikalo neatliekant validacijos ir neleidžiant kitų, nesusijusių modulių~\cite{AgileSoftwareDevelopment}.
 
 \subsubsection{Aciklinių priklausomybių principas}
-\textit{Paketo priklausomybės diagramoje neturi būti žiedinių ciklų.}
+\textit{Paketo priklausomybės diagramoje neturi būti ciklų.}
 
 Priklausomybių ciklai sukuria neatidėliotinų problemų.
 Žiedinės priklausomybės gali sukelti domino efektą, kai nedidelis, lokalus vieno modulio pokytis išplinta į kitus modulius,
@@ -118,7 +118,7 @@ Būtent šie matai bus naudojami įvertinti paketus analizuojamuose šablonuose 
     Abstrakcijos reikšmė gali būti tarp nulio ir vieno.
     Nulis reiškia, kad paketas neturi jokių abstrakčių klasių, o vienetas nurodo, kad pakete yra tik abstrakčios klasės.
     \item \textbf{Atstumas nuo pagrindinės sekos} (\textit{D}) -
-    Pagrindinė seka yra sąryšis tarp stabilumo ir abstrakcijos.
+    pagrindinė seka yra sąryšis tarp stabilumo ir abstrakcijos.
     Pagrindinė seka - idealizuota linija (Abstrakcija + Nestabilumas = 1) kurią galima vaizduoti kaip kreivę, su abstrakcijos dydžiu \textit{y} ašyje ir nestabilumu \textit{x} ašyje.
     Paketas tiesiai ant pagrindinės sekos yra optimaliai subalansuotas atsižvelgiant į jo abstraktumą ir stabilumą.
     Idealūs paketai yra arba visiškai abstraktūs ir stabilūs (Stabilumas=0, Abstrakcija=1) arba visiškai konkretūs ir nestabilūs (Nestabilumas=1, Abstrakcija=0) (pavyzdys~\ref{img:zones_of_exclusion}).
@@ -139,10 +139,10 @@ Būtent šie matai bus naudojami įvertinti paketus analizuojamuose šablonuose 
     Šis matas - aciklinių priklausomybių rodiklis, minėtas aciklinių priklausomybių principe.
 \end{itemize}
 
-Šių matų patikimumas buvo ivertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
-Understandability: A Case Study}, kurioje autoriai tyrinėjo sąryšį tarp minėtų matų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
+Šių matų patikimumas buvo įvertintas atvejo analizėje \textit{Exploring the Relationships between Design Metrics and Package
+Understandability: A Case Study}~\cite{DesignMetrics}, kurioje autoriai tyrinėjo sąryšį tarp minėtų matų ir vidutinių pastangų, reikalingų suprasti objektinio dizaino paketą.
 Tyrimas atliktas naudojant aštuoniolika paketų, paimtų iš dviejų atviro kodo programinės įrangos sistemų.
-Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris, panašią patirtį turinčius programuotojus.
+Paskaičiuoti pastangas, reikalingas paketui suprasti, buvo pasitelktos trys skirtingos komandos, turinčios po tris panašią patirtį turinčius programuotojus.
 Jų buvo paprašyta pilnai suprasti paketų funkcionalumą ir nuo vieno iki dešimt įvertinti pastangas, reikalingas suprasti kiekvieną paketą.
 Rezultatai gauti iš šio tyrimo rodo statistiškai reikšmingą koreliaciją tarp daugumos matų ir
-paketų suprantamumo~\cite{DesignMetrics}.
+paketų suprantamumo.
